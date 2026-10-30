@@ -1,0 +1,4279 @@
+{
+  "topics": [
+    {
+      "id": "topic-1mwvr40",
+      "name": "I. Two Pointer Patterns"
+    },
+    {
+      "id": "topic-au8lmu",
+      "name": "II. Sliding Window Patterns"
+    },
+    {
+      "id": "topic-nnkf3m",
+      "name": "III. Tree Traversal Patterns (DFS & BFS)"
+    },
+    {
+      "id": "topic-z09v6i",
+      "name": "IV. Graph Traversal Patterns (DFS & BFS)"
+    },
+    {
+      "id": "topic-1qgoxqf",
+      "name": "V. Dynamic Programming (DP) Patterns"
+    },
+    {
+      "id": "topic-1v43kfd",
+      "name": "VI. Heap (Priority Queue) Patterns"
+    },
+    {
+      "id": "topic-h9ud9a",
+      "name": "VII. Backtracking Patterns"
+    },
+    {
+      "id": "topic-1f6u3wb",
+      "name": "VIII. Greedy Patterns"
+    },
+    {
+      "id": "topic-149jgy4",
+      "name": "IX. Binary Search Patterns"
+    },
+    {
+      "id": "topic-ti7xuy",
+      "name": "X. Stack Patterns"
+    },
+    {
+      "id": "topic-1f3thwf",
+      "name": "XI. Bit Manipulation Patterns"
+    },
+    {
+      "id": "topic-k563jm",
+      "name": "XII. Linked List Manipulation Patterns"
+    },
+    {
+      "id": "topic-3fr2pt",
+      "name": "XIII. Array/Matrix Manipulation Patterns"
+    },
+    {
+      "id": "topic-eiig6z",
+      "name": "XIV. String Manipulation Patterns"
+    },
+    {
+      "id": "topic-1grxg2u",
+      "name": "XV. Design Patterns"
+    }
+  ],
+  "patterns": [
+    {
+      "id": "pattern-12gp12f",
+      "name": "Pattern 1: Two Pointers - Converging (Sorted Array Target Sum)",
+      "topicId": "topic-1mwvr40"
+    },
+    {
+      "id": "pattern-2r3apw",
+      "name": "Pattern 2: Two Pointers - Fast & Slow (Cycle Detection)",
+      "topicId": "topic-1mwvr40"
+    },
+    {
+      "id": "pattern-h1go7m",
+      "name": "Pattern 3: Two Pointers - Fixed Separation (Nth Node from End)",
+      "topicId": "topic-1mwvr40"
+    },
+    {
+      "id": "pattern-tmd5yv",
+      "name": "Pattern 4: Two Pointers - In-place Array Modification",
+      "topicId": "topic-1mwvr40"
+    },
+    {
+      "id": "pattern-jd7dva",
+      "name": "Pattern 5: Two Pointers - String Comparison with Backspaces",
+      "topicId": "topic-1mwvr40"
+    },
+    {
+      "id": "pattern-c28bx7",
+      "name": "Pattern 6: Two Pointers - Expanding From Center (Palindromes)",
+      "topicId": "topic-1mwvr40"
+    },
+    {
+      "id": "pattern-dahuv",
+      "name": "Pattern 7: Two Pointers - String Reversal",
+      "topicId": "topic-1mwvr40"
+    },
+    {
+      "id": "pattern-fon3hz",
+      "name": "Pattern 8: Sliding Window - Fixed Size (Subarray Calculation)",
+      "topicId": "topic-au8lmu"
+    },
+    {
+      "id": "pattern-4rr7nf",
+      "name": "Pattern 9: Sliding Window - Variable Size (Condition-Based)",
+      "topicId": "topic-au8lmu"
+    },
+    {
+      "id": "pattern-1qtw4h3",
+      "name": "Pattern 10: Sliding Window - Monotonic Queue for Max/Min",
+      "topicId": "topic-au8lmu"
+    },
+    {
+      "id": "pattern-1ougwf7",
+      "name": "Pattern 11: Sliding Window - Character Frequency Matching",
+      "topicId": "topic-au8lmu"
+    },
+    {
+      "id": "pattern-ainyqn",
+      "name": "Pattern 12: Tree BFS - Level Order Traversal",
+      "topicId": "topic-nnkf3m"
+    },
+    {
+      "id": "pattern-gfry4n",
+      "name": "Pattern 13: Tree DFS - Recursive Preorder Traversal",
+      "topicId": "topic-nnkf3m"
+    },
+    {
+      "id": "pattern-1c71rfs",
+      "name": "Pattern 14: Tree DFS - Recursive Inorder Traversal",
+      "topicId": "topic-nnkf3m"
+    },
+    {
+      "id": "pattern-2p0ln4",
+      "name": "Pattern 15: Tree DFS - Recursive Postorder Traversal",
+      "topicId": "topic-nnkf3m"
+    },
+    {
+      "id": "pattern-x497z0",
+      "name": "Pattern 16: Tree - Lowest Common Ancestor (LCA) Finding",
+      "topicId": "topic-nnkf3m"
+    },
+    {
+      "id": "pattern-17b590d",
+      "name": "Pattern 17: Tree - Serialization and Deserialization",
+      "topicId": "topic-nnkf3m"
+    },
+    {
+      "id": "pattern-d5bxtt",
+      "name": "Pattern 18: Graph DFS - Connected Components / Island Counting",
+      "topicId": "topic-z09v6i"
+    },
+    {
+      "id": "pattern-1lvkts0",
+      "name": "Pattern 19: Graph BFS - Connected Components / Island Counting",
+      "topicId": "topic-z09v6i"
+    },
+    {
+      "id": "pattern-fyucrs",
+      "name": "Pattern 20: Graph DFS - Cycle Detection (Directed Graph)",
+      "topicId": "topic-z09v6i"
+    },
+    {
+      "id": "pattern-1rp37cs",
+      "name": "Pattern 21: Graph BFS - Topological Sort (Kahn's Algorithm)",
+      "topicId": "topic-z09v6i"
+    },
+    {
+      "id": "pattern-10sw9ch",
+      "name": "Pattern 22: Graph - Deep Copy / Cloning",
+      "topicId": "topic-z09v6i"
+    },
+    {
+      "id": "pattern-1qawopj",
+      "name": "Pattern 23: Graph - Shortest Path (Dijkstra's Algorithm)",
+      "topicId": "topic-z09v6i"
+    },
+    {
+      "id": "pattern-11yowli",
+      "name": "Pattern 24: Graph - Shortest Path (Bellman-Ford / BFS+K)",
+      "topicId": "topic-z09v6i"
+    },
+    {
+      "id": "pattern-1v5decy",
+      "name": "Pattern 25: Graph - Union-Find (Disjoint Set Union - DSU)",
+      "topicId": "topic-z09v6i"
+    },
+    {
+      "id": "pattern-178gwr3",
+      "name": "Pattern 26: Strongly Connected Components (Kosaraju / Tarjan)",
+      "topicId": "topic-z09v6i"
+    },
+    {
+      "id": "pattern-xy910j",
+      "name": "Pattern 27: Bridges & Articulation Points (Tarjan low-link)",
+      "topicId": "topic-z09v6i"
+    },
+    {
+      "id": "pattern-efc9q5",
+      "name": "Pattern 28: Minimum Spanning Tree (Kruskal / Prim / DSU + heap)",
+      "topicId": "topic-z09v6i"
+    },
+    {
+      "id": "pattern-160mi2h",
+      "name": "Pattern 29: Bidirectional BFS (BFS optimization for known source & target",
+      "topicId": "topic-z09v6i"
+    },
+    {
+      "id": "pattern-1bs2guj",
+      "name": "Pattern 30: DP - 1D Array (Fibonacci Style)",
+      "topicId": "topic-1qgoxqf"
+    },
+    {
+      "id": "pattern-1tq0i9n",
+      "name": "Pattern 31: DP - 1D Array (Kadane's Algorithm for Max/Min Subarray)",
+      "topicId": "topic-1qgoxqf"
+    },
+    {
+      "id": "pattern-1xdph7l",
+      "name": "Pattern 32 DP - 1D Array (Coin Change / Unbounded Knapsack Style)",
+      "topicId": "topic-1qgoxqf"
+    },
+    {
+      "id": "pattern-cu7f6h",
+      "name": "Pattern 33: DP - 1D Array (0/1 Knapsack Subset Sum Style)",
+      "topicId": "topic-1qgoxqf"
+    },
+    {
+      "id": "pattern-lhg8a8",
+      "name": "Pattern 34: DP - 1D Array (Word Break Style)",
+      "topicId": "topic-1qgoxqf"
+    },
+    {
+      "id": "pattern-v0m8i7",
+      "name": "Pattern 35: DP - 2D Array (Longest Common Subsequence - LCS)",
+      "topicId": "topic-1qgoxqf"
+    },
+    {
+      "id": "pattern-15911qd",
+      "name": "Pattern 36: DP - 2D Array (Edit Distance / Levenshtein Distance)",
+      "topicId": "topic-1qgoxqf"
+    },
+    {
+      "id": "pattern-1wihp9i",
+      "name": "Pattern 37: DP - 2D Array (Unique Paths on Grid)",
+      "topicId": "topic-1qgoxqf"
+    },
+    {
+      "id": "pattern-10pk1u2",
+      "name": "Pattern 38: DP - Interval DP",
+      "topicId": "topic-1qgoxqf"
+    },
+    {
+      "id": "pattern-13dqpnm",
+      "name": "Pattern 39: DP - Catalan Numbers",
+      "topicId": "topic-1qgoxqf"
+    },
+    {
+      "id": "pattern-1mlrzsn",
+      "name": "Pattern 40: DP - Longest Increasing Subsequence (LIS)",
+      "topicId": "topic-1qgoxqf"
+    },
+    {
+      "id": "pattern-ly2455",
+      "name": "Pattern 41: DP - Stock problems",
+      "topicId": "topic-1qgoxqf"
+    },
+    {
+      "id": "pattern-1gonlr5",
+      "name": "Pattern 42: Heap - Top K Elements (Selection/Frequency)",
+      "topicId": "topic-1v43kfd"
+    },
+    {
+      "id": "pattern-oq05l8",
+      "name": "Pattern 43: Heap - Two Heaps for Median Finding",
+      "topicId": "topic-1v43kfd"
+    },
+    {
+      "id": "pattern-1lq1lid",
+      "name": "Pattern 44: Heap - K-way Merge",
+      "topicId": "topic-1v43kfd"
+    },
+    {
+      "id": "pattern-ywkch9",
+      "name": "Pattern 45: Heap - Scheduling / Minimum Cost (Greedy with Priority Queue)",
+      "topicId": "topic-1v43kfd"
+    },
+    {
+      "id": "pattern-1mrzwhe",
+      "name": "Pattern 46: Backtracking - Subsets (Include/Exclude)",
+      "topicId": "topic-h9ud9a"
+    },
+    {
+      "id": "pattern-d02o6r",
+      "name": "Pattern 47: Backtracking - Permutations",
+      "topicId": "topic-h9ud9a"
+    },
+    {
+      "id": "pattern-qmt1v7",
+      "name": "Pattern 48: Backtracking - Combination Sum",
+      "topicId": "topic-h9ud9a"
+    },
+    {
+      "id": "pattern-18ohraa",
+      "name": "Pattern 49: Backtracking - Parentheses Generation",
+      "topicId": "topic-h9ud9a"
+    },
+    {
+      "id": "pattern-1u2uuzu",
+      "name": "Pattern 50: Backtracking - Word Search / Path Finding in Grid",
+      "topicId": "topic-h9ud9a"
+    },
+    {
+      "id": "pattern-8magw1",
+      "name": "Pattern 51: Backtracking - N-Queens / Constraint Satisfaction",
+      "topicId": "topic-h9ud9a"
+    },
+    {
+      "id": "pattern-mbs5p3",
+      "name": "Pattern 52: Backtracking - Palindrome Partitioning",
+      "topicId": "topic-h9ud9a"
+    },
+    {
+      "id": "pattern-itbfu7",
+      "name": "Pattern 53: Greedy - Interval Merging/Scheduling",
+      "topicId": "topic-1f6u3wb"
+    },
+    {
+      "id": "pattern-16mt16n",
+      "name": "Pattern 54: Greedy - Jump Game Reachability/Minimization",
+      "topicId": "topic-1f6u3wb"
+    },
+    {
+      "id": "pattern-12ny99j",
+      "name": "Pattern 55: Greedy - Buy/Sell Stock",
+      "topicId": "topic-1f6u3wb"
+    },
+    {
+      "id": "pattern-18tw7m7",
+      "name": "Pattern 56: Greedy - Gas Station Circuit",
+      "topicId": "topic-1f6u3wb"
+    },
+    {
+      "id": "pattern-1u8b6nf",
+      "name": "Pattern 57: Greedy - Task Scheduling (Frequency Based)",
+      "topicId": "topic-1f6u3wb"
+    },
+    {
+      "id": "pattern-4pxbco",
+      "name": "Pattern 58: Greedy - Sorting Based",
+      "topicId": "topic-1f6u3wb"
+    },
+    {
+      "id": "pattern-udcl86",
+      "name": "Pattern 59: Binary Search - On Sorted Array/List",
+      "topicId": "topic-149jgy4"
+    },
+    {
+      "id": "pattern-f2siui",
+      "name": "Pattern 60: Binary Search - Find Min/Max in Rotated Sorted Array",
+      "topicId": "topic-149jgy4"
+    },
+    {
+      "id": "pattern-1kq8b9y",
+      "name": "Pattern 61: Binary Search - On Answer / Condition Function",
+      "topicId": "topic-149jgy4"
+    },
+    {
+      "id": "pattern-sn15e3",
+      "name": "Pattern 62: Binary Search - Find First/Last Occurrence",
+      "topicId": "topic-149jgy4"
+    },
+    {
+      "id": "pattern-1swltnp",
+      "name": "Pattern 63: Binary Search - Median / Kth across Two Sorted Arrays",
+      "topicId": "topic-149jgy4"
+    },
+    {
+      "id": "pattern-nfb40k",
+      "name": "Pattern 64: Stack - Valid Parentheses Matching",
+      "topicId": "topic-ti7xuy"
+    },
+    {
+      "id": "pattern-1ba92cq",
+      "name": "Pattern 65: Stack - Monotonic Stack",
+      "topicId": "topic-ti7xuy"
+    },
+    {
+      "id": "pattern-ttlnjl",
+      "name": "Pattern 66: Stack - Expression Evaluation (RPN/Infix)",
+      "topicId": "topic-ti7xuy"
+    },
+    {
+      "id": "pattern-t2cxls",
+      "name": "Pattern 67: Stack - Simulation / Backtracking Helper",
+      "topicId": "topic-ti7xuy"
+    },
+    {
+      "id": "pattern-luy1jn",
+      "name": "Pattern 68: Stack - Min Stack Design",
+      "topicId": "topic-ti7xuy"
+    },
+    {
+      "id": "pattern-1en2olk",
+      "name": "Pattern 69: Stack - Largest Rectangle in Histogram",
+      "topicId": "topic-ti7xuy"
+    },
+    {
+      "id": "pattern-ggg52i",
+      "name": "Pattern 70: Bitwise XOR - Finding Single/Missing Number",
+      "topicId": "topic-1f3thwf"
+    },
+    {
+      "id": "pattern-17cb4jx",
+      "name": "Pattern 71:Bitwise AND - Counting Set Bits (Hamming Weight)",
+      "topicId": "topic-1f3thwf"
+    },
+    {
+      "id": "pattern-1vvxkz2",
+      "name": "Pattern 72: Bitwise DP - Counting Bits Optimization",
+      "topicId": "topic-1f3thwf"
+    },
+    {
+      "id": "pattern-123ysvi",
+      "name": "Pattern 73: Bitwise Operations - Power of Two/Four Check",
+      "topicId": "topic-1f3thwf"
+    },
+    {
+      "id": "pattern-14wit1i",
+      "name": "Pattern 74: Linked List - In-place Reversal",
+      "topicId": "topic-k563jm"
+    },
+    {
+      "id": "pattern-65lvhd",
+      "name": "Pattern 75: Linked List - Merging Two Sorted Lists",
+      "topicId": "topic-k563jm"
+    },
+    {
+      "id": "pattern-1q4dxbe",
+      "name": "Pattern 76: Linked List - Addition of Numbers",
+      "topicId": "topic-k563jm"
+    },
+    {
+      "id": "pattern-utu17i",
+      "name": "Pattern 77: Linked List - Intersection Detection",
+      "topicId": "topic-k563jm"
+    },
+    {
+      "id": "pattern-136icjh",
+      "name": "Pattern 78: Linked List - Reordering / Partitioning",
+      "topicId": "topic-k563jm"
+    },
+    {
+      "id": "pattern-1sv3txq",
+      "name": "Pattern 79: Array/Matrix - In-place Rotation",
+      "topicId": "topic-3fr2pt"
+    },
+    {
+      "id": "pattern-1v82cb6",
+      "name": "Pattern 80: Array/Matrix - Spiral Traversal",
+      "topicId": "topic-3fr2pt"
+    },
+    {
+      "id": "pattern-y29w42",
+      "name": "Pattern 81: Array/Matrix - Set Matrix Zeroes (In-place Marking)",
+      "topicId": "topic-3fr2pt"
+    },
+    {
+      "id": "pattern-1bn69ia",
+      "name": "Pattern 82: Array - Product Except Self (Prefix/Suffix Products)",
+      "topicId": "topic-3fr2pt"
+    },
+    {
+      "id": "pattern-1suwftd",
+      "name": "Pattern 83: Array - Plus One (Handling Carry)",
+      "topicId": "topic-3fr2pt"
+    },
+    {
+      "id": "pattern-21dvb0",
+      "name": "Pattern 84: Array - Merge Sorted Array (In-place from End)",
+      "topicId": "topic-3fr2pt"
+    },
+    {
+      "id": "pattern-1vp24t3",
+      "name": "Pattern 85: Array - Cyclic Sort",
+      "topicId": "topic-3fr2pt"
+    },
+    {
+      "id": "pattern-igs84m",
+      "name": "Pattern 86: String - Palindrome Check (Two Pointers / Reverse)",
+      "topicId": "topic-eiig6z"
+    },
+    {
+      "id": "pattern-1y3ybhc",
+      "name": "Pattern 87: String - Anagram Check (Frequency Count/Sort)",
+      "topicId": "topic-eiig6z"
+    },
+    {
+      "id": "pattern-weflnr",
+      "name": "Pattern 88: String - Roman to Integer Conversion",
+      "topicId": "topic-eiig6z"
+    },
+    {
+      "id": "pattern-wwkn2c",
+      "name": "Pattern 89: String - String to Integer (atoi)",
+      "topicId": "topic-eiig6z"
+    },
+    {
+      "id": "pattern-apflh8",
+      "name": "Pattern 90: String - Multiply Strings (Manual Simulation)",
+      "topicId": "topic-eiig6z"
+    },
+    {
+      "id": "pattern-1rhkwyy",
+      "name": "Pattern 91: String Matching - Naive / KMP / Rabin-Karp",
+      "topicId": "topic-eiig6z"
+    },
+    {
+      "id": "pattern-hu5lnk",
+      "name": "Pattern 92: String - Repeated Substring Pattern Detection",
+      "topicId": "topic-eiig6z"
+    },
+    {
+      "id": "pattern-8x6ycg",
+      "name": "Pattern 93: Design (General/Specific)",
+      "topicId": "topic-1grxg2u"
+    },
+    {
+      "id": "pattern-1mhdtac",
+      "name": "Pattern 94. Tries",
+      "topicId": "topic-1grxg2u"
+    }
+  ],
+  "problems": [
+    {
+      "id": "lc-11",
+      "title": "Container With Most Water",
+      "url": "https://leetcode.com/problemset/?search=11",
+      "difficulty": "Unknown",
+      "patternIds": [
+        "pattern-12gp12f"
+      ]
+    },
+    {
+      "id": "lc-15",
+      "title": "3Sum",
+      "url": "https://leetcode.com/problemset/?search=15",
+      "difficulty": "Unknown",
+      "patternIds": [
+        "pattern-12gp12f"
+      ]
+    },
+    {
+      "id": "lc-16",
+      "title": "3Sum Closest",
+      "url": "https://leetcode.com/problemset/?search=16",
+      "difficulty": "Unknown",
+      "patternIds": [
+        "pattern-12gp12f"
+      ]
+    },
+    {
+      "id": "lc-18",
+      "title": "4Sum",
+      "url": "https://leetcode.com/problemset/?search=18",
+      "difficulty": "Unknown",
+      "patternIds": [
+        "pattern-12gp12f"
+      ]
+    },
+    {
+      "id": "lc-167",
+      "title": "Two Sum II - Input Array Is Sorted",
+      "url": "https://leetcode.com/problemset/?search=167",
+      "difficulty": "Unknown",
+      "patternIds": [
+        "pattern-12gp12f"
+      ]
+    },
+    {
+      "id": "lc-349",
+      "title": "Intersection of Two Arrays",
+      "url": "https://leetcode.com/problemset/?search=349",
+      "difficulty": "Unknown",
+      "patternIds": [
+        "pattern-12gp12f"
+      ]
+    },
+    {
+      "id": "lc-881",
+      "title": "Boats to Save People",
+      "url": "https://leetcode.com/problemset/?search=881",
+      "difficulty": "Unknown",
+      "patternIds": [
+        "pattern-12gp12f"
+      ]
+    },
+    {
+      "id": "lc-977",
+      "title": "Squares of a Sorted Array",
+      "url": "https://leetcode.com/problemset/?search=977",
+      "difficulty": "Unknown",
+      "patternIds": [
+        "pattern-12gp12f",
+        "pattern-21dvb0"
+      ]
+    },
+    {
+      "id": "lc-259",
+      "title": "3Sum Smaller",
+      "url": "https://leetcode.com/problemset/?search=259",
+      "difficulty": "Unknown",
+      "patternIds": [
+        "pattern-12gp12f"
+      ]
+    },
+    {
+      "id": "lc-141",
+      "title": "Linked List Cycle",
+      "url": "https://leetcode.com/problemset/?search=141",
+      "difficulty": "Unknown",
+      "patternIds": [
+        "pattern-2r3apw"
+      ]
+    },
+    {
+      "id": "lc-202",
+      "title": "Happy Number",
+      "url": "https://leetcode.com/problemset/?search=202",
+      "difficulty": "Unknown",
+      "patternIds": [
+        "pattern-2r3apw"
+      ]
+    },
+    {
+      "id": "lc-287",
+      "title": "Find the Duplicate Number",
+      "url": "https://leetcode.com/problemset/?search=287",
+      "difficulty": "Unknown",
+      "patternIds": [
+        "pattern-2r3apw",
+        "pattern-1vp24t3"
+      ]
+    },
+    {
+      "id": "lc-392",
+      "title": "Is Subsequence",
+      "url": "https://leetcode.com/problemset/?search=392",
+      "difficulty": "Unknown",
+      "patternIds": [
+        "pattern-2r3apw"
+      ]
+    },
+    {
+      "id": "lc-19",
+      "title": "Remove Nth Node From End of List",
+      "url": "https://leetcode.com/problemset/?search=19",
+      "difficulty": "Unknown",
+      "patternIds": [
+        "pattern-h1go7m"
+      ]
+    },
+    {
+      "id": "lc-876",
+      "title": "Middle of the Linked List",
+      "url": "https://leetcode.com/problemset/?search=876",
+      "difficulty": "Unknown",
+      "patternIds": [
+        "pattern-h1go7m"
+      ]
+    },
+    {
+      "id": "lc-2095",
+      "title": "Delete the Middle Node of a Linked List",
+      "url": "https://leetcode.com/problemset/?search=2095",
+      "difficulty": "Unknown",
+      "patternIds": [
+        "pattern-h1go7m"
+      ]
+    },
+    {
+      "id": "lc-26",
+      "title": "Remove Duplicates from Sorted Array",
+      "url": "https://leetcode.com/problemset/?search=26",
+      "difficulty": "Unknown",
+      "patternIds": [
+        "pattern-tmd5yv"
+      ]
+    },
+    {
+      "id": "lc-27",
+      "title": "Remove Element",
+      "url": "https://leetcode.com/problemset/?search=27",
+      "difficulty": "Unknown",
+      "patternIds": [
+        "pattern-tmd5yv"
+      ]
+    },
+    {
+      "id": "lc-75",
+      "title": "Sort Colors",
+      "url": "https://leetcode.com/problemset/?search=75",
+      "difficulty": "Unknown",
+      "patternIds": [
+        "pattern-tmd5yv"
+      ]
+    },
+    {
+      "id": "lc-80",
+      "title": "Remove Duplicates from Sorted Array II",
+      "url": "https://leetcode.com/problemset/?search=80",
+      "difficulty": "Unknown",
+      "patternIds": [
+        "pattern-tmd5yv"
+      ]
+    },
+    {
+      "id": "lc-283",
+      "title": "Move Zeroes",
+      "url": "https://leetcode.com/problemset/?search=283",
+      "difficulty": "Unknown",
+      "patternIds": [
+        "pattern-tmd5yv"
+      ]
+    },
+    {
+      "id": "lc-443",
+      "title": "String Compression",
+      "url": "https://leetcode.com/problemset/?search=443",
+      "difficulty": "Unknown",
+      "patternIds": [
+        "pattern-tmd5yv"
+      ]
+    },
+    {
+      "id": "lc-905",
+      "title": "Sort Array By Parity",
+      "url": "https://leetcode.com/problemset/?search=905",
+      "difficulty": "Unknown",
+      "patternIds": [
+        "pattern-tmd5yv"
+      ]
+    },
+    {
+      "id": "lc-2337",
+      "title": "Move Pieces to Obtain a String",
+      "url": "https://leetcode.com/problemset/?search=2337",
+      "difficulty": "Unknown",
+      "patternIds": [
+        "pattern-tmd5yv"
+      ]
+    },
+    {
+      "id": "lc-2938",
+      "title": "Separate Black and White Balls",
+      "url": "https://leetcode.com/problemset/?search=2938",
+      "difficulty": "Unknown",
+      "patternIds": [
+        "pattern-tmd5yv"
+      ]
+    },
+    {
+      "id": "lc-844",
+      "title": "Backspace String Compare",
+      "url": "https://leetcode.com/problemset/?search=844",
+      "difficulty": "Unknown",
+      "patternIds": [
+        "pattern-jd7dva"
+      ]
+    },
+    {
+      "id": "lc-1598",
+      "title": "Crawler Log Folder",
+      "url": "https://leetcode.com/problemset/?search=1598",
+      "difficulty": "Unknown",
+      "patternIds": [
+        "pattern-jd7dva"
+      ]
+    },
+    {
+      "id": "lc-2390",
+      "title": "Removing Stars From a String",
+      "url": "https://leetcode.com/problemset/?search=2390",
+      "difficulty": "Unknown",
+      "patternIds": [
+        "pattern-jd7dva"
+      ]
+    },
+    {
+      "id": "lc-5",
+      "title": "Longest Palindromic Substring",
+      "url": "https://leetcode.com/problemset/?search=5",
+      "difficulty": "Unknown",
+      "patternIds": [
+        "pattern-c28bx7"
+      ]
+    },
+    {
+      "id": "lc-647",
+      "title": "Palindromic Substrings",
+      "url": "https://leetcode.com/problemset/?search=647",
+      "difficulty": "Unknown",
+      "patternIds": [
+        "pattern-c28bx7"
+      ]
+    },
+    {
+      "id": "lc-151",
+      "title": "Reverse Words in a String",
+      "url": "https://leetcode.com/problemset/?search=151",
+      "difficulty": "Unknown",
+      "patternIds": [
+        "pattern-dahuv"
+      ]
+    },
+    {
+      "id": "lc-344",
+      "title": "Reverse String",
+      "url": "https://leetcode.com/problemset/?search=344",
+      "difficulty": "Unknown",
+      "patternIds": [
+        "pattern-dahuv"
+      ]
+    },
+    {
+      "id": "lc-345",
+      "title": "Reverse Vowels of a String",
+      "url": "https://leetcode.com/problemset/?search=345",
+      "difficulty": "Unknown",
+      "patternIds": [
+        "pattern-dahuv"
+      ]
+    },
+    {
+      "id": "lc-541",
+      "title": "Reverse String II",
+      "url": "https://leetcode.com/problemset/?search=541",
+      "difficulty": "Unknown",
+      "patternIds": [
+        "pattern-dahuv"
+      ]
+    },
+    {
+      "id": "lc-346",
+      "title": "Moving Average from Data Stream",
+      "url": "https://leetcode.com/problemset/?search=346",
+      "difficulty": "Unknown",
+      "patternIds": [
+        "pattern-fon3hz",
+        "pattern-8x6ycg"
+      ]
+    },
+    {
+      "id": "lc-643",
+      "title": "Maximum Average Subarray I",
+      "url": "https://leetcode.com/problemset/?search=643",
+      "difficulty": "Unknown",
+      "patternIds": [
+        "pattern-fon3hz"
+      ]
+    },
+    {
+      "id": "lc-2985",
+      "title": "Calculate Compressed Mean",
+      "url": "https://leetcode.com/problemset/?search=2985",
+      "difficulty": "Unknown",
+      "patternIds": [
+        "pattern-fon3hz"
+      ]
+    },
+    {
+      "id": "lc-3254",
+      "title": "Find the Power of K-Size Subarrays I",
+      "url": "https://leetcode.com/problemset/?search=3254",
+      "difficulty": "Unknown",
+      "patternIds": [
+        "pattern-fon3hz"
+      ]
+    },
+    {
+      "id": "lc-3318",
+      "title": "Find X-Sum of All K-Long Subarrays I",
+      "url": "https://leetcode.com/problemset/?search=3318",
+      "difficulty": "Unknown",
+      "patternIds": [
+        "pattern-fon3hz"
+      ]
+    },
+    {
+      "id": "lc-3",
+      "title": "Longest Substring Without Repeating Characters",
+      "url": "https://leetcode.com/problemset/?search=3",
+      "difficulty": "Unknown",
+      "patternIds": [
+        "pattern-4rr7nf"
+      ]
+    },
+    {
+      "id": "lc-76",
+      "title": "Minimum Window Substring",
+      "url": "https://leetcode.com/problemset/?search=76",
+      "difficulty": "Unknown",
+      "patternIds": [
+        "pattern-4rr7nf"
+      ]
+    },
+    {
+      "id": "lc-209",
+      "title": "Minimum Size Subarray Sum",
+      "url": "https://leetcode.com/problemset/?search=209",
+      "difficulty": "Unknown",
+      "patternIds": [
+        "pattern-4rr7nf"
+      ]
+    },
+    {
+      "id": "lc-219",
+      "title": "Contains Duplicate II",
+      "url": "https://leetcode.com/problemset/?search=219",
+      "difficulty": "Unknown",
+      "patternIds": [
+        "pattern-4rr7nf"
+      ]
+    },
+    {
+      "id": "lc-424",
+      "title": "Longest Repeating Character Replacement",
+      "url": "https://leetcode.com/problemset/?search=424",
+      "difficulty": "Unknown",
+      "patternIds": [
+        "pattern-4rr7nf"
+      ]
+    },
+    {
+      "id": "lc-713",
+      "title": "Subarray Product Less Than K",
+      "url": "https://leetcode.com/problemset/?search=713",
+      "difficulty": "Unknown",
+      "patternIds": [
+        "pattern-4rr7nf"
+      ]
+    },
+    {
+      "id": "lc-904",
+      "title": "Fruit Into Baskets",
+      "url": "https://leetcode.com/problemset/?search=904",
+      "difficulty": "Unknown",
+      "patternIds": [
+        "pattern-4rr7nf"
+      ]
+    },
+    {
+      "id": "lc-1004",
+      "title": "Max Consecutive Ones III",
+      "url": "https://leetcode.com/problemset/?search=1004",
+      "difficulty": "Unknown",
+      "patternIds": [
+        "pattern-4rr7nf"
+      ]
+    },
+    {
+      "id": "lc-1438",
+      "title": "Longest Continuous Subarray With Absolute Diff Less Than or Equal to Limit",
+      "url": "https://leetcode.com/problemset/?search=1438",
+      "difficulty": "Unknown",
+      "patternIds": [
+        "pattern-4rr7nf"
+      ]
+    },
+    {
+      "id": "lc-1493",
+      "title": "Longest Subarray of 1's After Deleting One Element",
+      "url": "https://leetcode.com/problemset/?search=1493",
+      "difficulty": "Unknown",
+      "patternIds": [
+        "pattern-4rr7nf"
+      ]
+    },
+    {
+      "id": "lc-1658",
+      "title": "Minimum Operations to Reduce X to Zero",
+      "url": "https://leetcode.com/problemset/?search=1658",
+      "difficulty": "Unknown",
+      "patternIds": [
+        "pattern-4rr7nf"
+      ]
+    },
+    {
+      "id": "lc-1838",
+      "title": "Frequency of the Most Frequent Element",
+      "url": "https://leetcode.com/problemset/?search=1838",
+      "difficulty": "Unknown",
+      "patternIds": [
+        "pattern-4rr7nf"
+      ]
+    },
+    {
+      "id": "lc-2461",
+      "title": "Maximum Sum of Distinct Subarrays With Length K",
+      "url": "https://leetcode.com/problemset/?search=2461",
+      "difficulty": "Unknown",
+      "patternIds": [
+        "pattern-4rr7nf"
+      ]
+    },
+    {
+      "id": "lc-2516",
+      "title": "Take K of Each Character From Left and Right",
+      "url": "https://leetcode.com/problemset/?search=2516",
+      "difficulty": "Unknown",
+      "patternIds": [
+        "pattern-4rr7nf"
+      ]
+    },
+    {
+      "id": "lc-2762",
+      "title": "Continuous Subarrays",
+      "url": "https://leetcode.com/problemset/?search=2762",
+      "difficulty": "Unknown",
+      "patternIds": [
+        "pattern-4rr7nf"
+      ]
+    },
+    {
+      "id": "lc-2779",
+      "title": "Maximum Beauty of an Array After Applying Operation",
+      "url": "https://leetcode.com/problemset/?search=2779",
+      "difficulty": "Unknown",
+      "patternIds": [
+        "pattern-4rr7nf"
+      ]
+    },
+    {
+      "id": "lc-2981",
+      "title": "Find Longest Special Substring That Occurs Thrice I",
+      "url": "https://leetcode.com/problemset/?search=2981",
+      "difficulty": "Unknown",
+      "patternIds": [
+        "pattern-4rr7nf"
+      ]
+    },
+    {
+      "id": "lc-3026",
+      "title": "Maximum Good Subarray Sum",
+      "url": "https://leetcode.com/problemset/?search=3026",
+      "difficulty": "Unknown",
+      "patternIds": [
+        "pattern-4rr7nf"
+      ]
+    },
+    {
+      "id": "lc-3346",
+      "title": "Maximum Frequency of an Element After Performing Operations I",
+      "url": "https://leetcode.com/problemset/?search=3346",
+      "difficulty": "Unknown",
+      "patternIds": [
+        "pattern-4rr7nf"
+      ]
+    },
+    {
+      "id": "lc-3347",
+      "title": "Maximum Frequency of an Element After Performing Operations II 2",
+      "url": "https://leetcode.com/problemset/?search=3347",
+      "difficulty": "Unknown",
+      "patternIds": [
+        "pattern-4rr7nf"
+      ]
+    },
+    {
+      "id": "lc-239",
+      "title": "Sliding Window Maximum",
+      "url": "https://leetcode.com/problemset/?search=239",
+      "difficulty": "Unknown",
+      "patternIds": [
+        "pattern-1qtw4h3"
+      ]
+    },
+    {
+      "id": "lc-862",
+      "title": "Shortest Subarray with Sum at Least K",
+      "url": "https://leetcode.com/problemset/?search=862",
+      "difficulty": "Unknown",
+      "patternIds": [
+        "pattern-1qtw4h3"
+      ]
+    },
+    {
+      "id": "lc-1696",
+      "title": "Jump Game VI",
+      "url": "https://leetcode.com/problemset/?search=1696",
+      "difficulty": "Unknown",
+      "patternIds": [
+        "pattern-1qtw4h3"
+      ]
+    },
+    {
+      "id": "lc-1",
+      "title": "TwoSum",
+      "url": "https://leetcode.com/problemset/?search=1",
+      "difficulty": "Unknown",
+      "patternIds": [
+        "pattern-1ougwf7"
+      ]
+    },
+    {
+      "id": "lc-438",
+      "title": "Find All Anagrams in a String",
+      "url": "https://leetcode.com/problemset/?search=438",
+      "difficulty": "Unknown",
+      "patternIds": [
+        "pattern-1ougwf7"
+      ]
+    },
+    {
+      "id": "lc-567",
+      "title": "Permutation in String",
+      "url": "https://leetcode.com/problemset/?search=567",
+      "difficulty": "Unknown",
+      "patternIds": [
+        "pattern-1ougwf7"
+      ]
+    },
+    {
+      "id": "lc-102",
+      "title": "Binary Tree Level Order Traversal",
+      "url": "https://leetcode.com/problemset/?search=102",
+      "difficulty": "Unknown",
+      "patternIds": [
+        "pattern-ainyqn"
+      ]
+    },
+    {
+      "id": "lc-103",
+      "title": "Binary Tree Zigzag Level Order Traversal",
+      "url": "https://leetcode.com/problemset/?search=103",
+      "difficulty": "Unknown",
+      "patternIds": [
+        "pattern-ainyqn"
+      ]
+    },
+    {
+      "id": "lc-199",
+      "title": "Binary Tree Right Side View",
+      "url": "https://leetcode.com/problemset/?search=199",
+      "difficulty": "Unknown",
+      "patternIds": [
+        "pattern-ainyqn"
+      ]
+    },
+    {
+      "id": "lc-515",
+      "title": "Find Largest Value in Each Tree Row",
+      "url": "https://leetcode.com/problemset/?search=515",
+      "difficulty": "Unknown",
+      "patternIds": [
+        "pattern-ainyqn"
+      ]
+    },
+    {
+      "id": "lc-1161",
+      "title": "Maximum Level Sum of a Binary Tree",
+      "url": "https://leetcode.com/problemset/?search=1161",
+      "difficulty": "Unknown",
+      "patternIds": [
+        "pattern-ainyqn"
+      ]
+    },
+    {
+      "id": "lc-100",
+      "title": "Same Tree",
+      "url": "https://leetcode.com/problemset/?search=100",
+      "difficulty": "Unknown",
+      "patternIds": [
+        "pattern-gfry4n"
+      ]
+    },
+    {
+      "id": "lc-101",
+      "title": "Symmetric Tree",
+      "url": "https://leetcode.com/problemset/?search=101",
+      "difficulty": "Unknown",
+      "patternIds": [
+        "pattern-gfry4n"
+      ]
+    },
+    {
+      "id": "lc-105",
+      "title": "Construct Binary Tree from Preorder and Inorder Traversal",
+      "url": "https://leetcode.com/problemset/?search=105",
+      "difficulty": "Unknown",
+      "patternIds": [
+        "pattern-gfry4n"
+      ]
+    },
+    {
+      "id": "lc-114",
+      "title": "Flatten Binary Tree to Linked List",
+      "url": "https://leetcode.com/problemset/?search=114",
+      "difficulty": "Unknown",
+      "patternIds": [
+        "pattern-gfry4n"
+      ]
+    },
+    {
+      "id": "lc-226",
+      "title": "Invert Binary Tree",
+      "url": "https://leetcode.com/problemset/?search=226",
+      "difficulty": "Unknown",
+      "patternIds": [
+        "pattern-gfry4n"
+      ]
+    },
+    {
+      "id": "lc-257",
+      "title": "Binary Tree Paths",
+      "url": "https://leetcode.com/problemset/?search=257",
+      "difficulty": "Unknown",
+      "patternIds": [
+        "pattern-gfry4n"
+      ]
+    },
+    {
+      "id": "lc-988",
+      "title": "Smallest String Starting From Leaf",
+      "url": "https://leetcode.com/problemset/?search=988",
+      "difficulty": "Unknown",
+      "patternIds": [
+        "pattern-gfry4n"
+      ]
+    },
+    {
+      "id": "lc-94",
+      "title": "Binary Tree Inorder Traversal",
+      "url": "https://leetcode.com/problemset/?search=94",
+      "difficulty": "Unknown",
+      "patternIds": [
+        "pattern-1c71rfs"
+      ]
+    },
+    {
+      "id": "lc-98",
+      "title": "Validate Binary Search Tree",
+      "url": "https://leetcode.com/problemset/?search=98",
+      "difficulty": "Unknown",
+      "patternIds": [
+        "pattern-1c71rfs"
+      ]
+    },
+    {
+      "id": "lc-173",
+      "title": "Binary Search Tree Iterator",
+      "url": "https://leetcode.com/problemset/?search=173",
+      "difficulty": "Unknown",
+      "patternIds": [
+        "pattern-1c71rfs"
+      ]
+    },
+    {
+      "id": "lc-230",
+      "title": "Kth Smallest Element in a BST",
+      "url": "https://leetcode.com/problemset/?search=230",
+      "difficulty": "Unknown",
+      "patternIds": [
+        "pattern-1c71rfs"
+      ]
+    },
+    {
+      "id": "lc-501",
+      "title": "Find Mode in Binary Search Tree",
+      "url": "https://leetcode.com/problemset/?search=501",
+      "difficulty": "Unknown",
+      "patternIds": [
+        "pattern-1c71rfs"
+      ]
+    },
+    {
+      "id": "lc-530",
+      "title": "Minimum Absolute Difference in BST",
+      "url": "https://leetcode.com/problemset/?search=530",
+      "difficulty": "Unknown",
+      "patternIds": [
+        "pattern-1c71rfs"
+      ]
+    },
+    {
+      "id": "lc-104",
+      "title": "Maximum Depth of Binary Tree",
+      "url": "https://leetcode.com/problemset/?search=104",
+      "difficulty": "Unknown",
+      "patternIds": [
+        "pattern-2p0ln4"
+      ]
+    },
+    {
+      "id": "lc-110",
+      "title": "Balanced Binary Tree",
+      "url": "https://leetcode.com/problemset/?search=110",
+      "difficulty": "Unknown",
+      "patternIds": [
+        "pattern-2p0ln4"
+      ]
+    },
+    {
+      "id": "lc-124",
+      "title": "Binary Tree Maximum Path Sum",
+      "url": "https://leetcode.com/problemset/?search=124",
+      "difficulty": "Unknown",
+      "patternIds": [
+        "pattern-2p0ln4"
+      ]
+    },
+    {
+      "id": "lc-145",
+      "title": "Binary Tree Postorder Traversal",
+      "url": "https://leetcode.com/problemset/?search=145",
+      "difficulty": "Unknown",
+      "patternIds": [
+        "pattern-2p0ln4"
+      ]
+    },
+    {
+      "id": "lc-337",
+      "title": "House Robber III",
+      "url": "https://leetcode.com/problemset/?search=337",
+      "difficulty": "Unknown",
+      "patternIds": [
+        "pattern-2p0ln4",
+        "pattern-1bs2guj"
+      ]
+    },
+    {
+      "id": "lc-366",
+      "title": "Find Leaves of Binary Tree",
+      "url": "https://leetcode.com/problemset/?search=366",
+      "difficulty": "Unknown",
+      "patternIds": [
+        "pattern-2p0ln4"
+      ]
+    },
+    {
+      "id": "lc-543",
+      "title": "Diameter of Binary Tree",
+      "url": "https://leetcode.com/problemset/?search=543",
+      "difficulty": "Unknown",
+      "patternIds": [
+        "pattern-2p0ln4"
+      ]
+    },
+    {
+      "id": "lc-863",
+      "title": "All Nodes Distance K in Binary Tree",
+      "url": "https://leetcode.com/problemset/?search=863",
+      "difficulty": "Unknown",
+      "patternIds": [
+        "pattern-2p0ln4"
+      ]
+    },
+    {
+      "id": "lc-1110",
+      "title": "Delete Nodes And Return Forest",
+      "url": "https://leetcode.com/problemset/?search=1110",
+      "difficulty": "Unknown",
+      "patternIds": [
+        "pattern-2p0ln4"
+      ]
+    },
+    {
+      "id": "lc-2458",
+      "title": "Height of Binary Tree After Subtree Removal Queries",
+      "url": "https://leetcode.com/problemset/?search=2458",
+      "difficulty": "Unknown",
+      "patternIds": [
+        "pattern-2p0ln4"
+      ]
+    },
+    {
+      "id": "lc-235",
+      "title": "Lowest Common Ancestor of a Binary Search Tree",
+      "url": "https://leetcode.com/problemset/?search=235",
+      "difficulty": "Unknown",
+      "patternIds": [
+        "pattern-x497z0"
+      ]
+    },
+    {
+      "id": "lc-236",
+      "title": "Lowest Common Ancestor of a Binary Tree",
+      "url": "https://leetcode.com/problemset/?search=236",
+      "difficulty": "Unknown",
+      "patternIds": [
+        "pattern-x497z0"
+      ]
+    },
+    {
+      "id": "lc-297",
+      "title": "Serialize and Deserialize Binary Tree",
+      "url": "https://leetcode.com/problemset/?search=297",
+      "difficulty": "Unknown",
+      "patternIds": [
+        "pattern-17b590d"
+      ]
+    },
+    {
+      "id": "lc-572",
+      "title": "Subtree of Another Tree",
+      "url": "https://leetcode.com/problemset/?search=572",
+      "difficulty": "Unknown",
+      "patternIds": [
+        "pattern-17b590d"
+      ]
+    },
+    {
+      "id": "lc-652",
+      "title": "Find Duplicate Subtrees",
+      "url": "https://leetcode.com/problemset/?search=652",
+      "difficulty": "Unknown",
+      "patternIds": [
+        "pattern-17b590d"
+      ]
+    },
+    {
+      "id": "lc-130",
+      "title": "Surrounded Regions",
+      "url": "https://leetcode.com/problemset/?search=130",
+      "difficulty": "Unknown",
+      "patternIds": [
+        "pattern-d5bxtt"
+      ]
+    },
+    {
+      "id": "lc-200",
+      "title": "Number of Islands",
+      "url": "https://leetcode.com/problemset/?search=200",
+      "difficulty": "Unknown",
+      "patternIds": [
+        "pattern-d5bxtt",
+        "pattern-1v5decy"
+      ]
+    },
+    {
+      "id": "lc-417",
+      "title": "Pacific Atlantic Water Flow",
+      "url": "https://leetcode.com/problemset/?search=417",
+      "difficulty": "Unknown",
+      "patternIds": [
+        "pattern-d5bxtt"
+      ]
+    },
+    {
+      "id": "lc-547",
+      "title": "Number of Provinces",
+      "url": "https://leetcode.com/problemset/?search=547",
+      "difficulty": "Unknown",
+      "patternIds": [
+        "pattern-d5bxtt",
+        "pattern-1v5decy",
+        "pattern-178gwr3"
+      ]
+    },
+    {
+      "id": "lc-695",
+      "title": "Max Area of Island",
+      "url": "https://leetcode.com/problemset/?search=695",
+      "difficulty": "Unknown",
+      "patternIds": [
+        "pattern-d5bxtt"
+      ]
+    },
+    {
+      "id": "lc-733",
+      "title": "Flood Fill",
+      "url": "https://leetcode.com/problemset/?search=733",
+      "difficulty": "Unknown",
+      "patternIds": [
+        "pattern-d5bxtt"
+      ]
+    },
+    {
+      "id": "lc-841",
+      "title": "Keys and Rooms",
+      "url": "https://leetcode.com/problemset/?search=841",
+      "difficulty": "Unknown",
+      "patternIds": [
+        "pattern-d5bxtt"
+      ]
+    },
+    {
+      "id": "lc-1020",
+      "title": "Number of Enclaves",
+      "url": "https://leetcode.com/problemset/?search=1020",
+      "difficulty": "Unknown",
+      "patternIds": [
+        "pattern-d5bxtt"
+      ]
+    },
+    {
+      "id": "lc-1254",
+      "title": "Number of Closed Islands",
+      "url": "https://leetcode.com/problemset/?search=1254",
+      "difficulty": "Unknown",
+      "patternIds": [
+        "pattern-d5bxtt"
+      ]
+    },
+    {
+      "id": "lc-1905",
+      "title": "Count Sub Islands",
+      "url": "https://leetcode.com/problemset/?search=1905",
+      "difficulty": "Unknown",
+      "patternIds": [
+        "pattern-d5bxtt"
+      ]
+    },
+    {
+      "id": "lc-2101",
+      "title": "Detonate the Maximum Bombs",
+      "url": "https://leetcode.com/problemset/?search=2101",
+      "difficulty": "Unknown",
+      "patternIds": [
+        "pattern-d5bxtt"
+      ]
+    },
+    {
+      "id": "lc-542",
+      "title": "01 Matrix",
+      "url": "https://leetcode.com/problemset/?search=542",
+      "difficulty": "Unknown",
+      "patternIds": [
+        "pattern-1lvkts0"
+      ]
+    },
+    {
+      "id": "lc-994",
+      "title": "Rotting Oranges",
+      "url": "https://leetcode.com/problemset/?search=994",
+      "difficulty": "Unknown",
+      "patternIds": [
+        "pattern-1lvkts0"
+      ]
+    },
+    {
+      "id": "lc-1091",
+      "title": "Shortest Path in Binary Matrix",
+      "url": "https://leetcode.com/problemset/?search=1091",
+      "difficulty": "Unknown",
+      "patternIds": [
+        "pattern-1lvkts0"
+      ]
+    },
+    {
+      "id": "lc-207",
+      "title": "Course Schedule",
+      "url": "https://leetcode.com/problemset/?search=207",
+      "difficulty": "Unknown",
+      "patternIds": [
+        "pattern-fyucrs"
+      ]
+    },
+    {
+      "id": "lc-210",
+      "title": "Course Schedule II",
+      "url": "https://leetcode.com/problemset/?search=210",
+      "difficulty": "Unknown",
+      "patternIds": [
+        "pattern-fyucrs",
+        "pattern-1rp37cs",
+        "pattern-178gwr3"
+      ]
+    },
+    {
+      "id": "lc-802",
+      "title": "Find Eventual Safe States",
+      "url": "https://leetcode.com/problemset/?search=802",
+      "difficulty": "Unknown",
+      "patternIds": [
+        "pattern-fyucrs"
+      ]
+    },
+    {
+      "id": "lc-1059",
+      "title": "All Paths from Source Lead to Destination",
+      "url": "https://leetcode.com/problemset/?search=1059",
+      "difficulty": "Unknown",
+      "patternIds": [
+        "pattern-fyucrs"
+      ]
+    },
+    {
+      "id": "lc-269",
+      "title": "Alien Dictionary",
+      "url": "https://leetcode.com/problemset/?search=269",
+      "difficulty": "Unknown",
+      "patternIds": [
+        "pattern-1rp37cs"
+      ]
+    },
+    {
+      "id": "lc-310",
+      "title": "Minimum Height Trees",
+      "url": "https://leetcode.com/problemset/?search=310",
+      "difficulty": "Unknown",
+      "patternIds": [
+        "pattern-1rp37cs"
+      ]
+    },
+    {
+      "id": "lc-444",
+      "title": "Sequence Reconstruction",
+      "url": "https://leetcode.com/problemset/?search=444",
+      "difficulty": "Unknown",
+      "patternIds": [
+        "pattern-1rp37cs"
+      ]
+    },
+    {
+      "id": "lc-1136",
+      "title": "Parallel Courses",
+      "url": "https://leetcode.com/problemset/?search=1136",
+      "difficulty": "Unknown",
+      "patternIds": [
+        "pattern-1rp37cs"
+      ]
+    },
+    {
+      "id": "lc-1857",
+      "title": "Largest Color Value in a Directed Graph",
+      "url": "https://leetcode.com/problemset/?search=1857",
+      "difficulty": "Unknown",
+      "patternIds": [
+        "pattern-1rp37cs"
+      ]
+    },
+    {
+      "id": "lc-2050",
+      "title": "Parallel Courses III",
+      "url": "https://leetcode.com/problemset/?search=2050",
+      "difficulty": "Unknown",
+      "patternIds": [
+        "pattern-1rp37cs"
+      ]
+    },
+    {
+      "id": "lc-2115",
+      "title": "Find All Possible Recipes from Given Supplies",
+      "url": "https://leetcode.com/problemset/?search=2115",
+      "difficulty": "Unknown",
+      "patternIds": [
+        "pattern-1rp37cs"
+      ]
+    },
+    {
+      "id": "lc-2392",
+      "title": "Build a Matrix With Conditions",
+      "url": "https://leetcode.com/problemset/?search=2392",
+      "difficulty": "Unknown",
+      "patternIds": [
+        "pattern-1rp37cs"
+      ]
+    },
+    {
+      "id": "lc-133",
+      "title": "Clone Graph",
+      "url": "https://leetcode.com/problemset/?search=133",
+      "difficulty": "Unknown",
+      "patternIds": [
+        "pattern-10sw9ch"
+      ]
+    },
+    {
+      "id": "lc-1334",
+      "title": "Find the City With the Smallest Number of Neighbors at a Threshold Distance",
+      "url": "https://leetcode.com/problemset/?search=1334",
+      "difficulty": "Unknown",
+      "patternIds": [
+        "pattern-10sw9ch"
+      ]
+    },
+    {
+      "id": "lc-138",
+      "title": "Copy List with Random Pointer",
+      "url": "https://leetcode.com/problemset/?search=138",
+      "difficulty": "Unknown",
+      "patternIds": [
+        "pattern-10sw9ch"
+      ]
+    },
+    {
+      "id": "lc-1490",
+      "title": "Clone N-ary Tree",
+      "url": "https://leetcode.com/problemset/?search=1490",
+      "difficulty": "Unknown",
+      "patternIds": [
+        "pattern-10sw9ch"
+      ]
+    },
+    {
+      "id": "lc-743",
+      "title": "Network Delay Time",
+      "url": "https://leetcode.com/problemset/?search=743",
+      "difficulty": "Unknown",
+      "patternIds": [
+        "pattern-1qawopj"
+      ]
+    },
+    {
+      "id": "lc-778",
+      "title": "Swim in Rising Water",
+      "url": "https://leetcode.com/problemset/?search=778",
+      "difficulty": "Unknown",
+      "patternIds": [
+        "pattern-1qawopj"
+      ]
+    },
+    {
+      "id": "lc-1514",
+      "title": "Path with Maximum Probability",
+      "url": "https://leetcode.com/problemset/?search=1514",
+      "difficulty": "Unknown",
+      "patternIds": [
+        "pattern-1qawopj"
+      ]
+    },
+    {
+      "id": "lc-1631",
+      "title": "Path With Minimum Effort",
+      "url": "https://leetcode.com/problemset/?search=1631",
+      "difficulty": "Unknown",
+      "patternIds": [
+        "pattern-1qawopj"
+      ]
+    },
+    {
+      "id": "lc-1976",
+      "title": "Number of Ways to Arrive at Destination",
+      "url": "https://leetcode.com/problemset/?search=1976",
+      "difficulty": "Unknown",
+      "patternIds": [
+        "pattern-1qawopj"
+      ]
+    },
+    {
+      "id": "lc-2045",
+      "title": "Second Minimum Time to Reach Destination",
+      "url": "https://leetcode.com/problemset/?search=2045",
+      "difficulty": "Unknown",
+      "patternIds": [
+        "pattern-1qawopj"
+      ]
+    },
+    {
+      "id": "lc-2203",
+      "title": "Minimum Weighted Subgraph With the Required Paths",
+      "url": "https://leetcode.com/problemset/?search=2203",
+      "difficulty": "Unknown",
+      "patternIds": [
+        "pattern-1qawopj"
+      ]
+    },
+    {
+      "id": "lc-2290",
+      "title": "Minimum Obstacle Removal to Reach Corner",
+      "url": "https://leetcode.com/problemset/?search=2290",
+      "difficulty": "Unknown",
+      "patternIds": [
+        "pattern-1qawopj"
+      ]
+    },
+    {
+      "id": "lc-2577",
+      "title": "Minimum Time to Visit a Cell In a Grid",
+      "url": "https://leetcode.com/problemset/?search=2577",
+      "difficulty": "Unknown",
+      "patternIds": [
+        "pattern-1qawopj"
+      ]
+    },
+    {
+      "id": "lc-2812",
+      "title": "Find the Safest Path in a Grid",
+      "url": "https://leetcode.com/problemset/?search=2812",
+      "difficulty": "Unknown",
+      "patternIds": [
+        "pattern-1qawopj"
+      ]
+    },
+    {
+      "id": "lc-787",
+      "title": "Cheapest Flights Within K Stops",
+      "url": "https://leetcode.com/problemset/?search=787",
+      "difficulty": "Unknown",
+      "patternIds": [
+        "pattern-11yowli"
+      ]
+    },
+    {
+      "id": "lc-1129",
+      "title": "Shortest Path with Alternating Colors",
+      "url": "https://leetcode.com/problemset/?search=1129",
+      "difficulty": "Unknown",
+      "patternIds": [
+        "pattern-11yowli"
+      ]
+    },
+    {
+      "id": "lc-261",
+      "title": "Graph Valid Tree",
+      "url": "https://leetcode.com/problemset/?search=261",
+      "difficulty": "Unknown",
+      "patternIds": [
+        "pattern-1v5decy"
+      ]
+    },
+    {
+      "id": "lc-305",
+      "title": "Number of Islands II",
+      "url": "https://leetcode.com/problemset/?search=305",
+      "difficulty": "Unknown",
+      "patternIds": [
+        "pattern-1v5decy"
+      ]
+    },
+    {
+      "id": "lc-323",
+      "title": "Number of Connected Components in an Undirected Graph",
+      "url": "https://leetcode.com/problemset/?search=323",
+      "difficulty": "Unknown",
+      "patternIds": [
+        "pattern-1v5decy"
+      ]
+    },
+    {
+      "id": "lc-684",
+      "title": "Redundant Connection",
+      "url": "https://leetcode.com/problemset/?search=684",
+      "difficulty": "Unknown",
+      "patternIds": [
+        "pattern-1v5decy"
+      ]
+    },
+    {
+      "id": "lc-721",
+      "title": "Accounts Merge",
+      "url": "https://leetcode.com/problemset/?search=721",
+      "difficulty": "Unknown",
+      "patternIds": [
+        "pattern-1v5decy"
+      ]
+    },
+    {
+      "id": "lc-737",
+      "title": "Sentence Similarity II",
+      "url": "https://leetcode.com/problemset/?search=737",
+      "difficulty": "Unknown",
+      "patternIds": [
+        "pattern-1v5decy"
+      ]
+    },
+    {
+      "id": "lc-947",
+      "title": "Most Stones Removed with Same Row or Column",
+      "url": "https://leetcode.com/problemset/?search=947",
+      "difficulty": "Unknown",
+      "patternIds": [
+        "pattern-1v5decy"
+      ]
+    },
+    {
+      "id": "lc-952",
+      "title": "Largest Component Size by Common Factor",
+      "url": "https://leetcode.com/problemset/?search=952",
+      "difficulty": "Unknown",
+      "patternIds": [
+        "pattern-1v5decy"
+      ]
+    },
+    {
+      "id": "lc-959",
+      "title": "Regions Cut By Slashes",
+      "url": "https://leetcode.com/problemset/?search=959",
+      "difficulty": "Unknown",
+      "patternIds": [
+        "pattern-1v5decy"
+      ]
+    },
+    {
+      "id": "lc-1101",
+      "title": "The Earliest Moment When Everyone Become Friends",
+      "url": "https://leetcode.com/problemset/?search=1101",
+      "difficulty": "Unknown",
+      "patternIds": [
+        "pattern-1v5decy"
+      ]
+    },
+    {
+      "id": "lc-1192",
+      "title": "Critical Connections in a Network",
+      "url": "https://leetcode.com/problemset/?search=1192",
+      "difficulty": "Unknown",
+      "patternIds": [
+        "pattern-178gwr3",
+        "pattern-xy910j"
+      ]
+    },
+    {
+      "id": "lc-2127",
+      "title": "Maximum Employees to Be Invited to a Meeting",
+      "url": "https://leetcode.com/problemset/?search=2127",
+      "difficulty": "Unknown",
+      "patternIds": [
+        "pattern-178gwr3"
+      ]
+    },
+    {
+      "id": "lc-2360",
+      "title": "Longest Cycle in a Graph",
+      "url": "https://leetcode.com/problemset/?search=2360",
+      "difficulty": "Unknown",
+      "patternIds": [
+        "pattern-xy910j"
+      ]
+    },
+    {
+      "id": "lc-1135",
+      "title": "Connecting Cities With Minimum Cost",
+      "url": "https://leetcode.com/problemset/?search=1135",
+      "difficulty": "Unknown",
+      "patternIds": [
+        "pattern-efc9q5"
+      ]
+    },
+    {
+      "id": "lc-1584",
+      "title": "Min Cost to Connect All Points",
+      "url": "https://leetcode.com/problemset/?search=1584",
+      "difficulty": "Unknown",
+      "patternIds": [
+        "pattern-efc9q5"
+      ]
+    },
+    {
+      "id": "lc-1168",
+      "title": "Optimize Water Distribution in a Village",
+      "url": "https://leetcode.com/problemset/?search=1168",
+      "difficulty": "Unknown",
+      "patternIds": [
+        "pattern-efc9q5"
+      ]
+    },
+    {
+      "id": "lc-1489",
+      "title": "Find Critical and Pseudo-Critical Edges in Minimum Spanning Tree",
+      "url": "https://leetcode.com/problemset/?search=1489",
+      "difficulty": "Unknown",
+      "patternIds": [
+        "pattern-efc9q5"
+      ]
+    },
+    {
+      "id": "lc-127",
+      "title": "Word Ladder",
+      "url": "https://leetcode.com/problemset/?search=127",
+      "difficulty": "Unknown",
+      "patternIds": [
+        "pattern-160mi2h"
+      ]
+    },
+    {
+      "id": "lc-126",
+      "title": "Word Ladder II",
+      "url": "https://leetcode.com/problemset/?search=126",
+      "difficulty": "Unknown",
+      "patternIds": [
+        "pattern-160mi2h"
+      ]
+    },
+    {
+      "id": "lc-815",
+      "title": "Bus Routes",
+      "url": "https://leetcode.com/problemset/?search=815",
+      "difficulty": "Unknown",
+      "patternIds": [
+        "pattern-160mi2h"
+      ]
+    },
+    {
+      "id": "lc-70",
+      "title": "Climbing Stairs",
+      "url": "https://leetcode.com/problemset/?search=70",
+      "difficulty": "Unknown",
+      "patternIds": [
+        "pattern-1bs2guj"
+      ]
+    },
+    {
+      "id": "lc-91",
+      "title": "Decode Ways",
+      "url": "https://leetcode.com/problemset/?search=91",
+      "difficulty": "Unknown",
+      "patternIds": [
+        "pattern-1bs2guj"
+      ]
+    },
+    {
+      "id": "lc-198",
+      "title": "House Robber",
+      "url": "https://leetcode.com/problemset/?search=198",
+      "difficulty": "Unknown",
+      "patternIds": [
+        "pattern-1bs2guj"
+      ]
+    },
+    {
+      "id": "lc-213",
+      "title": "House Robber II",
+      "url": "https://leetcode.com/problemset/?search=213",
+      "difficulty": "Unknown",
+      "patternIds": [
+        "pattern-1bs2guj"
+      ]
+    },
+    {
+      "id": "lc-509",
+      "title": "Fibonacci Number",
+      "url": "https://leetcode.com/problemset/?search=509",
+      "difficulty": "Unknown",
+      "patternIds": [
+        "pattern-1bs2guj"
+      ]
+    },
+    {
+      "id": "lc-740",
+      "title": "Delete and Earn",
+      "url": "https://leetcode.com/problemset/?search=740",
+      "difficulty": "Unknown",
+      "patternIds": [
+        "pattern-1bs2guj"
+      ]
+    },
+    {
+      "id": "lc-746",
+      "title": "Min Cost Climbing Stairs",
+      "url": "https://leetcode.com/problemset/?search=746",
+      "difficulty": "Unknown",
+      "patternIds": [
+        "pattern-1bs2guj"
+      ]
+    },
+    {
+      "id": "lc-53",
+      "title": "Maximum Subarray",
+      "url": "https://leetcode.com/problemset/?search=53",
+      "difficulty": "Unknown",
+      "patternIds": [
+        "pattern-1tq0i9n"
+      ]
+    },
+    {
+      "id": "lc-918",
+      "title": "Maximum Sum Circular Subarray",
+      "url": "https://leetcode.com/problemset/?search=918",
+      "difficulty": "Unknown",
+      "patternIds": [
+        "pattern-1tq0i9n"
+      ]
+    },
+    {
+      "id": "lc-2321",
+      "title": "Maximum Score Of Spliced Array",
+      "url": "https://leetcode.com/problemset/?search=2321",
+      "difficulty": "Unknown",
+      "patternIds": [
+        "pattern-1tq0i9n"
+      ]
+    },
+    {
+      "id": "lc-1749",
+      "title": "Maximum Absolute Sum of Any Subarray",
+      "url": "https://leetcode.com/problemset/?search=1749",
+      "difficulty": "Unknown",
+      "patternIds": [
+        "pattern-1tq0i9n"
+      ]
+    },
+    {
+      "id": "lc-152",
+      "title": "Maximum Product Subarray",
+      "url": "https://leetcode.com/problemset/?search=152",
+      "difficulty": "Unknown",
+      "patternIds": [
+        "pattern-1tq0i9n"
+      ]
+    },
+    {
+      "id": "lc-322",
+      "title": "Coin Change",
+      "url": "https://leetcode.com/problemset/?search=322",
+      "difficulty": "Unknown",
+      "patternIds": [
+        "pattern-1xdph7l"
+      ]
+    },
+    {
+      "id": "lc-377",
+      "title": "Combination Sum IV",
+      "url": "https://leetcode.com/problemset/?search=377",
+      "difficulty": "Unknown",
+      "patternIds": [
+        "pattern-1xdph7l"
+      ]
+    },
+    {
+      "id": "lc-518",
+      "title": "Coin Change II",
+      "url": "https://leetcode.com/problemset/?search=518",
+      "difficulty": "Unknown",
+      "patternIds": [
+        "pattern-1xdph7l"
+      ]
+    },
+    {
+      "id": "lc-416",
+      "title": "Partition Equal Subset Sum",
+      "url": "https://leetcode.com/problemset/?search=416",
+      "difficulty": "Unknown",
+      "patternIds": [
+        "pattern-cu7f6h"
+      ]
+    },
+    {
+      "id": "lc-494",
+      "title": "Target Sum",
+      "url": "https://leetcode.com/problemset/?search=494",
+      "difficulty": "Unknown",
+      "patternIds": [
+        "pattern-cu7f6h"
+      ]
+    },
+    {
+      "id": "lc-139",
+      "title": "Word Break",
+      "url": "https://leetcode.com/problemset/?search=139",
+      "difficulty": "Unknown",
+      "patternIds": [
+        "pattern-lhg8a8"
+      ]
+    },
+    {
+      "id": "lc-140",
+      "title": "Word Break II",
+      "url": "https://leetcode.com/problemset/?search=140",
+      "difficulty": "Unknown",
+      "patternIds": [
+        "pattern-lhg8a8"
+      ]
+    },
+    {
+      "id": "lc-1143",
+      "title": "Longest Common Subsequence",
+      "url": "https://leetcode.com/problemset/?search=1143",
+      "difficulty": "Unknown",
+      "patternIds": [
+        "pattern-v0m8i7"
+      ]
+    },
+    {
+      "id": "lc-1092",
+      "title": "Shortest Common Supersequence",
+      "url": "https://leetcode.com/problemset/?search=1092",
+      "difficulty": "Unknown",
+      "patternIds": [
+        "pattern-v0m8i7"
+      ]
+    },
+    {
+      "id": "lc-1312",
+      "title": "Minimum Insertion Steps to Make a String Palindrome",
+      "url": "https://leetcode.com/problemset/?search=1312",
+      "difficulty": "Unknown",
+      "patternIds": [
+        "pattern-v0m8i7"
+      ]
+    },
+    {
+      "id": "lc-72",
+      "title": "Edit Distance",
+      "url": "https://leetcode.com/problemset/?search=72",
+      "difficulty": "Unknown",
+      "patternIds": [
+        "pattern-15911qd"
+      ]
+    },
+    {
+      "id": "lc-583",
+      "title": "Delete Operation for Two Strings",
+      "url": "https://leetcode.com/problemset/?search=583",
+      "difficulty": "Unknown",
+      "patternIds": [
+        "pattern-15911qd"
+      ]
+    },
+    {
+      "id": "lc-712",
+      "title": "Minimum ASCII Delete Sum for Two Strings",
+      "url": "https://leetcode.com/problemset/?search=712",
+      "difficulty": "Unknown",
+      "patternIds": [
+        "pattern-15911qd"
+      ]
+    },
+    {
+      "id": "lc-62",
+      "title": "Unique Paths",
+      "url": "https://leetcode.com/problemset/?search=62",
+      "difficulty": "Unknown",
+      "patternIds": [
+        "pattern-1wihp9i"
+      ]
+    },
+    {
+      "id": "lc-63",
+      "title": "Unique Paths II",
+      "url": "https://leetcode.com/problemset/?search=63",
+      "difficulty": "Unknown",
+      "patternIds": [
+        "pattern-1wihp9i"
+      ]
+    },
+    {
+      "id": "lc-64",
+      "title": "Minimum Path Sum",
+      "url": "https://leetcode.com/problemset/?search=64",
+      "difficulty": "Unknown",
+      "patternIds": [
+        "pattern-1wihp9i"
+      ]
+    },
+    {
+      "id": "lc-120",
+      "title": "Triangle",
+      "url": "https://leetcode.com/problemset/?search=120",
+      "difficulty": "Unknown",
+      "patternIds": [
+        "pattern-1wihp9i"
+      ]
+    },
+    {
+      "id": "lc-221",
+      "title": "Maximal Square",
+      "url": "https://leetcode.com/problemset/?search=221",
+      "difficulty": "Unknown",
+      "patternIds": [
+        "pattern-1wihp9i"
+      ]
+    },
+    {
+      "id": "lc-931",
+      "title": "Minimum Falling Path Sum",
+      "url": "https://leetcode.com/problemset/?search=931",
+      "difficulty": "Unknown",
+      "patternIds": [
+        "pattern-1wihp9i"
+      ]
+    },
+    {
+      "id": "lc-1277",
+      "title": "Count Square Submatrices with All Ones",
+      "url": "https://leetcode.com/problemset/?search=1277",
+      "difficulty": "Unknown",
+      "patternIds": [
+        "pattern-1wihp9i"
+      ]
+    },
+    {
+      "id": "lc-312",
+      "title": "Burst Balloons",
+      "url": "https://leetcode.com/problemset/?search=312",
+      "difficulty": "Unknown",
+      "patternIds": [
+        "pattern-10pk1u2"
+      ]
+    },
+    {
+      "id": "lc-546",
+      "title": "Remove Boxes",
+      "url": "https://leetcode.com/problemset/?search=546",
+      "difficulty": "Unknown",
+      "patternIds": [
+        "pattern-10pk1u2"
+      ]
+    },
+    {
+      "id": "lc-95",
+      "title": "Unique Binary Search Trees II",
+      "url": "https://leetcode.com/problemset/?search=95",
+      "difficulty": "Unknown",
+      "patternIds": [
+        "pattern-13dqpnm"
+      ]
+    },
+    {
+      "id": "lc-96",
+      "title": "Unique Binary Search Trees",
+      "url": "https://leetcode.com/problemset/?search=96",
+      "difficulty": "Unknown",
+      "patternIds": [
+        "pattern-13dqpnm"
+      ]
+    },
+    {
+      "id": "lc-241",
+      "title": "Different Ways to Add Parentheses",
+      "url": "https://leetcode.com/problemset/?search=241",
+      "difficulty": "Unknown",
+      "patternIds": [
+        "pattern-13dqpnm"
+      ]
+    },
+    {
+      "id": "lc-300",
+      "title": "Longest Increasing Subsequence",
+      "url": "https://leetcode.com/problemset/?search=300",
+      "difficulty": "Unknown",
+      "patternIds": [
+        "pattern-1mlrzsn"
+      ]
+    },
+    {
+      "id": "lc-354",
+      "title": "Russian Doll Envelopes",
+      "url": "https://leetcode.com/problemset/?search=354",
+      "difficulty": "Unknown",
+      "patternIds": [
+        "pattern-1mlrzsn"
+      ]
+    },
+    {
+      "id": "lc-1671",
+      "title": "Minimum Number of Removals to Make Mountain Array",
+      "url": "https://leetcode.com/problemset/?search=1671",
+      "difficulty": "Unknown",
+      "patternIds": [
+        "pattern-1mlrzsn"
+      ]
+    },
+    {
+      "id": "lc-2407",
+      "title": "Longest Increasing Subsequence II",
+      "url": "https://leetcode.com/problemset/?search=2407",
+      "difficulty": "Unknown",
+      "patternIds": [
+        "pattern-1mlrzsn"
+      ]
+    },
+    {
+      "id": "lc-121",
+      "title": "Best Time to Buy and Sell Stock",
+      "url": "https://leetcode.com/problemset/?search=121",
+      "difficulty": "Unknown",
+      "patternIds": [
+        "pattern-ly2455",
+        "pattern-12ny99j"
+      ]
+    },
+    {
+      "id": "lc-122",
+      "title": "Best Time to Buy and Sell Stock II",
+      "url": "https://leetcode.com/problemset/?search=122",
+      "difficulty": "Unknown",
+      "patternIds": [
+        "pattern-ly2455",
+        "pattern-12ny99j"
+      ]
+    },
+    {
+      "id": "lc-123",
+      "title": "Best Time to Buy and Sell Stock III",
+      "url": "https://leetcode.com/problemset/?search=123",
+      "difficulty": "Unknown",
+      "patternIds": [
+        "pattern-ly2455"
+      ]
+    },
+    {
+      "id": "lc-188",
+      "title": "Best Time to Buy and Sell Stock IV",
+      "url": "https://leetcode.com/problemset/?search=188",
+      "difficulty": "Unknown",
+      "patternIds": [
+        "pattern-ly2455"
+      ]
+    },
+    {
+      "id": "lc-309",
+      "title": "Best Time to Buy and Sell Stock with Cooldown",
+      "url": "https://leetcode.com/problemset/?search=309",
+      "difficulty": "Unknown",
+      "patternIds": [
+        "pattern-ly2455"
+      ]
+    },
+    {
+      "id": "lc-215",
+      "title": "Kth Largest Element in an Array",
+      "url": "https://leetcode.com/problemset/?search=215",
+      "difficulty": "Unknown",
+      "patternIds": [
+        "pattern-1gonlr5"
+      ]
+    },
+    {
+      "id": "lc-347",
+      "title": "Top K Frequent Elements",
+      "url": "https://leetcode.com/problemset/?search=347",
+      "difficulty": "Unknown",
+      "patternIds": [
+        "pattern-1gonlr5"
+      ]
+    },
+    {
+      "id": "lc-451",
+      "title": "Sort Characters By Frequency",
+      "url": "https://leetcode.com/problemset/?search=451",
+      "difficulty": "Unknown",
+      "patternIds": [
+        "pattern-1gonlr5"
+      ]
+    },
+    {
+      "id": "lc-506",
+      "title": "Relative Ranks",
+      "url": "https://leetcode.com/problemset/?search=506",
+      "difficulty": "Unknown",
+      "patternIds": [
+        "pattern-1gonlr5"
+      ]
+    },
+    {
+      "id": "lc-703",
+      "title": "Kth Largest Element in a Stream",
+      "url": "https://leetcode.com/problemset/?search=703",
+      "difficulty": "Unknown",
+      "patternIds": [
+        "pattern-1gonlr5"
+      ]
+    },
+    {
+      "id": "lc-973",
+      "title": "K Closest Points to Origin",
+      "url": "https://leetcode.com/problemset/?search=973",
+      "difficulty": "Unknown",
+      "patternIds": [
+        "pattern-1gonlr5"
+      ]
+    },
+    {
+      "id": "lc-1046",
+      "title": "Last Stone Weight",
+      "url": "https://leetcode.com/problemset/?search=1046",
+      "difficulty": "Unknown",
+      "patternIds": [
+        "pattern-1gonlr5"
+      ]
+    },
+    {
+      "id": "lc-2558",
+      "title": "Take Gifts From the Richest Pile",
+      "url": "https://leetcode.com/problemset/?search=2558",
+      "difficulty": "Unknown",
+      "patternIds": [
+        "pattern-1gonlr5"
+      ]
+    },
+    {
+      "id": "lc-295",
+      "title": "Find Median from Data Stream",
+      "url": "https://leetcode.com/problemset/?search=295",
+      "difficulty": "Unknown",
+      "patternIds": [
+        "pattern-oq05l8",
+        "pattern-8x6ycg"
+      ]
+    },
+    {
+      "id": "lc-1825",
+      "title": "Finding MK Average",
+      "url": "https://leetcode.com/problemset/?search=1825",
+      "difficulty": "Unknown",
+      "patternIds": [
+        "pattern-oq05l8"
+      ]
+    },
+    {
+      "id": "lc-23",
+      "title": "Merge k Sorted Lists",
+      "url": "https://leetcode.com/problemset/?search=23",
+      "difficulty": "Unknown",
+      "patternIds": [
+        "pattern-1lq1lid"
+      ]
+    },
+    {
+      "id": "lc-373",
+      "title": "Find K Pairs with Smallest Sums",
+      "url": "https://leetcode.com/problemset/?search=373",
+      "difficulty": "Unknown",
+      "patternIds": [
+        "pattern-1lq1lid"
+      ]
+    },
+    {
+      "id": "lc-378",
+      "title": "Kth Smallest Element in a Sorted Matrix",
+      "url": "https://leetcode.com/problemset/?search=378",
+      "difficulty": "Unknown",
+      "patternIds": [
+        "pattern-1lq1lid",
+        "pattern-1swltnp"
+      ]
+    },
+    {
+      "id": "lc-632",
+      "title": "Smallest Range Covering Elements from K Lists",
+      "url": "https://leetcode.com/problemset/?search=632",
+      "difficulty": "Unknown",
+      "patternIds": [
+        "pattern-1lq1lid"
+      ]
+    },
+    {
+      "id": "lc-253",
+      "title": "Meeting Rooms II",
+      "url": "https://leetcode.com/problemset/?search=253",
+      "difficulty": "Unknown",
+      "patternIds": [
+        "pattern-ywkch9"
+      ]
+    },
+    {
+      "id": "lc-767",
+      "title": "Reorganize String",
+      "url": "https://leetcode.com/problemset/?search=767",
+      "difficulty": "Unknown",
+      "patternIds": [
+        "pattern-ywkch9",
+        "pattern-1u8b6nf"
+      ]
+    },
+    {
+      "id": "lc-857",
+      "title": "Minimum Cost to Hire K Workers",
+      "url": "https://leetcode.com/problemset/?search=857",
+      "difficulty": "Unknown",
+      "patternIds": [
+        "pattern-ywkch9"
+      ]
+    },
+    {
+      "id": "lc-1642",
+      "title": "Furthest Building You Can Reach",
+      "url": "https://leetcode.com/problemset/?search=1642",
+      "difficulty": "Unknown",
+      "patternIds": [
+        "pattern-ywkch9"
+      ]
+    },
+    {
+      "id": "lc-1792",
+      "title": "Maximum Average Pass Ratio",
+      "url": "https://leetcode.com/problemset/?search=1792",
+      "difficulty": "Unknown",
+      "patternIds": [
+        "pattern-ywkch9"
+      ]
+    },
+    {
+      "id": "lc-1834",
+      "title": "Single-Threaded CPU",
+      "url": "https://leetcode.com/problemset/?search=1834",
+      "difficulty": "Unknown",
+      "patternIds": [
+        "pattern-ywkch9"
+      ]
+    },
+    {
+      "id": "lc-1942",
+      "title": "The Number of the Smallest Unoccupied Chair",
+      "url": "https://leetcode.com/problemset/?search=1942",
+      "difficulty": "Unknown",
+      "patternIds": [
+        "pattern-ywkch9"
+      ]
+    },
+    {
+      "id": "lc-2402",
+      "title": "Meeting Rooms III",
+      "url": "https://leetcode.com/problemset/?search=2402",
+      "difficulty": "Unknown",
+      "patternIds": [
+        "pattern-ywkch9"
+      ]
+    },
+    {
+      "id": "lc-17",
+      "title": "Letter Combinations of a Phone Number",
+      "url": "https://leetcode.com/problemset/?search=17",
+      "difficulty": "Unknown",
+      "patternIds": [
+        "pattern-1mrzwhe"
+      ]
+    },
+    {
+      "id": "lc-77",
+      "title": "Combinations",
+      "url": "https://leetcode.com/problemset/?search=77",
+      "difficulty": "Unknown",
+      "patternIds": [
+        "pattern-1mrzwhe"
+      ]
+    },
+    {
+      "id": "lc-78",
+      "title": "Subsets",
+      "url": "https://leetcode.com/problemset/?search=78",
+      "difficulty": "Unknown",
+      "patternIds": [
+        "pattern-1mrzwhe"
+      ]
+    },
+    {
+      "id": "lc-90",
+      "title": "Subsets II",
+      "url": "https://leetcode.com/problemset/?search=90",
+      "difficulty": "Unknown",
+      "patternIds": [
+        "pattern-1mrzwhe"
+      ]
+    },
+    {
+      "id": "lc-31",
+      "title": "Next Permutation",
+      "url": "https://leetcode.com/problemset/?search=31",
+      "difficulty": "Unknown",
+      "patternIds": [
+        "pattern-d02o6r"
+      ]
+    },
+    {
+      "id": "lc-46",
+      "title": "Permutations",
+      "url": "https://leetcode.com/problemset/?search=46",
+      "difficulty": "Unknown",
+      "patternIds": [
+        "pattern-d02o6r"
+      ]
+    },
+    {
+      "id": "lc-60",
+      "title": "Permutation Sequence",
+      "url": "https://leetcode.com/problemset/?search=60",
+      "difficulty": "Unknown",
+      "patternIds": [
+        "pattern-d02o6r"
+      ]
+    },
+    {
+      "id": "lc-39",
+      "title": "Combination Sum",
+      "url": "https://leetcode.com/problemset/?search=39",
+      "difficulty": "Unknown",
+      "patternIds": [
+        "pattern-qmt1v7"
+      ]
+    },
+    {
+      "id": "lc-40",
+      "title": "Combination Sum II",
+      "url": "https://leetcode.com/problemset/?search=40",
+      "difficulty": "Unknown",
+      "patternIds": [
+        "pattern-qmt1v7"
+      ]
+    },
+    {
+      "id": "lc-22",
+      "title": "Generate Parentheses",
+      "url": "https://leetcode.com/problemset/?search=22",
+      "difficulty": "Unknown",
+      "patternIds": [
+        "pattern-18ohraa"
+      ]
+    },
+    {
+      "id": "lc-301",
+      "title": "Remove Invalid Parentheses",
+      "url": "https://leetcode.com/problemset/?search=301",
+      "difficulty": "Unknown",
+      "patternIds": [
+        "pattern-18ohraa"
+      ]
+    },
+    {
+      "id": "lc-79",
+      "title": "Word Search",
+      "url": "https://leetcode.com/problemset/?search=79",
+      "difficulty": "Unknown",
+      "patternIds": [
+        "pattern-1u2uuzu"
+      ]
+    },
+    {
+      "id": "lc-212",
+      "title": "Word Search II",
+      "url": "https://leetcode.com/problemset/?search=212",
+      "difficulty": "Unknown",
+      "patternIds": [
+        "pattern-1u2uuzu"
+      ]
+    },
+    {
+      "id": "lc-2018",
+      "title": "Check if Word Can Be Placed In Crossword",
+      "url": "https://leetcode.com/problemset/?search=2018",
+      "difficulty": "Unknown",
+      "patternIds": [
+        "pattern-1u2uuzu"
+      ]
+    },
+    {
+      "id": "lc-37",
+      "title": "Sudoku Solver",
+      "url": "https://leetcode.com/problemset/?search=37",
+      "difficulty": "Unknown",
+      "patternIds": [
+        "pattern-8magw1"
+      ]
+    },
+    {
+      "id": "lc-51",
+      "title": "N-Queens",
+      "url": "https://leetcode.com/problemset/?search=51",
+      "difficulty": "Unknown",
+      "patternIds": [
+        "pattern-8magw1"
+      ]
+    },
+    {
+      "id": "lc-131",
+      "title": "Palindrome Partitioning",
+      "url": "https://leetcode.com/problemset/?search=131",
+      "difficulty": "Unknown",
+      "patternIds": [
+        "pattern-mbs5p3"
+      ]
+    },
+    {
+      "id": "lc-132",
+      "title": "Palindrome Partitioning II",
+      "url": "https://leetcode.com/problemset/?search=132",
+      "difficulty": "Unknown",
+      "patternIds": [
+        "pattern-mbs5p3"
+      ]
+    },
+    {
+      "id": "lc-1457",
+      "title": "Pseudo-Palindromic Paths in a Binary Tree",
+      "url": "https://leetcode.com/problemset/?search=1457",
+      "difficulty": "Unknown",
+      "patternIds": [
+        "pattern-mbs5p3"
+      ]
+    },
+    {
+      "id": "lc-56",
+      "title": "Merge Intervals",
+      "url": "https://leetcode.com/problemset/?search=56",
+      "difficulty": "Unknown",
+      "patternIds": [
+        "pattern-itbfu7"
+      ]
+    },
+    {
+      "id": "lc-57",
+      "title": "Insert Interval",
+      "url": "https://leetcode.com/problemset/?search=57",
+      "difficulty": "Unknown",
+      "patternIds": [
+        "pattern-itbfu7"
+      ]
+    },
+    {
+      "id": "lc-759",
+      "title": "Employee Free Time",
+      "url": "https://leetcode.com/problemset/?search=759",
+      "difficulty": "Unknown",
+      "patternIds": [
+        "pattern-itbfu7"
+      ]
+    },
+    {
+      "id": "lc-986",
+      "title": "Interval List Intersections",
+      "url": "https://leetcode.com/problemset/?search=986",
+      "difficulty": "Unknown",
+      "patternIds": [
+        "pattern-itbfu7"
+      ]
+    },
+    {
+      "id": "lc-2406",
+      "title": "Divide Intervals Into Minimum Number of Groups",
+      "url": "https://leetcode.com/problemset/?search=2406",
+      "difficulty": "Unknown",
+      "patternIds": [
+        "pattern-itbfu7"
+      ]
+    },
+    {
+      "id": "lc-45",
+      "title": "Jump Game II",
+      "url": "https://leetcode.com/problemset/?search=45",
+      "difficulty": "Unknown",
+      "patternIds": [
+        "pattern-16mt16n"
+      ]
+    },
+    {
+      "id": "lc-55",
+      "title": "Jump Game",
+      "url": "https://leetcode.com/problemset/?search=55",
+      "difficulty": "Unknown",
+      "patternIds": [
+        "pattern-16mt16n"
+      ]
+    },
+    {
+      "id": "lc-134",
+      "title": "Gas Station",
+      "url": "https://leetcode.com/problemset/?search=134",
+      "difficulty": "Unknown",
+      "patternIds": [
+        "pattern-18tw7m7"
+      ]
+    },
+    {
+      "id": "lc-2202",
+      "title": "Maximize the Topmost Element After K Moves",
+      "url": "https://leetcode.com/problemset/?search=2202",
+      "difficulty": "Unknown",
+      "patternIds": [
+        "pattern-18tw7m7"
+      ]
+    },
+    {
+      "id": "lc-621",
+      "title": "Task Scheduler",
+      "url": "https://leetcode.com/problemset/?search=621",
+      "difficulty": "Unknown",
+      "patternIds": [
+        "pattern-1u8b6nf"
+      ]
+    },
+    {
+      "id": "lc-1054",
+      "title": "Distant Barcodes",
+      "url": "https://leetcode.com/problemset/?search=1054",
+      "difficulty": "Unknown",
+      "patternIds": [
+        "pattern-1u8b6nf"
+      ]
+    },
+    {
+      "id": "lc-455",
+      "title": "Assign Cookies",
+      "url": "https://leetcode.com/problemset/?search=455",
+      "difficulty": "Unknown",
+      "patternIds": [
+        "pattern-4pxbco"
+      ]
+    },
+    {
+      "id": "lc-135",
+      "title": "Candy",
+      "url": "https://leetcode.com/problemset/?search=135",
+      "difficulty": "Unknown",
+      "patternIds": [
+        "pattern-4pxbco"
+      ]
+    },
+    {
+      "id": "lc-406",
+      "title": "Queue Reconstruction by Height",
+      "url": "https://leetcode.com/problemset/?search=406",
+      "difficulty": "Unknown",
+      "patternIds": [
+        "pattern-4pxbco"
+      ]
+    },
+    {
+      "id": "lc-1029",
+      "title": "Two City Scheduling",
+      "url": "https://leetcode.com/problemset/?search=1029",
+      "difficulty": "Unknown",
+      "patternIds": [
+        "pattern-4pxbco"
+      ]
+    },
+    {
+      "id": "lc-35",
+      "title": "Search Insert Position",
+      "url": "https://leetcode.com/problemset/?search=35",
+      "difficulty": "Unknown",
+      "patternIds": [
+        "pattern-udcl86"
+      ]
+    },
+    {
+      "id": "lc-69",
+      "title": "Sqrt(x)",
+      "url": "https://leetcode.com/problemset/?search=69",
+      "difficulty": "Unknown",
+      "patternIds": [
+        "pattern-udcl86"
+      ]
+    },
+    {
+      "id": "lc-74",
+      "title": "Search a 2D Matrix",
+      "url": "https://leetcode.com/problemset/?search=74",
+      "difficulty": "Unknown",
+      "patternIds": [
+        "pattern-udcl86"
+      ]
+    },
+    {
+      "id": "lc-278",
+      "title": "First Bad Version",
+      "url": "https://leetcode.com/problemset/?search=278",
+      "difficulty": "Unknown",
+      "patternIds": [
+        "pattern-udcl86"
+      ]
+    },
+    {
+      "id": "lc-374",
+      "title": "Guess Number Higher or Lower",
+      "url": "https://leetcode.com/problemset/?search=374",
+      "difficulty": "Unknown",
+      "patternIds": [
+        "pattern-udcl86"
+      ]
+    },
+    {
+      "id": "lc-540",
+      "title": "Single Element in a Sorted Array",
+      "url": "https://leetcode.com/problemset/?search=540",
+      "difficulty": "Unknown",
+      "patternIds": [
+        "pattern-udcl86"
+      ]
+    },
+    {
+      "id": "lc-704",
+      "title": "Binary Search",
+      "url": "https://leetcode.com/problemset/?search=704",
+      "difficulty": "Unknown",
+      "patternIds": [
+        "pattern-udcl86"
+      ]
+    },
+    {
+      "id": "lc-1539",
+      "title": "Kth Missing Positive Number",
+      "url": "https://leetcode.com/problemset/?search=1539",
+      "difficulty": "Unknown",
+      "patternIds": [
+        "pattern-udcl86"
+      ]
+    },
+    {
+      "id": "lc-33",
+      "title": "Search in Rotated Sorted Array",
+      "url": "https://leetcode.com/problemset/?search=33",
+      "difficulty": "Unknown",
+      "patternIds": [
+        "pattern-f2siui"
+      ]
+    },
+    {
+      "id": "lc-81",
+      "title": "Search in Rotated Sorted Array II",
+      "url": "https://leetcode.com/problemset/?search=81",
+      "difficulty": "Unknown",
+      "patternIds": [
+        "pattern-f2siui"
+      ]
+    },
+    {
+      "id": "lc-153",
+      "title": "Find Minimum in Rotated Sorted Array",
+      "url": "https://leetcode.com/problemset/?search=153",
+      "difficulty": "Unknown",
+      "patternIds": [
+        "pattern-f2siui"
+      ]
+    },
+    {
+      "id": "lc-162",
+      "title": "Find Peak Element",
+      "url": "https://leetcode.com/problemset/?search=162",
+      "difficulty": "Unknown",
+      "patternIds": [
+        "pattern-f2siui"
+      ]
+    },
+    {
+      "id": "lc-852",
+      "title": "Peak Index in a Mountain Array",
+      "url": "https://leetcode.com/problemset/?search=852",
+      "difficulty": "Unknown",
+      "patternIds": [
+        "pattern-f2siui"
+      ]
+    },
+    {
+      "id": "lc-1095",
+      "title": "Find in Mountain Array",
+      "url": "https://leetcode.com/problemset/?search=1095",
+      "difficulty": "Unknown",
+      "patternIds": [
+        "pattern-f2siui"
+      ]
+    },
+    {
+      "id": "lc-410",
+      "title": "Split Array Largest Sum",
+      "url": "https://leetcode.com/problemset/?search=410",
+      "difficulty": "Unknown",
+      "patternIds": [
+        "pattern-1kq8b9y"
+      ]
+    },
+    {
+      "id": "lc-774",
+      "title": "Minimize Max Distance to Gas Station",
+      "url": "https://leetcode.com/problemset/?search=774",
+      "difficulty": "Unknown",
+      "patternIds": [
+        "pattern-1kq8b9y"
+      ]
+    },
+    {
+      "id": "lc-875",
+      "title": "Koko Eating Bananas",
+      "url": "https://leetcode.com/problemset/?search=875",
+      "difficulty": "Unknown",
+      "patternIds": [
+        "pattern-1kq8b9y"
+      ]
+    },
+    {
+      "id": "lc-1011",
+      "title": "Capacity To Ship Packages 6  Within D Days",
+      "url": "https://leetcode.com/problemset/?search=1011",
+      "difficulty": "Unknown",
+      "patternIds": [
+        "pattern-1kq8b9y"
+      ]
+    },
+    {
+      "id": "lc-1482",
+      "title": "Minimum Number of Days to Make m Bouquets",
+      "url": "https://leetcode.com/problemset/?search=1482",
+      "difficulty": "Unknown",
+      "patternIds": [
+        "pattern-1kq8b9y"
+      ]
+    },
+    {
+      "id": "lc-1760",
+      "title": "Minimum Limit of Balls in a Bag",
+      "url": "https://leetcode.com/problemset/?search=1760",
+      "difficulty": "Unknown",
+      "patternIds": [
+        "pattern-1kq8b9y"
+      ]
+    },
+    {
+      "id": "lc-2064",
+      "title": "Minimized Maximum of Products Distributed to Any Store",
+      "url": "https://leetcode.com/problemset/?search=2064",
+      "difficulty": "Unknown",
+      "patternIds": [
+        "pattern-1kq8b9y"
+      ]
+    },
+    {
+      "id": "lc-2226",
+      "title": "Maximum Candies Allocated to K Children",
+      "url": "https://leetcode.com/problemset/?search=2226",
+      "difficulty": "Unknown",
+      "patternIds": [
+        "pattern-1kq8b9y"
+      ]
+    },
+    {
+      "id": "lc-34",
+      "title": "Find First and Last Position of Element in Sorted Array",
+      "url": "https://leetcode.com/problemset/?search=34",
+      "difficulty": "Unknown",
+      "patternIds": [
+        "pattern-sn15e3"
+      ]
+    },
+    {
+      "id": "lc-658",
+      "title": "Find K Closest Elements",
+      "url": "https://leetcode.com/problemset/?search=658",
+      "difficulty": "Unknown",
+      "patternIds": [
+        "pattern-sn15e3"
+      ]
+    },
+    {
+      "id": "lc-4",
+      "title": "Median of Two Sorted Arrays",
+      "url": "https://leetcode.com/problemset/?search=4",
+      "difficulty": "Unknown",
+      "patternIds": [
+        "pattern-1swltnp"
+      ]
+    },
+    {
+      "id": "lc-719",
+      "title": "Find K-th Smallest Pair Distance",
+      "url": "https://leetcode.com/problemset/?search=719",
+      "difficulty": "Unknown",
+      "patternIds": [
+        "pattern-1swltnp"
+      ]
+    },
+    {
+      "id": "lc-20",
+      "title": "Valid Parentheses",
+      "url": "https://leetcode.com/problemset/?search=20",
+      "difficulty": "Unknown",
+      "patternIds": [
+        "pattern-nfb40k"
+      ]
+    },
+    {
+      "id": "lc-32",
+      "title": "Longest Valid Parentheses",
+      "url": "https://leetcode.com/problemset/?search=32",
+      "difficulty": "Unknown",
+      "patternIds": [
+        "pattern-nfb40k"
+      ]
+    },
+    {
+      "id": "lc-921",
+      "title": "Minimum Add to Make Parentheses Valid",
+      "url": "https://leetcode.com/problemset/?search=921",
+      "difficulty": "Unknown",
+      "patternIds": [
+        "pattern-nfb40k"
+      ]
+    },
+    {
+      "id": "lc-1249",
+      "title": "Minimum Remove to Make Valid Parentheses",
+      "url": "https://leetcode.com/problemset/?search=1249",
+      "difficulty": "Unknown",
+      "patternIds": [
+        "pattern-nfb40k"
+      ]
+    },
+    {
+      "id": "lc-1963",
+      "title": "Minimum Number of Swaps to Make the String Balanced",
+      "url": "https://leetcode.com/problemset/?search=1963",
+      "difficulty": "Unknown",
+      "patternIds": [
+        "pattern-nfb40k"
+      ]
+    },
+    {
+      "id": "lc-402",
+      "title": "Remove K Digits",
+      "url": "https://leetcode.com/problemset/?search=402",
+      "difficulty": "Unknown",
+      "patternIds": [
+        "pattern-1ba92cq"
+      ]
+    },
+    {
+      "id": "lc-496",
+      "title": "Next Greater Element I",
+      "url": "https://leetcode.com/problemset/?search=496",
+      "difficulty": "Unknown",
+      "patternIds": [
+        "pattern-1ba92cq"
+      ]
+    },
+    {
+      "id": "lc-503",
+      "title": "Next Greater Element II",
+      "url": "https://leetcode.com/problemset/?search=503",
+      "difficulty": "Unknown",
+      "patternIds": [
+        "pattern-1ba92cq"
+      ]
+    },
+    {
+      "id": "lc-739",
+      "title": "Daily Temperatures",
+      "url": "https://leetcode.com/problemset/?search=739",
+      "difficulty": "Unknown",
+      "patternIds": [
+        "pattern-1ba92cq"
+      ]
+    },
+    {
+      "id": "lc-901",
+      "title": "Online Stock Span",
+      "url": "https://leetcode.com/problemset/?search=901",
+      "difficulty": "Unknown",
+      "patternIds": [
+        "pattern-1ba92cq",
+        "pattern-luy1jn"
+      ]
+    },
+    {
+      "id": "lc-907",
+      "title": "Sum of Subarray Minimums",
+      "url": "https://leetcode.com/problemset/?search=907",
+      "difficulty": "Unknown",
+      "patternIds": [
+        "pattern-1ba92cq"
+      ]
+    },
+    {
+      "id": "lc-962",
+      "title": "Maximum Width Ramp",
+      "url": "https://leetcode.com/problemset/?search=962",
+      "difficulty": "Unknown",
+      "patternIds": [
+        "pattern-1ba92cq"
+      ]
+    },
+    {
+      "id": "lc-1475",
+      "title": "Final Prices With a Special Discount in a Shop",
+      "url": "https://leetcode.com/problemset/?search=1475",
+      "difficulty": "Unknown",
+      "patternIds": [
+        "pattern-1ba92cq"
+      ]
+    },
+    {
+      "id": "lc-1673",
+      "title": "Find the Most Competitive Subsequence",
+      "url": "https://leetcode.com/problemset/?search=1673",
+      "difficulty": "Unknown",
+      "patternIds": [
+        "pattern-1ba92cq"
+      ]
+    },
+    {
+      "id": "lc-150",
+      "title": "Evaluate Reverse Polish Notation",
+      "url": "https://leetcode.com/problemset/?search=150",
+      "difficulty": "Unknown",
+      "patternIds": [
+        "pattern-ttlnjl"
+      ]
+    },
+    {
+      "id": "lc-224",
+      "title": "Basic Calculator",
+      "url": "https://leetcode.com/problemset/?search=224",
+      "difficulty": "Unknown",
+      "patternIds": [
+        "pattern-ttlnjl"
+      ]
+    },
+    {
+      "id": "lc-227",
+      "title": "Basic Calculator II",
+      "url": "https://leetcode.com/problemset/?search=227",
+      "difficulty": "Unknown",
+      "patternIds": [
+        "pattern-ttlnjl"
+      ]
+    },
+    {
+      "id": "lc-772",
+      "title": "Basic Calculator III",
+      "url": "https://leetcode.com/problemset/?search=772",
+      "difficulty": "Unknown",
+      "patternIds": [
+        "pattern-ttlnjl"
+      ]
+    },
+    {
+      "id": "lc-71",
+      "title": "Simplify Path",
+      "url": "https://leetcode.com/problemset/?search=71",
+      "difficulty": "Unknown",
+      "patternIds": [
+        "pattern-t2cxls"
+      ]
+    },
+    {
+      "id": "lc-394",
+      "title": "Decode String",
+      "url": "https://leetcode.com/problemset/?search=394",
+      "difficulty": "Unknown",
+      "patternIds": [
+        "pattern-t2cxls"
+      ]
+    },
+    {
+      "id": "lc-735",
+      "title": "Asteroid Collision",
+      "url": "https://leetcode.com/problemset/?search=735",
+      "difficulty": "Unknown",
+      "patternIds": [
+        "pattern-t2cxls"
+      ]
+    },
+    {
+      "id": "lc-155",
+      "title": "Min Stack",
+      "url": "https://leetcode.com/problemset/?search=155",
+      "difficulty": "Unknown",
+      "patternIds": [
+        "pattern-luy1jn",
+        "pattern-8x6ycg"
+      ]
+    },
+    {
+      "id": "lc-895",
+      "title": "Maximum Frequency Stack",
+      "url": "https://leetcode.com/problemset/?search=895",
+      "difficulty": "Unknown",
+      "patternIds": [
+        "pattern-luy1jn"
+      ]
+    },
+    {
+      "id": "lc-84",
+      "title": "Largest Rectangle in Histogram",
+      "url": "https://leetcode.com/problemset/?search=84",
+      "difficulty": "Unknown",
+      "patternIds": [
+        "pattern-1en2olk"
+      ]
+    },
+    {
+      "id": "lc-85",
+      "title": "Maximal Rectangle",
+      "url": "https://leetcode.com/problemset/?search=85",
+      "difficulty": "Unknown",
+      "patternIds": [
+        "pattern-1en2olk"
+      ]
+    },
+    {
+      "id": "lc-136",
+      "title": "Single Number",
+      "url": "https://leetcode.com/problemset/?search=136",
+      "difficulty": "Unknown",
+      "patternIds": [
+        "pattern-ggg52i"
+      ]
+    },
+    {
+      "id": "lc-137",
+      "title": "Single Number II",
+      "url": "https://leetcode.com/problemset/?search=137",
+      "difficulty": "Unknown",
+      "patternIds": [
+        "pattern-ggg52i"
+      ]
+    },
+    {
+      "id": "lc-268",
+      "title": "Missing Number",
+      "url": "https://leetcode.com/problemset/?search=268",
+      "difficulty": "Unknown",
+      "patternIds": [
+        "pattern-ggg52i",
+        "pattern-1vp24t3"
+      ]
+    },
+    {
+      "id": "lc-389",
+      "title": "Find the Difference",
+      "url": "https://leetcode.com/problemset/?search=389",
+      "difficulty": "Unknown",
+      "patternIds": [
+        "pattern-ggg52i"
+      ]
+    },
+    {
+      "id": "lc-191",
+      "title": "Number of 1 Bits",
+      "url": "https://leetcode.com/problemset/?search=191",
+      "difficulty": "Unknown",
+      "patternIds": [
+        "pattern-17cb4jx"
+      ]
+    },
+    {
+      "id": "lc-231",
+      "title": "Power of Two",
+      "url": "https://leetcode.com/problemset/?search=231",
+      "difficulty": "Unknown",
+      "patternIds": [
+        "pattern-17cb4jx",
+        "pattern-123ysvi"
+      ]
+    },
+    {
+      "id": "lc-477",
+      "title": "Total Hamming Distance",
+      "url": "https://leetcode.com/problemset/?search=477",
+      "difficulty": "Unknown",
+      "patternIds": [
+        "pattern-17cb4jx"
+      ]
+    },
+    {
+      "id": "lc-338",
+      "title": "Counting Bits",
+      "url": "https://leetcode.com/problemset/?search=338",
+      "difficulty": "Unknown",
+      "patternIds": [
+        "pattern-1vvxkz2"
+      ]
+    },
+    {
+      "id": "lc-1494",
+      "title": "Parallel Courses II",
+      "url": "https://leetcode.com/problemset/?search=1494",
+      "difficulty": "Unknown",
+      "patternIds": [
+        "pattern-1vvxkz2"
+      ]
+    },
+    {
+      "id": "lc-1442",
+      "title": "Count Triplets That Can Form Two Arrays of Equal XOR",
+      "url": "https://leetcode.com/problemset/?search=1442",
+      "difficulty": "Unknown",
+      "patternIds": [
+        "pattern-1vvxkz2"
+      ]
+    },
+    {
+      "id": "lc-342",
+      "title": "Power of Four",
+      "url": "https://leetcode.com/problemset/?search=342",
+      "difficulty": "Unknown",
+      "patternIds": [
+        "pattern-123ysvi"
+      ]
+    },
+    {
+      "id": "lc-83",
+      "title": "Remove Duplicates from Sorted List",
+      "url": "https://leetcode.com/problemset/?search=83",
+      "difficulty": "Unknown",
+      "patternIds": [
+        "pattern-14wit1i"
+      ]
+    },
+    {
+      "id": "lc-92",
+      "title": "Reverse Linked List II",
+      "url": "https://leetcode.com/problemset/?search=92",
+      "difficulty": "Unknown",
+      "patternIds": [
+        "pattern-14wit1i"
+      ]
+    },
+    {
+      "id": "lc-206",
+      "title": "Reverse Linked List",
+      "url": "https://leetcode.com/problemset/?search=206",
+      "difficulty": "Unknown",
+      "patternIds": [
+        "pattern-14wit1i"
+      ]
+    },
+    {
+      "id": "lc-25",
+      "title": "Reverse Nodes in k-Group",
+      "url": "https://leetcode.com/problemset/?search=25",
+      "difficulty": "Unknown",
+      "patternIds": [
+        "pattern-14wit1i"
+      ]
+    },
+    {
+      "id": "lc-234",
+      "title": "Palindrome Linked List",
+      "url": "https://leetcode.com/problemset/?search=234",
+      "difficulty": "Unknown",
+      "patternIds": [
+        "pattern-14wit1i"
+      ]
+    },
+    {
+      "id": "lc-82",
+      "title": "Remove Duplicates from Sorted List II",
+      "url": "https://leetcode.com/problemset/?search=82",
+      "difficulty": "Unknown",
+      "patternIds": [
+        "pattern-14wit1i"
+      ]
+    },
+    {
+      "id": "lc-21",
+      "title": "Merge Two Sorted Lists",
+      "url": "https://leetcode.com/problemset/?search=21",
+      "difficulty": "Unknown",
+      "patternIds": [
+        "pattern-65lvhd"
+      ]
+    },
+    {
+      "id": "lc-2",
+      "title": "Add Two Numbers",
+      "url": "https://leetcode.com/problemset/?search=2",
+      "difficulty": "Unknown",
+      "patternIds": [
+        "pattern-1q4dxbe"
+      ]
+    },
+    {
+      "id": "lc-369",
+      "title": "Plus One Linked List",
+      "url": "https://leetcode.com/problemset/?search=369",
+      "difficulty": "Unknown",
+      "patternIds": [
+        "pattern-1q4dxbe"
+      ]
+    },
+    {
+      "id": "lc-160",
+      "title": "Intersection of Two Linked Lists",
+      "url": "https://leetcode.com/problemset/?search=160",
+      "difficulty": "Unknown",
+      "patternIds": [
+        "pattern-utu17i"
+      ]
+    },
+    {
+      "id": "lc-599",
+      "title": "Minimum Index Sum of Two Lists",
+      "url": "https://leetcode.com/problemset/?search=599",
+      "difficulty": "Unknown",
+      "patternIds": [
+        "pattern-utu17i"
+      ]
+    },
+    {
+      "id": "lc-24",
+      "title": "Swap Nodes in Pairs",
+      "url": "https://leetcode.com/problemset/?search=24",
+      "difficulty": "Unknown",
+      "patternIds": [
+        "pattern-136icjh"
+      ]
+    },
+    {
+      "id": "lc-61",
+      "title": "Rotate List",
+      "url": "https://leetcode.com/problemset/?search=61",
+      "difficulty": "Unknown",
+      "patternIds": [
+        "pattern-136icjh"
+      ]
+    },
+    {
+      "id": "lc-86",
+      "title": "Partition List",
+      "url": "https://leetcode.com/problemset/?search=86",
+      "difficulty": "Unknown",
+      "patternIds": [
+        "pattern-136icjh"
+      ]
+    },
+    {
+      "id": "lc-143",
+      "title": "Reorder List",
+      "url": "https://leetcode.com/problemset/?search=143",
+      "difficulty": "Unknown",
+      "patternIds": [
+        "pattern-136icjh"
+      ]
+    },
+    {
+      "id": "lc-328",
+      "title": "Odd Even Linked List",
+      "url": "https://leetcode.com/problemset/?search=328",
+      "difficulty": "Unknown",
+      "patternIds": [
+        "pattern-136icjh"
+      ]
+    },
+    {
+      "id": "lc-48",
+      "title": "Rotate Image",
+      "url": "https://leetcode.com/problemset/?search=48",
+      "difficulty": "Unknown",
+      "patternIds": [
+        "pattern-1sv3txq"
+      ]
+    },
+    {
+      "id": "lc-189",
+      "title": "Rotate Array",
+      "url": "https://leetcode.com/problemset/?search=189",
+      "difficulty": "Unknown",
+      "patternIds": [
+        "pattern-1sv3txq"
+      ]
+    },
+    {
+      "id": "lc-867",
+      "title": "Transpose Matrix",
+      "url": "https://leetcode.com/problemset/?search=867",
+      "difficulty": "Unknown",
+      "patternIds": [
+        "pattern-1sv3txq"
+      ]
+    },
+    {
+      "id": "lc-54",
+      "title": "Spiral Matrix",
+      "url": "https://leetcode.com/problemset/?search=54",
+      "difficulty": "Unknown",
+      "patternIds": [
+        "pattern-1v82cb6"
+      ]
+    },
+    {
+      "id": "lc-59",
+      "title": "Spiral Matrix II",
+      "url": "https://leetcode.com/problemset/?search=59",
+      "difficulty": "Unknown",
+      "patternIds": [
+        "pattern-1v82cb6"
+      ]
+    },
+    {
+      "id": "lc-885",
+      "title": "Spiral Matrix III",
+      "url": "https://leetcode.com/problemset/?search=885",
+      "difficulty": "Unknown",
+      "patternIds": [
+        "pattern-1v82cb6"
+      ]
+    },
+    {
+      "id": "lc-2326",
+      "title": "Spiral Matrix IV",
+      "url": "https://leetcode.com/problemset/?search=2326",
+      "difficulty": "Unknown",
+      "patternIds": [
+        "pattern-1v82cb6"
+      ]
+    },
+    {
+      "id": "lc-73",
+      "title": "Set Matrix Zeroes",
+      "url": "https://leetcode.com/problemset/?search=73",
+      "difficulty": "Unknown",
+      "patternIds": [
+        "pattern-y29w42"
+      ]
+    },
+    {
+      "id": "lc-289",
+      "title": "Game of Life",
+      "url": "https://leetcode.com/problemset/?search=289",
+      "difficulty": "Unknown",
+      "patternIds": [
+        "pattern-y29w42"
+      ]
+    },
+    {
+      "id": "lc-498",
+      "title": "Diagonal Traverse",
+      "url": "https://leetcode.com/problemset/?search=498",
+      "difficulty": "Unknown",
+      "patternIds": [
+        "pattern-y29w42"
+      ]
+    },
+    {
+      "id": "lc-238",
+      "title": "Product of Array Except Self",
+      "url": "https://leetcode.com/problemset/?search=238",
+      "difficulty": "Unknown",
+      "patternIds": [
+        "pattern-1bn69ia"
+      ]
+    },
+    {
+      "id": "lc-845",
+      "title": "Longest Mountain in Array",
+      "url": "https://leetcode.com/problemset/?search=845",
+      "difficulty": "Unknown",
+      "patternIds": [
+        "pattern-1bn69ia"
+      ]
+    },
+    {
+      "id": "lc-2483",
+      "title": "Minimum Penalty for a Shop",
+      "url": "https://leetcode.com/problemset/?search=2483",
+      "difficulty": "Unknown",
+      "patternIds": [
+        "pattern-1bn69ia"
+      ]
+    },
+    {
+      "id": "lc-66",
+      "title": "Plus One",
+      "url": "https://leetcode.com/problemset/?search=66",
+      "difficulty": "Unknown",
+      "patternIds": [
+        "pattern-1suwftd"
+      ]
+    },
+    {
+      "id": "lc-43",
+      "title": "Multiply Strings",
+      "url": "https://leetcode.com/problemset/?search=43",
+      "difficulty": "Unknown",
+      "patternIds": [
+        "pattern-1suwftd",
+        "pattern-apflh8"
+      ]
+    },
+    {
+      "id": "lc-989",
+      "title": "Add to Array-Form of Integer",
+      "url": "https://leetcode.com/problemset/?search=989",
+      "difficulty": "Unknown",
+      "patternIds": [
+        "pattern-1suwftd"
+      ]
+    },
+    {
+      "id": "lc-67",
+      "title": "Add Binary",
+      "url": "https://leetcode.com/problemset/?search=67",
+      "difficulty": "Unknown",
+      "patternIds": [
+        "pattern-1suwftd",
+        "pattern-apflh8"
+      ]
+    },
+    {
+      "id": "lc-88",
+      "title": "Merge Sorted Array",
+      "url": "https://leetcode.com/problemset/?search=88",
+      "difficulty": "Unknown",
+      "patternIds": [
+        "pattern-21dvb0"
+      ]
+    },
+    {
+      "id": "lc-41",
+      "title": "First Missing Positive",
+      "url": "https://leetcode.com/problemset/?search=41",
+      "difficulty": "Unknown",
+      "patternIds": [
+        "pattern-1vp24t3"
+      ]
+    },
+    {
+      "id": "lc-442",
+      "title": "Find All Duplicates in an Array",
+      "url": "https://leetcode.com/problemset/?search=442",
+      "difficulty": "Unknown",
+      "patternIds": [
+        "pattern-1vp24t3"
+      ]
+    },
+    {
+      "id": "lc-448",
+      "title": "Find All Numbers Disappeared in an Array",
+      "url": "https://leetcode.com/problemset/?search=448",
+      "difficulty": "Unknown",
+      "patternIds": [
+        "pattern-1vp24t3"
+      ]
+    },
+    {
+      "id": "lc-9",
+      "title": "Palindrome Number",
+      "url": "https://leetcode.com/problemset/?search=9",
+      "difficulty": "Unknown",
+      "patternIds": [
+        "pattern-igs84m"
+      ]
+    },
+    {
+      "id": "lc-125",
+      "title": "Valid Palindrome",
+      "url": "https://leetcode.com/problemset/?search=125",
+      "difficulty": "Unknown",
+      "patternIds": [
+        "pattern-igs84m"
+      ]
+    },
+    {
+      "id": "lc-680",
+      "title": "Valid Palindrome II",
+      "url": "https://leetcode.com/problemset/?search=680",
+      "difficulty": "Unknown",
+      "patternIds": [
+        "pattern-igs84m"
+      ]
+    },
+    {
+      "id": "lc-49",
+      "title": "Group Anagrams",
+      "url": "https://leetcode.com/problemset/?search=49",
+      "difficulty": "Unknown",
+      "patternIds": [
+        "pattern-1y3ybhc"
+      ]
+    },
+    {
+      "id": "lc-242",
+      "title": "Valid Anagram",
+      "url": "https://leetcode.com/problemset/?search=242",
+      "difficulty": "Unknown",
+      "patternIds": [
+        "pattern-1y3ybhc"
+      ]
+    },
+    {
+      "id": "lc-13",
+      "title": "Roman to Integer",
+      "url": "https://leetcode.com/problemset/?search=13",
+      "difficulty": "Unknown",
+      "patternIds": [
+        "pattern-weflnr"
+      ]
+    },
+    {
+      "id": "lc-12",
+      "title": "Integer to Roman",
+      "url": "https://leetcode.com/problemset/?search=12",
+      "difficulty": "Unknown",
+      "patternIds": [
+        "pattern-weflnr"
+      ]
+    },
+    {
+      "id": "lc-8",
+      "title": "String to Integer (atoi)",
+      "url": "https://leetcode.com/problemset/?search=8",
+      "difficulty": "Unknown",
+      "patternIds": [
+        "pattern-wwkn2c"
+      ]
+    },
+    {
+      "id": "lc-65",
+      "title": "Valid Number",
+      "url": "https://leetcode.com/problemset/?search=65",
+      "difficulty": "Unknown",
+      "patternIds": [
+        "pattern-wwkn2c"
+      ]
+    },
+    {
+      "id": "lc-415",
+      "title": "Add Strings",
+      "url": "https://leetcode.com/problemset/?search=415",
+      "difficulty": "Unknown",
+      "patternIds": [
+        "pattern-apflh8"
+      ]
+    },
+    {
+      "id": "lc-28",
+      "title": "Find the Index of the First Occurrence in a String",
+      "url": "https://leetcode.com/problemset/?search=28",
+      "difficulty": "Unknown",
+      "patternIds": [
+        "pattern-1rhkwyy",
+        "pattern-hu5lnk"
+      ]
+    },
+    {
+      "id": "lc-214",
+      "title": "Shortest Palindrome",
+      "url": "https://leetcode.com/problemset/?search=214",
+      "difficulty": "Unknown",
+      "patternIds": [
+        "pattern-1rhkwyy"
+      ]
+    },
+    {
+      "id": "lc-686",
+      "title": "Repeated String Match",
+      "url": "https://leetcode.com/problemset/?search=686",
+      "difficulty": "Unknown",
+      "patternIds": [
+        "pattern-1rhkwyy",
+        "pattern-hu5lnk"
+      ]
+    },
+    {
+      "id": "lc-796",
+      "title": "Rotate String",
+      "url": "https://leetcode.com/problemset/?search=796",
+      "difficulty": "Unknown",
+      "patternIds": [
+        "pattern-1rhkwyy"
+      ]
+    },
+    {
+      "id": "lc-3008",
+      "title": "Find Beautiful Indices in the Given Array II",
+      "url": "https://leetcode.com/problemset/?search=3008",
+      "difficulty": "Unknown",
+      "patternIds": [
+        "pattern-1rhkwyy"
+      ]
+    },
+    {
+      "id": "lc-459",
+      "title": "Repeated Substring Pattern",
+      "url": "https://leetcode.com/problemset/?search=459",
+      "difficulty": "Unknown",
+      "patternIds": [
+        "pattern-hu5lnk"
+      ]
+    },
+    {
+      "id": "lc-146",
+      "title": "LRU Cache",
+      "url": "https://leetcode.com/problemset/?search=146",
+      "difficulty": "Unknown",
+      "patternIds": [
+        "pattern-8x6ycg"
+      ]
+    },
+    {
+      "id": "lc-225",
+      "title": "Implement Stack using Queues",
+      "url": "https://leetcode.com/problemset/?search=225",
+      "difficulty": "Unknown",
+      "patternIds": [
+        "pattern-8x6ycg"
+      ]
+    },
+    {
+      "id": "lc-232",
+      "title": "Implement Queue using Stacks",
+      "url": "https://leetcode.com/problemset/?search=232",
+      "difficulty": "Unknown",
+      "patternIds": [
+        "pattern-8x6ycg"
+      ]
+    },
+    {
+      "id": "lc-251",
+      "title": "Flatten 2D Vector",
+      "url": "https://leetcode.com/problemset/?search=251",
+      "difficulty": "Unknown",
+      "patternIds": [
+        "pattern-8x6ycg"
+      ]
+    },
+    {
+      "id": "lc-271",
+      "title": "Encode and Decode Strings",
+      "url": "https://leetcode.com/problemset/?search=271",
+      "difficulty": "Unknown",
+      "patternIds": [
+        "pattern-8x6ycg"
+      ]
+    },
+    {
+      "id": "lc-341",
+      "title": "Flatten Nested List Iterator",
+      "url": "https://leetcode.com/problemset/?search=341",
+      "difficulty": "Unknown",
+      "patternIds": [
+        "pattern-8x6ycg"
+      ]
+    },
+    {
+      "id": "lc-353",
+      "title": "Design Snake Game",
+      "url": "https://leetcode.com/problemset/?search=353",
+      "difficulty": "Unknown",
+      "patternIds": [
+        "pattern-8x6ycg"
+      ]
+    },
+    {
+      "id": "lc-359",
+      "title": "Logger Rate Limiter",
+      "url": "https://leetcode.com/problemset/?search=359",
+      "difficulty": "Unknown",
+      "patternIds": [
+        "pattern-8x6ycg"
+      ]
+    },
+    {
+      "id": "lc-362",
+      "title": "Design Hit Counter",
+      "url": "https://leetcode.com/problemset/?search=362",
+      "difficulty": "Unknown",
+      "patternIds": [
+        "pattern-8x6ycg"
+      ]
+    },
+    {
+      "id": "lc-379",
+      "title": "Design Phone Directory",
+      "url": "https://leetcode.com/problemset/?search=379",
+      "difficulty": "Unknown",
+      "patternIds": [
+        "pattern-8x6ycg"
+      ]
+    },
+    {
+      "id": "lc-380",
+      "title": "Insert Delete GetRandom O(1)",
+      "url": "https://leetcode.com/problemset/?search=380",
+      "difficulty": "Unknown",
+      "patternIds": [
+        "pattern-8x6ycg"
+      ]
+    },
+    {
+      "id": "lc-432",
+      "title": "All O`one Data Structure",
+      "url": "https://leetcode.com/problemset/?search=432",
+      "difficulty": "Unknown",
+      "patternIds": [
+        "pattern-8x6ycg"
+      ]
+    },
+    {
+      "id": "lc-460",
+      "title": "LFU Cache",
+      "url": "https://leetcode.com/problemset/?search=460",
+      "difficulty": "Unknown",
+      "patternIds": [
+        "pattern-8x6ycg"
+      ]
+    },
+    {
+      "id": "lc-604",
+      "title": "Design Compressed String Iterator",
+      "url": "https://leetcode.com/problemset/?search=604",
+      "difficulty": "Unknown",
+      "patternIds": [
+        "pattern-8x6ycg"
+      ]
+    },
+    {
+      "id": "lc-622",
+      "title": "Design Circular Queue",
+      "url": "https://leetcode.com/problemset/?search=622",
+      "difficulty": "Unknown",
+      "patternIds": [
+        "pattern-8x6ycg"
+      ]
+    },
+    {
+      "id": "lc-641",
+      "title": "Design Circular Deque",
+      "url": "https://leetcode.com/problemset/?search=641",
+      "difficulty": "Unknown",
+      "patternIds": [
+        "pattern-8x6ycg"
+      ]
+    },
+    {
+      "id": "lc-642",
+      "title": "Design Search Autocomplete System",
+      "url": "https://leetcode.com/problemset/?search=642",
+      "difficulty": "Unknown",
+      "patternIds": [
+        "pattern-8x6ycg",
+        "pattern-1mhdtac"
+      ]
+    },
+    {
+      "id": "lc-706",
+      "title": "Design HashMap",
+      "url": "https://leetcode.com/problemset/?search=706",
+      "difficulty": "Unknown",
+      "patternIds": [
+        "pattern-8x6ycg"
+      ]
+    },
+    {
+      "id": "lc-715",
+      "title": "Range Module",
+      "url": "https://leetcode.com/problemset/?search=715",
+      "difficulty": "Unknown",
+      "patternIds": [
+        "pattern-8x6ycg"
+      ]
+    },
+    {
+      "id": "lc-900",
+      "title": "RLE Iterator",
+      "url": "https://leetcode.com/problemset/?search=900",
+      "difficulty": "Unknown",
+      "patternIds": [
+        "pattern-8x6ycg"
+      ]
+    },
+    {
+      "id": "lc-981",
+      "title": "Time Based Key-Value Store",
+      "url": "https://leetcode.com/problemset/?search=981",
+      "difficulty": "Unknown",
+      "patternIds": [
+        "pattern-8x6ycg"
+      ]
+    },
+    {
+      "id": "lc-1146",
+      "title": "Snapshot Array",
+      "url": "https://leetcode.com/problemset/?search=1146",
+      "difficulty": "Unknown",
+      "patternIds": [
+        "pattern-8x6ycg"
+      ]
+    },
+    {
+      "id": "lc-1348",
+      "title": "Tweet Counts Per Frequency",
+      "url": "https://leetcode.com/problemset/?search=1348",
+      "difficulty": "Unknown",
+      "patternIds": [
+        "pattern-8x6ycg"
+      ]
+    },
+    {
+      "id": "lc-1352",
+      "title": "Product of the Last K Numbers",
+      "url": "https://leetcode.com/problemset/?search=1352",
+      "difficulty": "Unknown",
+      "patternIds": [
+        "pattern-8x6ycg"
+      ]
+    },
+    {
+      "id": "lc-1381",
+      "title": "Design a Stack With Increment Operation",
+      "url": "https://leetcode.com/problemset/?search=1381",
+      "difficulty": "Unknown",
+      "patternIds": [
+        "pattern-8x6ycg"
+      ]
+    },
+    {
+      "id": "lc-1756",
+      "title": "Design Most Recently Used Queue",
+      "url": "https://leetcode.com/problemset/?search=1756",
+      "difficulty": "Unknown",
+      "patternIds": [
+        "pattern-8x6ycg"
+      ]
+    },
+    {
+      "id": "lc-2013",
+      "title": "Detect Squares",
+      "url": "https://leetcode.com/problemset/?search=2013",
+      "difficulty": "Unknown",
+      "patternIds": [
+        "pattern-8x6ycg"
+      ]
+    },
+    {
+      "id": "lc-2034",
+      "title": "Stock Price Fluctuation",
+      "url": "https://leetcode.com/problemset/?search=2034",
+      "difficulty": "Unknown",
+      "patternIds": [
+        "pattern-8x6ycg"
+      ]
+    },
+    {
+      "id": "lc-2296",
+      "title": "Design a Text Editor",
+      "url": "https://leetcode.com/problemset/?search=2296",
+      "difficulty": "Unknown",
+      "patternIds": [
+        "pattern-8x6ycg"
+      ]
+    },
+    {
+      "id": "lc-2336",
+      "title": "Smallest Number in Infinite Set",
+      "url": "https://leetcode.com/problemset/?search=2336",
+      "difficulty": "Unknown",
+      "patternIds": [
+        "pattern-8x6ycg"
+      ]
+    },
+    {
+      "id": "lc-208",
+      "title": "Implement Trie (Prefix Tree)",
+      "url": "https://leetcode.com/problemset/?search=208",
+      "difficulty": "Unknown",
+      "patternIds": [
+        "pattern-1mhdtac"
+      ]
+    },
+    {
+      "id": "lc-211",
+      "title": "Design Add and Search Words Data Structure",
+      "url": "https://leetcode.com/problemset/?search=211",
+      "difficulty": "Unknown",
+      "patternIds": [
+        "pattern-1mhdtac"
+      ]
+    },
+    {
+      "id": "lc-720",
+      "title": "Longest Word in Dictionary",
+      "url": "https://leetcode.com/problemset/?search=720",
+      "difficulty": "Unknown",
+      "patternIds": [
+        "pattern-1mhdtac"
+      ]
+    },
+    {
+      "id": "lc-648",
+      "title": "Replace Words",
+      "url": "https://leetcode.com/problemset/?search=648",
+      "difficulty": "Unknown",
+      "patternIds": [
+        "pattern-1mhdtac"
+      ]
+    },
+    {
+      "id": "lc-425",
+      "title": "Word Squares",
+      "url": "https://leetcode.com/problemset/?search=425",
+      "difficulty": "Unknown",
+      "patternIds": [
+        "pattern-1mhdtac"
+      ]
+    },
+    {
+      "id": "lc-745",
+      "title": "Prefix and Suffix Search",
+      "url": "https://leetcode.com/problemset/?search=745",
+      "difficulty": "Unknown",
+      "patternIds": [
+        "pattern-1mhdtac"
+      ]
+    }
+  ]
+}

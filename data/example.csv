@@ -1,0 +1,5 @@
+topic,pattern,title,id,url,difficulty
+Arrays,Two pointers,Two Sum II - Input Array Is Sorted,167,https://leetcode.com/problems/two-sum-ii-input-array-is-sorted/,Medium
+Arrays,Sliding window,Longest Substring Without Repeating Characters,3,https://leetcode.com/problems/longest-substring-without-repeating-characters/,Medium
+Graphs,DFS,Number of Islands,200,https://leetcode.com/problems/number-of-islands/,Medium
+Graphs,Union-Find,Number of Islands,200,https://leetcode.com/problems/number-of-islands/,Medium

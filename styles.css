@@ -1,0 +1,343 @@
+.ap-root {
+  padding: 28px 32px !important;
+  color: var(--text-normal);
+  max-width: 1200px;
+  margin: 0 auto;
+}
+.ap-root *,
+.ap-modal * {
+  box-sizing: border-box;
+}
+.ap-header,
+.ap-between {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+.ap-header {
+  margin-bottom: 22px;
+}
+.ap-root h2 {
+  margin: 5px 0 8px;
+  font-size: 26px;
+  letter-spacing: -0.6px;
+}
+.ap-root h3 {
+  margin: 24px 0 14px;
+}
+.ap-root h4 {
+  font-size: 16px;
+  margin: 8px 0;
+}
+.ap-root p {
+  line-height: 1.5;
+  margin: 6px 0;
+}
+.ap-eyebrow {
+  color: var(--text-accent);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 1.6px;
+}
+.ap-muted,
+.ap-patterns,
+.ap-footnote {
+  color: var(--text-muted);
+  font-size: 13px;
+}
+.ap-footnote {
+  margin: 20px 0 !important;
+  line-height: 1.6;
+}
+.ap-nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  border-bottom: 1px solid var(--background-modifier-border);
+  padding-bottom: 14px;
+  margin-bottom: 24px;
+}
+.ap-nav button {
+  box-shadow: none;
+  background: transparent;
+  color: var(--text-muted);
+}
+.ap-nav button.is-active {
+  background: var(--interactive-accent);
+  color: var(--text-on-accent);
+}
+.ap-root button,
+.ap-modal button {
+  min-height: 34px;
+  height: auto;
+  padding: 7px 12px;
+  white-space: normal;
+}
+.ap-root button:disabled {
+  opacity: 0.45;
+}
+.ap-root button:focus-visible,
+.ap-modal button:focus-visible {
+  outline: 2px solid var(--interactive-accent);
+  outline-offset: 2px;
+}
+.ap-settings {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 14px 20px;
+  margin-bottom: 24px;
+  align-items: end;
+}
+.ap-field {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  min-width: 0;
+  font-size: 13px;
+}
+.ap-field > span {
+  color: var(--text-muted);
+}
+.ap-field input:not([type="checkbox"]),
+.ap-field select,
+.ap-field textarea {
+  width: 100%;
+  min-width: 0;
+  max-width: 100%;
+  height: auto;
+  min-height: 36px;
+}
+.ap-field select {
+  text-overflow: ellipsis;
+}
+.ap-active {
+  padding: 20px;
+  background: var(--background-secondary);
+  border: 1px solid var(--interactive-accent);
+  border-radius: 12px;
+  margin-bottom: 24px;
+}
+.ap-active h3 {
+  margin: 10px 0;
+}
+.ap-timer {
+  font-size: 28px;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: 1px;
+}
+.ap-actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+.ap-actions a {
+  font-size: 13px;
+  overflow-wrap: anywhere;
+}
+.ap-active .ap-actions {
+  margin-top: 18px;
+}
+.ap-task-row {
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+  padding: 18px 0;
+  border-bottom: 1px solid var(--background-modifier-border);
+}
+.ap-task-row > div:first-child {
+  flex: 1;
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+.ap-task-row > .ap-actions {
+  align-content: center;
+  justify-content: flex-end;
+  max-width: 260px;
+}
+.ap-meta {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+.ap-tag {
+  font-size: 10px;
+  letter-spacing: 1px;
+  color: var(--text-accent);
+  font-weight: 600;
+}
+.ap-empty {
+  text-align: center;
+  padding: 36px 20px;
+  background: var(--background-secondary);
+  border-radius: 12px;
+  margin: 20px 0;
+}
+.ap-empty h3 {
+  margin: 0 0 10px;
+}
+.ap-empty p {
+  max-width: 600px;
+  margin: 0 auto 18px;
+  color: var(--text-muted);
+}
+.ap-metrics {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 12px;
+  margin-bottom: 28px;
+}
+.ap-stat {
+  background: var(--background-secondary);
+  padding: 18px;
+  border-radius: 10px;
+}
+.ap-stat p {
+  font-size: 13px;
+}
+.ap-stat strong {
+  display: block;
+  font-size: 30px;
+  font-weight: 600;
+  margin: 10px 0;
+}
+.ap-stat small {
+  color: var(--text-muted);
+}
+.ap-table-wrap {
+  overflow-x: auto;
+  max-width: 100%;
+}
+.ap-root table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 13px;
+}
+.ap-root th,
+.ap-root td {
+  text-align: left;
+  padding: 12px 10px;
+  border-bottom: 1px solid var(--background-modifier-border);
+  vertical-align: top;
+}
+.ap-root th {
+  color: var(--text-muted);
+  font-weight: 500;
+}
+.ap-root th:first-child,
+.ap-root td:first-child {
+  padding-left: 0;
+}
+.ap-bar-row {
+  display: grid;
+  grid-template-columns: minmax(120px, 2fr) minmax(80px, 3fr) 70px;
+  gap: 12px;
+  align-items: center;
+  margin: 14px 0;
+  font-size: 12px;
+}
+.ap-bar-track {
+  background: var(--background-secondary);
+  height: 12px;
+  border-radius: 3px;
+  overflow: hidden;
+}
+.ap-bar {
+  height: 100%;
+  background: var(--interactive-accent);
+}
+.ap-bar.is-assisted {
+  background: var(--text-muted);
+}
+.ap-history {
+  padding: 12px 0 18px;
+  border-bottom: 1px solid var(--background-modifier-border);
+}
+.ap-history p {
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+}
+.ap-check {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 0;
+}
+.ap-stack {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 20px;
+}
+.ap-modal {
+  padding: 4px;
+}
+.ap-modal h2 {
+  margin-top: 0;
+}
+.ap-modal .ap-field {
+  margin: 16px 0;
+}
+.ap-modal textarea {
+  width: 100%;
+  resize: vertical;
+}
+.ap-modal .ap-actions {
+  margin-top: 20px;
+}
+.ap-import-text {
+  display: block;
+  margin: 18px 0;
+  font-family: var(--font-monospace);
+}
+.ap-preview-count {
+  font-weight: 600;
+}
+.ap-feedback,
+.ap-error {
+  color: var(--text-error);
+  white-space: pre-wrap;
+}
+.ap-modal details {
+  margin: 16px 0;
+}
+@media (max-width: 600px) {
+  .ap-root {
+    padding: 18px 14px !important;
+  }
+  .ap-root h2 {
+    font-size: 22px;
+  }
+  .ap-settings,
+  .ap-metrics {
+    grid-template-columns: 1fr;
+  }
+  .ap-task-row {
+    flex-direction: column;
+    gap: 10px;
+  }
+  .ap-task-row > .ap-actions {
+    max-width: none;
+    justify-content: flex-start;
+  }
+  .ap-bar-row {
+    grid-template-columns: 1fr 70px;
+  }
+  .ap-bar-row > span:first-child {
+    grid-column: 1/-1;
+  }
+}
+@media (pointer: coarse) {
+  .ap-root button,
+  .ap-modal button,
+  .ap-field select,
+  .ap-field input {
+    min-height: 44px;
+  }
+  .ap-modal input,
+  .ap-modal textarea {
+    font-size: 16px;
+  }
+}
