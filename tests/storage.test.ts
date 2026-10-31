@@ -26,6 +26,7 @@ const {
   TFolder,
   dataFolderPath,
   TrainerView,
+  notices,
 } = require("../work/storage-test.cjs");
 
 function harness() {
@@ -97,6 +98,103 @@ test("Fresh install uses _algo_patterns and persists the path outside tracker.js
   assert.ok(h.files.has("_algo_patterns/tracker.json"));
   assert.deepEqual(h.plugin.savedData, { dataFolder: "_algo_patterns" });
   assert.equal(h.plugin.settingTabs.length, 1);
+  h.dom.window.close();
+});
+
+test("Header reload reads synced data, refreshes every open view and permits later writes", async () => {
+  const h = harness();
+  await h.load();
+  await h.plugin.changeDataFolder("Study/Algo");
+  const today = new TrainerView({}, h.plugin);
+  const history = new TrainerView({}, h.plugin);
+  history.tab = "history";
+  h.plugin.app.workspace.getLeavesOfType = () => [
+    { view: today },
+    { view: history },
+  ];
+  today.render();
+  history.render();
+  assert.equal(
+    today.contentEl
+      .querySelector("header")!
+      .textContent!.includes("Импорт каталога"),
+    false,
+  );
+  const synced = emptyDatabase();
+  mergeCatalog(
+    synced,
+    parseImport("topic,pattern,title,id\nSynced topic,B,Synced task,1").catalog,
+  );
+  recordAttempt(synced, {
+    id: "synced-attempt",
+    problemId: "lc-1",
+    patternId: synced.patterns[0].id,
+    mode: "solve",
+    outcome: "independent",
+    minutes: 20,
+    at: "2026-10-31T09:00:00.000Z",
+    note: "Result from another device",
+  });
+  const raw = JSON.stringify(synced);
+  h.contents.set(h.plugin.dataPath, raw);
+  const reload = today.contentEl.querySelector(
+    "header button",
+  ) as HTMLButtonElement;
+  assert.equal(reload.textContent, "Обновить базу данных");
+  reload.click();
+  assert.equal(reload.disabled, true);
+  await new Promise<void>((resolve) => setImmediate(resolve));
+  assert.deepEqual(h.plugin.db, synced);
+  assert.equal(h.contents.get(h.plugin.dataPath), raw);
+  assert.match(today.contentEl.textContent, /Synced topic/);
+  assert.match(history.contentEl.textContent, /Synced task/);
+  assert.match(history.contentEl.textContent, /Result from another device/);
+  assert.equal(notices.at(-1), "База перечитана с диска.");
+  await h.plugin.change((db: any) => {
+    db.settings.budget = 75;
+  });
+  assert.equal(
+    JSON.parse(h.contents.get(h.plugin.dataPath)!).settings.budget,
+    75,
+  );
+  assert.equal(h.plugin.db.attempts.length, 1);
+  today.tab = "data";
+  today.render();
+  const importButton = [
+    ...today.contentEl.querySelectorAll("main button"),
+  ].find(
+    (button: any) => button.textContent === "Импорт каталога",
+  ) as HTMLButtonElement;
+  assert.ok(importButton);
+  importButton.click();
+  await new Promise<void>((resolve) => setImmediate(resolve));
+  assert.match(
+    h.dom.window.document.body.textContent!,
+    /CSV: topic, pattern, title/,
+  );
+  h.dom.window.close();
+});
+
+test("Header reload rejects broken synced data without replacing the current database or file", async () => {
+  const h = harness();
+  await h.load();
+  const view = new TrainerView({}, h.plugin);
+  view.render();
+  const before = structuredClone(h.plugin.db);
+  for (const raw of ["{broken", JSON.stringify({ schemaVersion: 999 })]) {
+    h.contents.set(h.plugin.dataPath, raw);
+    const count = notices.length;
+    const reload = view.contentEl.querySelector(
+      "header button",
+    ) as HTMLButtonElement;
+    reload.click();
+    await new Promise<void>((resolve) => setImmediate(resolve));
+    assert.deepEqual(h.plugin.db, before);
+    assert.equal(h.contents.get(h.plugin.dataPath), raw);
+    assert.equal(reload.disabled, false);
+    assert.equal(notices.length, count + 1);
+    assert.notEqual(notices.at(-1), "База перечитана с диска.");
+  }
   h.dom.window.close();
 });
 

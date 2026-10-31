@@ -177,12 +177,12 @@ export default class AlgoPatternsPlugin extends Plugin {
         const file = this.app.vault.getAbstractFileByPath(this.dataPath);
         if (!(file instanceof TFile))
           throw new Error(
-            "Файл базы не найден. Перезагрузите базу через экран «Данные».",
+            "Файл базы не найден. Нажмите «Обновить базу данных».",
           );
         await this.app.vault.process(file, (current) => {
           if (current !== expected)
             throw new Error(
-              "База изменена извне. Ваши изменения не записаны. Нажмите «Перезагрузить базу» на экране «Данные».",
+              "База изменена извне. Ваши изменения не записаны. Нажмите «Обновить базу данных».",
             );
           return next;
         });
@@ -322,6 +322,12 @@ export default class AlgoPatternsPlugin extends Plugin {
     await this.ready;
     await this.store.change(action);
     this.refresh();
+  }
+  async reloadDatabase() {
+    await this.ready;
+    await this.store.reload();
+    this.refresh();
+    new Notice("База перечитана с диска.");
   }
   async backup() {
     await this.ready;
@@ -551,9 +557,7 @@ export class TrainerView extends ItemView {
     const header = el(root, "header", "", "ap-header");
     const title = el(header, "div");
     el(title, "h2", "Algo Patterns");
-    button(header, "Импорт каталога", () =>
-      new ImportModal(this.plugin).open(),
-    );
+    button(header, "Обновить базу данных", () => this.plugin.reloadDatabase());
     const nav = el(root, "nav", "", "ap-nav");
     nav.setAttribute("aria-label", "Разделы тренажёра");
     for (const [id, name] of [
@@ -1191,11 +1195,10 @@ export class TrainerView extends ItemView {
     button(actions, "Восстановить резервную копию", () =>
       new RestoreModal(this.plugin).open(),
     );
-    button(actions, "Перезагрузить базу", async () => {
-      await this.plugin.store.reload();
-      this.plugin.refresh();
-      new Notice("База перечитана с диска.");
-    });
+    button(actions, "Перезагрузить базу", () => this.plugin.reloadDatabase());
+    button(actions, "Импорт каталога", () =>
+      new ImportModal(this.plugin).open(),
+    );
     button(actions, "Импорт исходного каталога", () =>
       new ImportModal(this.plugin, JSON.stringify(starterCatalog)).open(),
     );

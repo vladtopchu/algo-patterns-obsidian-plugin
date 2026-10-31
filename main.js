@@ -4897,12 +4897,12 @@ var AlgoPatternsPlugin = class extends import_obsidian2.Plugin {
         const file = this.app.vault.getAbstractFileByPath(this.dataPath);
         if (!(file instanceof import_obsidian2.TFile))
           throw new Error(
-            "\u0424\u0430\u0439\u043B \u0431\u0430\u0437\u044B \u043D\u0435 \u043D\u0430\u0439\u0434\u0435\u043D. \u041F\u0435\u0440\u0435\u0437\u0430\u0433\u0440\u0443\u0437\u0438\u0442\u0435 \u0431\u0430\u0437\u0443 \u0447\u0435\u0440\u0435\u0437 \u044D\u043A\u0440\u0430\u043D \xAB\u0414\u0430\u043D\u043D\u044B\u0435\xBB."
+            "\u0424\u0430\u0439\u043B \u0431\u0430\u0437\u044B \u043D\u0435 \u043D\u0430\u0439\u0434\u0435\u043D. \u041D\u0430\u0436\u043C\u0438\u0442\u0435 \xAB\u041E\u0431\u043D\u043E\u0432\u0438\u0442\u044C \u0431\u0430\u0437\u0443 \u0434\u0430\u043D\u043D\u044B\u0445\xBB."
           );
         await this.app.vault.process(file, (current) => {
           if (current !== expected)
             throw new Error(
-              "\u0411\u0430\u0437\u0430 \u0438\u0437\u043C\u0435\u043D\u0435\u043D\u0430 \u0438\u0437\u0432\u043D\u0435. \u0412\u0430\u0448\u0438 \u0438\u0437\u043C\u0435\u043D\u0435\u043D\u0438\u044F \u043D\u0435 \u0437\u0430\u043F\u0438\u0441\u0430\u043D\u044B. \u041D\u0430\u0436\u043C\u0438\u0442\u0435 \xAB\u041F\u0435\u0440\u0435\u0437\u0430\u0433\u0440\u0443\u0437\u0438\u0442\u044C \u0431\u0430\u0437\u0443\xBB \u043D\u0430 \u044D\u043A\u0440\u0430\u043D\u0435 \xAB\u0414\u0430\u043D\u043D\u044B\u0435\xBB."
+              "\u0411\u0430\u0437\u0430 \u0438\u0437\u043C\u0435\u043D\u0435\u043D\u0430 \u0438\u0437\u0432\u043D\u0435. \u0412\u0430\u0448\u0438 \u0438\u0437\u043C\u0435\u043D\u0435\u043D\u0438\u044F \u043D\u0435 \u0437\u0430\u043F\u0438\u0441\u0430\u043D\u044B. \u041D\u0430\u0436\u043C\u0438\u0442\u0435 \xAB\u041E\u0431\u043D\u043E\u0432\u0438\u0442\u044C \u0431\u0430\u0437\u0443 \u0434\u0430\u043D\u043D\u044B\u0445\xBB."
             );
           return next;
         });
@@ -5034,6 +5034,12 @@ var AlgoPatternsPlugin = class extends import_obsidian2.Plugin {
     await this.ready;
     await this.store.change(action);
     this.refresh();
+  }
+  async reloadDatabase() {
+    await this.ready;
+    await this.store.reload();
+    this.refresh();
+    new import_obsidian2.Notice("\u0411\u0430\u0437\u0430 \u043F\u0435\u0440\u0435\u0447\u0438\u0442\u0430\u043D\u0430 \u0441 \u0434\u0438\u0441\u043A\u0430.");
   }
   async backup() {
     await this.ready;
@@ -5237,11 +5243,7 @@ var TrainerView = class extends import_obsidian2.ItemView {
     const header = el(root, "header", "", "ap-header");
     const title = el(header, "div");
     el(title, "h2", "Algo Patterns");
-    button(
-      header,
-      "\u0418\u043C\u043F\u043E\u0440\u0442 \u043A\u0430\u0442\u0430\u043B\u043E\u0433\u0430",
-      () => new ImportModal(this.plugin).open()
-    );
+    button(header, "\u041E\u0431\u043D\u043E\u0432\u0438\u0442\u044C \u0431\u0430\u0437\u0443 \u0434\u0430\u043D\u043D\u044B\u0445", () => this.plugin.reloadDatabase());
     const nav = el(root, "nav", "", "ap-nav");
     nav.setAttribute("aria-label", "\u0420\u0430\u0437\u0434\u0435\u043B\u044B \u0442\u0440\u0435\u043D\u0430\u0436\u0451\u0440\u0430");
     for (const [id, name] of [
@@ -5840,11 +5842,12 @@ var TrainerView = class extends import_obsidian2.ItemView {
       "\u0412\u043E\u0441\u0441\u0442\u0430\u043D\u043E\u0432\u0438\u0442\u044C \u0440\u0435\u0437\u0435\u0440\u0432\u043D\u0443\u044E \u043A\u043E\u043F\u0438\u044E",
       () => new RestoreModal(this.plugin).open()
     );
-    button(actions, "\u041F\u0435\u0440\u0435\u0437\u0430\u0433\u0440\u0443\u0437\u0438\u0442\u044C \u0431\u0430\u0437\u0443", async () => {
-      await this.plugin.store.reload();
-      this.plugin.refresh();
-      new import_obsidian2.Notice("\u0411\u0430\u0437\u0430 \u043F\u0435\u0440\u0435\u0447\u0438\u0442\u0430\u043D\u0430 \u0441 \u0434\u0438\u0441\u043A\u0430.");
-    });
+    button(actions, "\u041F\u0435\u0440\u0435\u0437\u0430\u0433\u0440\u0443\u0437\u0438\u0442\u044C \u0431\u0430\u0437\u0443", () => this.plugin.reloadDatabase());
+    button(
+      actions,
+      "\u0418\u043C\u043F\u043E\u0440\u0442 \u043A\u0430\u0442\u0430\u043B\u043E\u0433\u0430",
+      () => new ImportModal(this.plugin).open()
+    );
     button(
       actions,
       "\u0418\u043C\u043F\u043E\u0440\u0442 \u0438\u0441\u0445\u043E\u0434\u043D\u043E\u0433\u043E \u043A\u0430\u0442\u0430\u043B\u043E\u0433\u0430",
