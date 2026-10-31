@@ -28,7 +28,7 @@ __export(main_exports, {
   default: () => AlgoPatternsPlugin
 });
 module.exports = __toCommonJS(main_exports);
-var import_obsidian = require("obsidian");
+var import_obsidian2 = require("obsidian");
 
 // src/core.ts
 var outcomeLabels = {
@@ -464,7 +464,7 @@ var Store = class {
     }
   }
   change(mutator) {
-    const operation = this.queue.then(async () => {
+    return this.exclusive(async () => {
       const draft = structuredClone(this.db);
       mutator(draft);
       draft.revision = this.db.revision + 1;
@@ -474,15 +474,35 @@ var Store = class {
       this.raw = next;
       this.db = draft;
     });
+  }
+  // Folder moves and other disk operations share the same queue as writes.
+  exclusive(action) {
+    const operation = this.queue.then(action);
     this.queue = operation.catch(() => {
     });
     return operation;
   }
   async reload() {
-    await this.queue;
-    await this.load();
+    await this.exclusive(() => this.load());
   }
 };
+
+// src/settings.ts
+var import_obsidian = require("obsidian");
+var DEFAULT_DATA_FOLDER = "_algo_patterns";
+var LEGACY_DATA_FOLDER = "Algo Patterns";
+function dataFolderPath(value) {
+  const path = value.trim().replace(/\\/g, "/");
+  const parts = path.split("/");
+  if (!path || parts.some(
+    (part) => !part || part.startsWith(".") || part !== part.trim() || /[<>:"|?*\x00-\x1f]/.test(part) || part.endsWith(".") || /^(con|prn|aux|nul|com[1-9]|lpt[1-9])(?:\.|$)/i.test(part)
+  )) {
+    throw new Error(
+      "\u0423\u043A\u0430\u0436\u0438\u0442\u0435 \u043E\u0442\u043D\u043E\u0441\u0438\u0442\u0435\u043B\u044C\u043D\u0443\u044E \u043F\u0430\u043F\u043A\u0443 \u0432\u043D\u0443\u0442\u0440\u0438 vault, \u043D\u0430\u043F\u0440\u0438\u043C\u0435\u0440 _algo_patterns \u0438\u043B\u0438 \u0423\u0447\u0451\u0431\u0430/\u0410\u043B\u0433\u043E\u0440\u0438\u0442\u043C\u044B. \u0421\u043A\u0440\u044B\u0442\u044B\u0435 \u0438 \u0441\u0438\u0441\u0442\u0435\u043C\u043D\u044B\u0435 \u043F\u0443\u0442\u0438 \u043D\u0435\u0434\u043E\u0441\u0442\u0443\u043F\u043D\u044B."
+    );
+  }
+  return (0, import_obsidian.normalizePath)(path);
+}
 
 // data/starter-catalog.json
 var starter_catalog_default = {
@@ -4767,8 +4787,6 @@ var starter_catalog_default = {
 
 // src/main.ts
 var VIEW = "algo-patterns-trainer";
-var ROOT = "Algo Patterns";
-var DATA = ROOT + "/tracker.json";
 var date = (at) => new Date(at).toLocaleString("ru-RU", {
   dateStyle: "short",
   timeStyle: "short"
@@ -4787,7 +4805,7 @@ function button(parent, text, action, primary = false) {
   b.type = "button";
   b.addEventListener("click", () => {
     b.disabled = true;
-    Promise.resolve().then(action).catch((error) => new import_obsidian.Notice(error.message, 8e3)).finally(() => {
+    Promise.resolve().then(action).catch((error) => new import_obsidian2.Notice(error.message, 8e3)).finally(() => {
       b.disabled = false;
     });
   });
@@ -4805,7 +4823,7 @@ function select(parent, label, options, value, onChange) {
   if (onChange)
     field.addEventListener("change", () => {
       Promise.resolve(onChange(field.value)).catch(
-        (e) => new import_obsidian.Notice(String(e))
+        (e) => new import_obsidian2.Notice(String(e))
       );
     });
   return field;
@@ -4849,26 +4867,35 @@ function link(parent, title, url) {
   } catch {
   }
 }
-var AlgoPatternsPlugin = class extends import_obsidian.Plugin {
+var AlgoPatternsPlugin = class extends import_obsidian2.Plugin {
   store;
   ready;
   startupError = "";
+  dataFolder = DEFAULT_DATA_FOLDER;
+  get dataPath() {
+    return this.dataFolder + "/tracker.json";
+  }
   get db() {
     return this.store.db;
   }
   async onload() {
+    const saved = await this.loadData();
+    if (saved?.dataFolder !== void 0)
+      this.dataFolder = dataFolderPath(saved.dataFolder);
     this.store = new Store({
       read: async () => {
-        const f = this.app.vault.getAbstractFileByPath(DATA);
-        return f instanceof import_obsidian.TFile ? this.app.vault.read(f) : null;
+        const f = this.app.vault.getAbstractFileByPath(this.dataPath);
+        if (f && !(f instanceof import_obsidian2.TFile))
+          throw new Error("\u041F\u0443\u0442\u044C \u0431\u0430\u0437\u044B \u0437\u0430\u043D\u044F\u0442 \u043F\u0430\u043F\u043A\u043E\u0439: " + this.dataPath);
+        return f instanceof import_obsidian2.TFile ? this.app.vault.read(f) : null;
       },
       create: async (text) => {
-        await this.folder(ROOT);
-        await this.app.vault.create(DATA, text);
+        await this.folder(this.dataFolder);
+        await this.app.vault.create(this.dataPath, text);
       },
       replace: async (expected, next) => {
-        const file = this.app.vault.getAbstractFileByPath(DATA);
-        if (!(file instanceof import_obsidian.TFile))
+        const file = this.app.vault.getAbstractFileByPath(this.dataPath);
+        if (!(file instanceof import_obsidian2.TFile))
           throw new Error(
             "\u0424\u0430\u0439\u043B \u0431\u0430\u0437\u044B \u043D\u0435 \u043D\u0430\u0439\u0434\u0435\u043D. \u041F\u0435\u0440\u0435\u0437\u0430\u0433\u0440\u0443\u0437\u0438\u0442\u0435 \u0431\u0430\u0437\u0443 \u0447\u0435\u0440\u0435\u0437 \u044D\u043A\u0440\u0430\u043D \xAB\u0414\u0430\u043D\u043D\u044B\u0435\xBB."
           );
@@ -4883,15 +4910,16 @@ var AlgoPatternsPlugin = class extends import_obsidian.Plugin {
     });
     this.ready = new Promise(
       (resolve, reject) => this.app.workspace.onLayoutReady(() => {
-        this.store.load().then(resolve).catch((error) => {
+        this.initializeStorage(saved?.dataFolder === void 0).then(resolve).catch((error) => {
           this.startupError = String(error);
-          new import_obsidian.Notice("Algo Patterns: " + this.startupError, 12e3);
+          new import_obsidian2.Notice("Algo Patterns: " + this.startupError, 12e3);
           reject(error);
         });
       })
     );
     void this.ready.catch(() => {
     });
+    this.addSettingTab(new AlgoPatternsSettings(this));
     this.registerView(VIEW, (leaf) => new TrainerView(leaf, this));
     this.addRibbonIcon("brain-circuit", "Algo Patterns", () => {
       void this.open();
@@ -4915,16 +4943,80 @@ var AlgoPatternsPlugin = class extends import_obsidian.Plugin {
       id: "backup",
       name: "\u0421\u043E\u0437\u0434\u0430\u0442\u044C \u0440\u0435\u0437\u0435\u0440\u0432\u043D\u0443\u044E \u043A\u043E\u043F\u0438\u044E",
       callback: () => {
-        void this.ready.then(() => this.backup()).catch((error) => new import_obsidian.Notice(String(error)));
+        void this.ready.then(() => this.backup()).catch((error) => new import_obsidian2.Notice(String(error)));
       }
     });
   }
+  async initializeStorage(firstRun) {
+    if (firstRun) {
+      const legacy = this.app.vault.getAbstractFileByPath(LEGACY_DATA_FOLDER);
+      const oldData = this.app.vault.getAbstractFileByPath(
+        LEGACY_DATA_FOLDER + "/tracker.json"
+      );
+      if (legacy instanceof import_obsidian2.TFolder && oldData instanceof import_obsidian2.TFile) {
+        const destinationExists = this.app.vault.getAbstractFileByPath(
+          this.dataFolder
+        );
+        this.dataFolder = LEGACY_DATA_FOLDER;
+        await this.saveData({ dataFolder: this.dataFolder });
+        if (!destinationExists) await this.moveDataFolder(DEFAULT_DATA_FOLDER);
+        else
+          new import_obsidian2.Notice(
+            "\u041F\u0430\u043F\u043A\u0430 _algo_patterns \u0443\u0436\u0435 \u0437\u0430\u043D\u044F\u0442\u0430. \u0421\u043E\u0445\u0440\u0430\u043D\u0435\u043D\u0430 \u0442\u0435\u043A\u0443\u0449\u0430\u044F \u0431\u0430\u0437\u0430 \u0432 Algo Patterns; \u043D\u043E\u0432\u044B\u0439 \u043F\u0443\u0442\u044C \u043C\u043E\u0436\u043D\u043E \u0432\u044B\u0431\u0440\u0430\u0442\u044C \u0432 \u043D\u0430\u0441\u0442\u0440\u043E\u0439\u043A\u0430\u0445.",
+            1e4
+          );
+      }
+    }
+    await this.store.load();
+    await this.saveData({ dataFolder: this.dataFolder });
+  }
+  async changeDataFolder(value) {
+    const next = dataFolderPath(value);
+    await this.ready;
+    await this.store.exclusive(() => this.moveDataFolder(next));
+    this.refresh();
+  }
+  async moveDataFolder(next) {
+    const previous = this.dataFolder;
+    if (next === previous) return;
+    if (next.startsWith(previous + "/") || previous.startsWith(next + "/"))
+      throw new Error(
+        "\u041D\u043E\u0432\u0430\u044F \u043F\u0430\u043F\u043A\u0430 \u043D\u0435 \u0434\u043E\u043B\u0436\u043D\u0430 \u0441\u043E\u0434\u0435\u0440\u0436\u0430\u0442\u044C \u0442\u0435\u043A\u0443\u0449\u0443\u044E \u0438\u043B\u0438 \u043D\u0430\u0445\u043E\u0434\u0438\u0442\u044C\u0441\u044F \u0432\u043D\u0443\u0442\u0440\u0438 \u043D\u0435\u0451."
+      );
+    if (this.app.vault.getAbstractFileByPath(next))
+      throw new Error(
+        "\u041F\u0430\u043F\u043A\u0430 \u043D\u0430\u0437\u043D\u0430\u0447\u0435\u043D\u0438\u044F \u0443\u0436\u0435 \u0441\u0443\u0449\u0435\u0441\u0442\u0432\u0443\u0435\u0442. \u0412\u044B\u0431\u0435\u0440\u0438\u0442\u0435 \u0441\u0432\u043E\u0431\u043E\u0434\u043D\u044B\u0439 \u043F\u0443\u0442\u044C; \u0434\u0430\u043D\u043D\u044B\u0435 \u043D\u0435 \u043E\u0431\u044A\u0435\u0434\u0438\u043D\u044F\u044E\u0442\u0441\u044F."
+      );
+    const source = this.app.vault.getAbstractFileByPath(previous);
+    if (!(source instanceof import_obsidian2.TFolder))
+      throw new Error("\u041F\u0430\u043F\u043A\u0430 \u0434\u0430\u043D\u043D\u044B\u0445 \u043D\u0435 \u043D\u0430\u0439\u0434\u0435\u043D\u0430: " + previous);
+    const parent = next.split("/").slice(0, -1).join("/");
+    if (parent) await this.folder(parent);
+    await this.app.fileManager.renameFile(source, next);
+    try {
+      await this.saveData({ dataFolder: next });
+    } catch (error) {
+      try {
+        await this.app.fileManager.renameFile(source, previous);
+      } catch {
+        this.dataFolder = next;
+        throw new Error(
+          "\u0414\u0430\u043D\u043D\u044B\u0435 \u043F\u0435\u0440\u0435\u043D\u0435\u0441\u0435\u043D\u044B \u0432 " + next + ", \u043D\u043E \u0441\u043E\u0445\u0440\u0430\u043D\u0438\u0442\u044C \u043D\u0430\u0441\u0442\u0440\u043E\u0439\u043A\u0443 \u0438 \u0432\u0435\u0440\u043D\u0443\u0442\u044C \u043F\u0430\u043F\u043A\u0443 \u043D\u0435 \u0443\u0434\u0430\u043B\u043E\u0441\u044C. \u041F\u0440\u043E\u0432\u0435\u0440\u044C\u0442\u0435 \u043F\u0443\u0442\u044C \u043F\u0435\u0440\u0435\u0434 \u043F\u0435\u0440\u0435\u0437\u0430\u043F\u0443\u0441\u043A\u043E\u043C."
+        );
+      }
+      throw error;
+    }
+    this.dataFolder = next;
+    new import_obsidian2.Notice("\u0414\u0430\u043D\u043D\u044B\u0435 \u043F\u0435\u0440\u0435\u043D\u0435\u0441\u0435\u043D\u044B \u0432 " + next);
+  }
   async folder(path) {
     let current = "";
-    for (const part of (0, import_obsidian.normalizePath)(path).split("/")) {
+    for (const part of (0, import_obsidian2.normalizePath)(path).split("/")) {
       current = current ? current + "/" + part : part;
-      if (!this.app.vault.getAbstractFileByPath(current))
-        await this.app.vault.createFolder(current);
+      const existing = this.app.vault.getAbstractFileByPath(current);
+      if (existing && !(existing instanceof import_obsidian2.TFolder))
+        throw new Error("\u041F\u0443\u0442\u044C \u0437\u0430\u043D\u044F\u0442 \u0444\u0430\u0439\u043B\u043E\u043C: " + current);
+      if (!existing) await this.app.vault.createFolder(current);
     }
   }
   async open() {
@@ -4945,11 +5037,13 @@ var AlgoPatternsPlugin = class extends import_obsidian.Plugin {
   }
   async backup() {
     await this.ready;
-    await this.folder(ROOT + "/Backups");
-    const path = ROOT + "/Backups/tracker-" + (/* @__PURE__ */ new Date()).toISOString().replace(/[:.]/g, "-") + "-" + uid().slice(0, 6) + ".json";
-    await this.app.vault.create(path, JSON.stringify(this.db, null, 2));
-    new import_obsidian.Notice("\u0420\u0435\u0437\u0435\u0440\u0432\u043D\u0430\u044F \u043A\u043E\u043F\u0438\u044F: " + path);
-    return path;
+    return this.store.exclusive(async () => {
+      await this.folder(this.dataFolder + "/Backups");
+      const path = this.dataFolder + "/Backups/tracker-" + (/* @__PURE__ */ new Date()).toISOString().replace(/[:.]/g, "-") + "-" + uid().slice(0, 6) + ".json";
+      await this.app.vault.create(path, JSON.stringify(this.db, null, 2));
+      new import_obsidian2.Notice("\u0420\u0435\u0437\u0435\u0440\u0432\u043D\u0430\u044F \u043A\u043E\u043F\u0438\u044F: " + path);
+      return path;
+    });
   }
   async start(item, manual = false) {
     await this.change((db) => {
@@ -4970,18 +5064,20 @@ var AlgoPatternsPlugin = class extends import_obsidian.Plugin {
     if (manual) new FinishModal(this, true).open();
   }
   async note(problemId) {
-    const p = this.db.problems.find((p2) => p2.id === problemId);
-    await this.folder(ROOT + "/Tasks");
-    const safe = p.id.replace(/[^\p{L}\p{N}_-]/gu, "_");
-    const path = ROOT + "/Tasks/" + safe + ".md";
-    let file = this.app.vault.getAbstractFileByPath(path);
-    if (!(file instanceof import_obsidian.TFile)) {
-      const patterns = p.patternIds.map(
-        (id) => this.db.patterns.find((t) => t.id === id)?.name ?? id
-      );
-      file = await this.app.vault.create(
-        path,
-        `---
+    await this.ready;
+    return this.store.exclusive(async () => {
+      const p = this.db.problems.find((p2) => p2.id === problemId);
+      await this.folder(this.dataFolder + "/Tasks");
+      const safe = p.id.replace(/[^\p{L}\p{N}_-]/gu, "_");
+      const path = this.dataFolder + "/Tasks/" + safe + ".md";
+      let file = this.app.vault.getAbstractFileByPath(path);
+      if (!(file instanceof import_obsidian2.TFile)) {
+        const patterns = p.patternIds.map(
+          (id) => this.db.patterns.find((t) => t.id === id)?.name ?? id
+        );
+        file = await this.app.vault.create(
+          path,
+          `---
 algo_id: ${JSON.stringify(p.id)}
 difficulty: ${JSON.stringify(p.difficulty)}
 patterns: ${JSON.stringify(patterns)}
@@ -4997,13 +5093,101 @@ ${p.url}
 
 ## \u041E\u0448\u0438\u0431\u043A\u0438 \u0438 \u043A\u0440\u0430\u0439\u043D\u0438\u0435 \u0441\u043B\u0443\u0447\u0430\u0438
 `
-      );
-    }
-    if (file instanceof import_obsidian.TFile)
-      await this.app.workspace.getLeaf("tab").openFile(file);
+        );
+      }
+      if (file instanceof import_obsidian2.TFile)
+        await this.app.workspace.getLeaf("tab").openFile(file);
+    });
   }
 };
-var TrainerView = class extends import_obsidian.ItemView {
+var AlgoPatternsSettings = class extends import_obsidian2.PluginSettingTab {
+  constructor(plugin) {
+    super(plugin.app, plugin);
+    this.plugin = plugin;
+  }
+  display() {
+    this.containerEl.replaceChildren();
+    void this.plugin.ready.then(() => this.render()).catch((error) => {
+      el(this.containerEl, "p", String(error), "ap-error");
+    });
+  }
+  render() {
+    this.containerEl.replaceChildren();
+    let value = this.plugin.dataFolder;
+    new import_obsidian2.Setting(this.containerEl).setName("\u041F\u0430\u043F\u043A\u0430 \u0434\u0430\u043D\u043D\u044B\u0445").setDesc(
+      "\u041A\u0430\u0442\u0430\u043B\u043E\u0433, \u0438\u0441\u0442\u043E\u0440\u0438\u044F, \u0442\u0430\u0439\u043C\u0435\u0440, \u0440\u0435\u0437\u0435\u0440\u0432\u043D\u044B\u0435 \u043A\u043E\u043F\u0438\u0438 \u0438 \u0437\u0430\u043C\u0435\u0442\u043A\u0438. \u041F\u0440\u0438 \u0441\u043E\u0445\u0440\u0430\u043D\u0435\u043D\u0438\u0438 \u0442\u0435\u043A\u0443\u0449\u0430\u044F \u043F\u0430\u043F\u043A\u0430 \u043F\u0435\u0440\u0435\u043D\u043E\u0441\u0438\u0442\u0441\u044F \u0446\u0435\u043B\u0438\u043A\u043E\u043C. \u041F\u043E \u0443\u043C\u043E\u043B\u0447\u0430\u043D\u0438\u044E: _algo_patterns."
+    ).addText(
+      (text) => text.setPlaceholder(DEFAULT_DATA_FOLDER).setValue(value).onChange((next) => {
+        value = next;
+      })
+    ).addButton(
+      (save) => save.setButtonText("\u0421\u043E\u0445\u0440\u0430\u043D\u0438\u0442\u044C \u0438 \u043F\u0435\u0440\u0435\u043D\u0435\u0441\u0442\u0438").onClick(async () => {
+        save.setDisabled(true);
+        try {
+          await this.plugin.changeDataFolder(value);
+          this.display();
+        } catch (error) {
+          new import_obsidian2.Notice(String(error), 8e3);
+        } finally {
+          save.setDisabled(false);
+        }
+      })
+    );
+    el(this.containerEl, "p", "\u041F\u0440\u043E\u0433\u0440\u0435\u0441\u0441: " + this.plugin.dataPath);
+    el(
+      this.containerEl,
+      "p",
+      "\u0421\u043E\u0445\u0440\u0430\u043D\u0435\u043D\u0438\u0435 \u0430\u0432\u0442\u043E\u043C\u0430\u0442\u0438\u0447\u0435\u0441\u043A\u043E\u0435 \u043F\u043E\u0441\u043B\u0435 \u043A\u0430\u0436\u0434\u043E\u0433\u043E \u0438\u0437\u043C\u0435\u043D\u0435\u043D\u0438\u044F."
+    );
+    new import_obsidian2.Setting(this.containerEl).setName("\u0412\u0440\u0435\u043C\u044F \u043D\u0430 \u043F\u043B\u0430\u043D, \u043C\u0438\u043D").addText(
+      (text) => text.setValue(String(this.plugin.db.settings.budget)).onChange(async (value2) => {
+        const budget = Number(value2);
+        if (!Number.isFinite(budget) || budget < 5 || budget > 480) return;
+        try {
+          await this.plugin.change((db) => {
+            db.settings.budget = budget;
+          });
+        } catch (error) {
+          new import_obsidian2.Notice(String(error));
+        }
+      })
+    );
+    new import_obsidian2.Setting(this.containerEl).setName("\u0414\u043E\u043B\u044F \u0432\u0440\u0435\u043C\u0435\u043D\u0438 \u043D\u0430 \u043D\u043E\u0432\u044B\u0435 \u0437\u0430\u0434\u0430\u0447\u0438").addDropdown(
+      (select2) => select2.addOptions({ "40": "40%", "60": "60%", "80": "80%" }).setValue(String(this.plugin.db.settings.newPercent)).onChange(async (value2) => {
+        try {
+          await this.plugin.change((db) => {
+            db.settings.newPercent = Number(value2);
+          });
+        } catch (error) {
+          new import_obsidian2.Notice(String(error));
+        }
+      })
+    );
+    new import_obsidian2.Setting(this.containerEl).setName("\u0421\u043A\u0440\u044B\u0432\u0430\u0442\u044C \u043F\u0430\u0442\u0442\u0435\u0440\u043D \u043F\u0440\u0438 \u0441\u043C\u0435\u0448\u0430\u043D\u043D\u043E\u0439 \u043F\u0440\u0430\u043A\u0442\u0438\u043A\u0435").addToggle(
+      (toggle) => toggle.setValue(this.plugin.db.settings.hidePattern).onChange(async (value2) => {
+        try {
+          await this.plugin.change((db) => {
+            db.settings.hidePattern = value2;
+          });
+        } catch (error) {
+          new import_obsidian2.Notice(String(error));
+        }
+      })
+    );
+    new import_obsidian2.Setting(this.containerEl).setName("\u0414\u043E\u0431\u0430\u0432\u043B\u044F\u0442\u044C \u043A\u043E\u0440\u043E\u0442\u043A\u0438\u0435 \u043F\u0440\u043E\u0432\u0435\u0440\u043A\u0438 \u043F\u043E\u0434\u0445\u043E\u0434\u0430").addToggle(
+      (toggle) => toggle.setValue(this.plugin.db.settings.includeRecall).onChange(async (value2) => {
+        try {
+          await this.plugin.change((db) => {
+            db.settings.includeRecall = value2;
+          });
+        } catch (error) {
+          new import_obsidian2.Notice(String(error));
+        }
+      })
+    );
+  }
+};
+var TrainerView = class extends import_obsidian2.ItemView {
   constructor(leaf, plugin) {
     super(leaf);
     this.plugin = plugin;
@@ -5046,20 +5230,13 @@ var TrainerView = class extends import_obsidian.ItemView {
       empty(
         root,
         "\u041D\u0435 \u0443\u0434\u0430\u043B\u043E\u0441\u044C \u043E\u0442\u043A\u0440\u044B\u0442\u044C \u0431\u0430\u0437\u0443",
-        this.plugin.startupError + " \u0424\u0430\u0439\u043B \u043D\u0435 \u043F\u0435\u0440\u0435\u0437\u0430\u043F\u0438\u0441\u0430\u043D. \u041F\u0440\u043E\u0432\u0435\u0440\u044C\u0442\u0435 Algo Patterns/tracker.json \u0438 \u0440\u0435\u0437\u0435\u0440\u0432\u043D\u044B\u0435 \u043A\u043E\u043F\u0438\u0438."
+        this.plugin.startupError + " \u0424\u0430\u0439\u043B \u043D\u0435 \u043F\u0435\u0440\u0435\u0437\u0430\u043F\u0438\u0441\u0430\u043D. \u041F\u0440\u043E\u0432\u0435\u0440\u044C\u0442\u0435 " + this.plugin.dataPath + " \u0438 \u0440\u0435\u0437\u0435\u0440\u0432\u043D\u044B\u0435 \u043A\u043E\u043F\u0438\u0438."
       );
       return;
     }
     const header = el(root, "header", "", "ap-header");
     const title = el(header, "div");
-    el(title, "div", "ALGO PATTERNS", "ap-eyebrow");
-    el(title, "h2", "\u041F\u0440\u0430\u043A\u0442\u0438\u043A\u0430, \u043A\u043E\u0442\u043E\u0440\u0430\u044F \u043E\u0441\u0442\u0430\u0451\u0442\u0441\u044F");
-    el(
-      title,
-      "p",
-      "\u041D\u043E\u0432\u044B\u0435 \u0437\u0430\u0434\u0430\u0447\u0438 \xB7 \u043E\u0442\u043B\u043E\u0436\u0435\u043D\u043D\u044B\u0435 \u043F\u043E\u0432\u0442\u043E\u0440\u0435\u043D\u0438\u044F \xB7 \u0441\u0430\u043C\u043E\u0441\u0442\u043E\u044F\u0442\u0435\u043B\u044C\u043D\u044B\u0435 \u0440\u0435\u0448\u0435\u043D\u0438\u044F",
-      "ap-muted"
-    );
+    el(title, "h2", "Algo Patterns");
     button(
       header,
       "\u0418\u043C\u043F\u043E\u0440\u0442 \u043A\u0430\u0442\u0430\u043B\u043E\u0433\u0430",
@@ -5088,6 +5265,13 @@ var TrainerView = class extends import_obsidian.ItemView {
     if (this.tab === "progress") this.progress(body);
     if (this.tab === "history") this.history(body);
     if (this.tab === "data") this.data(body);
+    if (this.tab !== "data")
+      el(
+        root,
+        "p",
+        "\u0410\u0432\u0442\u043E\u0441\u043E\u0445\u0440\u0430\u043D\u0435\u043D\u0438\u0435: " + this.plugin.dataPath,
+        "ap-muted ap-storage"
+      );
     this.tick();
   }
   active(root) {
@@ -5170,12 +5354,12 @@ var TrainerView = class extends import_obsidian.ItemView {
     if (!db.problems.length) {
       const box = empty(
         root,
-        "\u041D\u0430\u0447\u043D\u0438\u0442\u0435 \u0441\u043E \u0441\u0432\u043E\u0435\u0433\u043E \u043A\u0430\u0442\u0430\u043B\u043E\u0433\u0430",
-        "\u0417\u0430\u0433\u0440\u0443\u0437\u0438\u0442\u0435 CSV \u0438\u0437 Numbers \u0438\u043B\u0438 \u0433\u043E\u0442\u043E\u0432\u044B\u0439 \u043A\u0430\u0442\u0430\u043B\u043E\u0433. \u0421\u0443\u0449\u0435\u0441\u0442\u0432\u0443\u044E\u0449\u0430\u044F \u0438\u0441\u0442\u043E\u0440\u0438\u044F \u043F\u0440\u0438 \u043F\u043E\u0432\u0442\u043E\u0440\u043D\u043E\u043C \u0438\u043C\u043F\u043E\u0440\u0442\u0435 \u0441\u043E\u0445\u0440\u0430\u043D\u044F\u0435\u0442\u0441\u044F."
+        "\u041A\u0430\u0442\u0430\u043B\u043E\u0433 \u043F\u0443\u0441\u0442",
+        "\u0418\u043C\u043F\u043E\u0440\u0442\u0438\u0440\u0443\u0439\u0442\u0435 CSV/JSON \u0438\u043B\u0438 \u0437\u0430\u0433\u0440\u0443\u0437\u0438\u0442\u0435 \u0432\u0441\u0442\u0440\u043E\u0435\u043D\u043D\u044B\u0439 \u043A\u0430\u0442\u0430\u043B\u043E\u0433."
       );
       button(
         box,
-        "\u0417\u0430\u0433\u0440\u0443\u0437\u0438\u0442\u044C \u043A\u0430\u0442\u0430\u043B\u043E\u0433 \u0438\u0437 \u0432\u0430\u0448\u0435\u0433\u043E Numbers",
+        "\u0417\u0430\u0433\u0440\u0443\u0437\u0438\u0442\u044C \u0432\u0441\u0442\u0440\u043E\u0435\u043D\u043D\u044B\u0439 \u043A\u0430\u0442\u0430\u043B\u043E\u0433",
         () => new ImportModal(this.plugin, JSON.stringify(starter_catalog_default)).open(),
         true
       );
@@ -5221,13 +5405,13 @@ var TrainerView = class extends import_obsidian.ItemView {
     budget.addEventListener("change", () => {
       const v = Number(budget.value);
       if (!Number.isFinite(v) || v < 5 || v > 480) {
-        new import_obsidian.Notice("\u0423\u043A\u0430\u0436\u0438\u0442\u0435 \u043E\u0442 5 \u0434\u043E 480 \u043C\u0438\u043D\u0443\u0442.");
+        new import_obsidian2.Notice("\u0423\u043A\u0430\u0436\u0438\u0442\u0435 \u043E\u0442 5 \u0434\u043E 480 \u043C\u0438\u043D\u0443\u0442.");
         budget.value = String(db.settings.budget);
         return;
       }
       void this.plugin.change((d) => {
         d.settings.budget = v;
-      }).catch((e) => new import_obsidian.Notice(String(e)));
+      }).catch((e) => new import_obsidian2.Notice(String(e)));
     });
     select(
       settings,
@@ -5259,7 +5443,7 @@ var TrainerView = class extends import_obsidian.ItemView {
     if (!queue.length)
       empty(
         root,
-        "\u041F\u043B\u0430\u043D \u0441\u0432\u043E\u0431\u043E\u0434\u0435\u043D",
+        "\u041D\u0435\u0442 \u0437\u0430\u0434\u0430\u0447 \u0432 \u043E\u0447\u0435\u0440\u0435\u0434\u0438",
         "\u041D\u0435\u0442 \u043F\u043E\u0434\u0445\u043E\u0434\u044F\u0449\u0438\u0445 \u0437\u0430\u0434\u0430\u0447 \u0432 \u0432\u044B\u0431\u0440\u0430\u043D\u043D\u043E\u043C \u0431\u044E\u0434\u0436\u0435\u0442\u0435. \u0412\u044B\u0431\u0435\u0440\u0438\u0442\u0435 \u0434\u0440\u0443\u0433\u0443\u044E \u0442\u0435\u043C\u0443, \u0443\u0432\u0435\u043B\u0438\u0447\u044C\u0442\u0435 \u0432\u0440\u0435\u043C\u044F \u0438\u043B\u0438 \u043D\u0430\u0447\u043D\u0438\u0442\u0435 \u0437\u0430\u0434\u0430\u0447\u0443 \u0432\u0440\u0443\u0447\u043D\u0443\u044E \u0438\u0437 \u043A\u0430\u0442\u0430\u043B\u043E\u0433\u0430."
       );
     queue.forEach((item) => this.queueRow(root, item));
@@ -5268,12 +5452,6 @@ var TrainerView = class extends import_obsidian.ItemView {
         this.skipped.clear();
         this.render();
       });
-    el(
-      root,
-      "p",
-      "\u041F\u043E\u0441\u043B\u0435 \u043A\u0430\u0436\u0434\u043E\u0439 \u043F\u043E\u043F\u044B\u0442\u043A\u0438 \u043F\u043B\u0430\u043D \u043F\u0435\u0440\u0435\u0441\u0447\u0438\u0442\u044B\u0432\u0430\u0435\u0442\u0441\u044F \u0434\u043B\u044F \u0443\u043A\u0430\u0437\u0430\u043D\u043D\u043E\u0433\u043E \u0431\u044E\u0434\u0436\u0435\u0442\u0430. \u041E\u043D \u043D\u0435 \u044F\u0432\u043B\u044F\u0435\u0442\u0441\u044F \u043B\u0438\u043C\u0438\u0442\u043E\u043C \u0432\u0441\u0435\u0439 \u0441\u0435\u0441\u0441\u0438\u0438. \u041F\u0440\u043E\u043F\u0443\u0441\u043A \u043D\u0435 \u0443\u0445\u0443\u0434\u0448\u0430\u0435\u0442 \u0440\u0435\u0437\u0443\u043B\u044C\u0442\u0430\u0442; \u043D\u0435\u0432\u044B\u043F\u043E\u043B\u043D\u0435\u043D\u043D\u044B\u0435 \u043F\u043E\u0432\u0442\u043E\u0440\u0435\u043D\u0438\u044F \u0441\u043E\u0445\u0440\u0430\u043D\u044F\u044E\u0442 \u0441\u0440\u043E\u043A.",
-      "ap-footnote"
-    );
   }
   queueRow(root, item) {
     const db = this.plugin.db, p = db.problems.find((p2) => p2.id === item.problemId);
@@ -5534,11 +5712,7 @@ var TrainerView = class extends import_obsidian.ItemView {
       (p) => full.some((a) => a.problemId === p.id)
     );
     if (!practiced.length) {
-      empty(
-        root,
-        "\u041F\u043E\u043A\u0430 \u043D\u0435\u0442 \u0440\u0435\u0437\u0443\u043B\u044C\u0442\u0430\u0442\u043E\u0432",
-        "\u0417\u0430\u0432\u0435\u0440\u0448\u0438\u0442\u0435 \u043F\u0435\u0440\u0432\u0443\u044E \u043F\u043E\u043F\u044B\u0442\u043A\u0443 \u2014 \u0437\u0434\u0435\u0441\u044C \u043F\u043E\u044F\u0432\u044F\u0442\u0441\u044F \u043F\u043E\u043A\u0430\u0437\u0430\u0442\u0435\u043B\u0438."
-      );
+      empty(root, "\u041D\u0435\u0442 \u0440\u0435\u0437\u0443\u043B\u044C\u0442\u0430\u0442\u043E\u0432", "\u041D\u0435\u0442 \u0441\u043E\u0445\u0440\u0430\u043D\u0451\u043D\u043D\u044B\u0445 \u043F\u043E\u043F\u044B\u0442\u043E\u043A.");
       return;
     }
     const chart = el(root, "div");
@@ -5574,11 +5748,7 @@ var TrainerView = class extends import_obsidian.ItemView {
     const db = this.plugin.db;
     el(root, "h3", "\u0416\u0443\u0440\u043D\u0430\u043B \u043F\u043E\u043F\u044B\u0442\u043E\u043A");
     if (!db.attempts.length) {
-      empty(
-        root,
-        "\u0418\u0441\u0442\u043E\u0440\u0438\u044F \u043F\u043E\u043A\u0430 \u043F\u0443\u0441\u0442\u0430",
-        "\u0417\u0434\u0435\u0441\u044C \u0441\u043E\u0445\u0440\u0430\u043D\u044F\u044E\u0442\u0441\u044F \u0432\u0441\u0435 \u0440\u0435\u0437\u0443\u043B\u044C\u0442\u0430\u0442\u044B, \u0432 \u0442\u043E\u043C \u0447\u0438\u0441\u043B\u0435 \u043D\u0435\u0443\u0434\u0430\u0447\u043D\u044B\u0435 \u043F\u043E\u043F\u044B\u0442\u043A\u0438."
-      );
+      empty(root, "\u0418\u0441\u0442\u043E\u0440\u0438\u044F \u043F\u0443\u0441\u0442\u0430", "\u041D\u0435\u0442 \u0441\u043E\u0445\u0440\u0430\u043D\u0451\u043D\u043D\u044B\u0445 \u043F\u043E\u043F\u044B\u0442\u043E\u043A.");
       return;
     }
     for (const a of [...db.attempts].reverse().slice(0, 100)) {
@@ -5611,6 +5781,18 @@ var TrainerView = class extends import_obsidian.ItemView {
   }
   data(root) {
     el(root, "h3", "\u041F\u043E\u0432\u0442\u043E\u0440\u0435\u043D\u0438\u044F \u0438 \u0434\u0430\u043D\u043D\u044B\u0435");
+    const folder = input(root, "\u041F\u0430\u043F\u043A\u0430 \u0434\u0430\u043D\u043D\u044B\u0445", this.plugin.dataFolder);
+    button(
+      root,
+      "\u0421\u043E\u0445\u0440\u0430\u043D\u0438\u0442\u044C \u043F\u0430\u043F\u043A\u0443 \u0438 \u043F\u0435\u0440\u0435\u043D\u0435\u0441\u0442\u0438 \u0434\u0430\u043D\u043D\u044B\u0435",
+      () => this.plugin.changeDataFolder(folder.value)
+    );
+    el(
+      root,
+      "p",
+      "\u041F\u043E \u0443\u043C\u043E\u043B\u0447\u0430\u043D\u0438\u044E: _algo_patterns. \u041F\u0440\u0438 \u0441\u043C\u0435\u043D\u0435 \u043F\u0443\u0442\u0438 \u0442\u0435\u043A\u0443\u0449\u0430\u044F \u043F\u0430\u043F\u043A\u0430 \u043F\u0435\u0440\u0435\u043D\u043E\u0441\u0438\u0442\u0441\u044F \u0446\u0435\u043B\u0438\u043A\u043E\u043C; \u0432\u044B\u0431\u0435\u0440\u0438\u0442\u0435 \u0441\u0432\u043E\u0431\u043E\u0434\u043D\u044B\u0439 \u043F\u0443\u0442\u044C \u0432\u043D\u0443\u0442\u0440\u0438 vault.",
+      "ap-muted"
+    );
     const settings = el(root, "div", "", "ap-stack");
     const hide = checkbox(
       settings,
@@ -5620,7 +5802,7 @@ var TrainerView = class extends import_obsidian.ItemView {
     hide.addEventListener("change", () => {
       void this.plugin.change((d) => {
         d.settings.hidePattern = hide.checked;
-      }).catch((e) => new import_obsidian.Notice(String(e)));
+      }).catch((e) => new import_obsidian2.Notice(String(e)));
     });
     const recall = checkbox(
       settings,
@@ -5630,19 +5812,27 @@ var TrainerView = class extends import_obsidian.ItemView {
     recall.addEventListener("change", () => {
       void this.plugin.change((d) => {
         d.settings.includeRecall = recall.checked;
-      }).catch((e) => new import_obsidian.Notice(String(e)));
+      }).catch((e) => new import_obsidian2.Notice(String(e)));
     });
     el(
       root,
       "p",
-      "\u0418\u043D\u0442\u0435\u0440\u0432\u0430\u043B\u044B \u043F\u043E\u0441\u043B\u0435 \u0441\u0430\u043C\u043E\u0441\u0442\u043E\u044F\u0442\u0435\u043B\u044C\u043D\u044B\u0445 \u0440\u0435\u0448\u0435\u043D\u0438\u0439: 1 \u2192 3 \u2192 7 \u2192 14 \u2192 30 \u2192 60 \u2192 90 \u0434\u043D\u0435\u0439. \u041F\u043E\u0441\u043B\u0435 \u043F\u043E\u0434\u0441\u043A\u0430\u0437\u043A\u0438, \u0440\u0430\u0437\u0431\u043E\u0440\u0430 \u0438\u043B\u0438 \u043D\u0435\u0443\u0434\u0430\u0447\u0438 \u2014 1 \u0434\u0435\u043D\u044C. \u0420\u0430\u0441\u043F\u0438\u0441\u0430\u043D\u0438\u044F \u043F\u043E\u043B\u043D\u044B\u0445 \u0440\u0435\u0448\u0435\u043D\u0438\u0439 \u0438 \u043A\u043E\u0440\u043E\u0442\u043A\u0438\u0445 \u043F\u0440\u043E\u0432\u0435\u0440\u043E\u043A \u043D\u0435\u0437\u0430\u0432\u0438\u0441\u0438\u043C\u044B. \u042D\u0442\u043E \u043F\u0440\u043E\u0441\u0442\u043E\u0439 \u0430\u043B\u0433\u043E\u0440\u0438\u0442\u043C \u0438\u043D\u0442\u0435\u0440\u0432\u0430\u043B\u043E\u0432, \u043D\u0435 FSRS."
+      "\u0418\u043D\u0442\u0435\u0440\u0432\u0430\u043B\u044B \u043F\u043E\u0432\u0442\u043E\u0440\u0435\u043D\u0438\u0439: 1 \u2192 3 \u2192 7 \u2192 14 \u2192 30 \u2192 60 \u2192 90 \u0434\u043D\u0435\u0439. \u041F\u043E\u0441\u043B\u0435 \u043F\u043E\u0434\u0441\u043A\u0430\u0437\u043A\u0438, \u0440\u0430\u0437\u0431\u043E\u0440\u0430 \u0438\u043B\u0438 \u043D\u0435\u0443\u0434\u0430\u0447\u0438 \u2014 1 \u0434\u0435\u043D\u044C."
+    );
+    el(root, "p", "\u041F\u0440\u043E\u0433\u0440\u0435\u0441\u0441: " + this.plugin.dataPath, "ap-muted");
+    el(
+      root,
+      "p",
+      "\u0421\u043E\u0445\u0440\u0430\u043D\u0435\u043D\u0438\u0435 \u0430\u0432\u0442\u043E\u043C\u0430\u0442\u0438\u0447\u0435\u0441\u043A\u043E\u0435 \u043F\u043E\u0441\u043B\u0435 \u043A\u0430\u0436\u0434\u043E\u0433\u043E \u0438\u0437\u043C\u0435\u043D\u0435\u043D\u0438\u044F.",
+      "ap-muted"
     );
     el(
       root,
       "p",
-      "\u041A\u0430\u0442\u0430\u043B\u043E\u0433, \u043F\u043E\u043F\u044B\u0442\u043A\u0438 \u0438 \u0430\u043A\u0442\u0438\u0432\u043D\u044B\u0439 \u0442\u0430\u0439\u043C\u0435\u0440: " + DATA + ". \u0417\u0430\u043C\u0435\u0442\u043A\u0438: " + ROOT + "/Tasks/. \u0424\u0430\u0439\u043B \u0431\u0430\u0437\u044B \u0445\u0440\u0430\u043D\u0438\u0442\u0441\u044F \u0432 vault \u0438 \u043C\u043E\u0436\u0435\u0442 \u0441\u0438\u043D\u0445\u0440\u043E\u043D\u0438\u0437\u0438\u0440\u043E\u0432\u0430\u0442\u044C\u0441\u044F \u0432\u043C\u0435\u0441\u0442\u0435 \u0441 \u043D\u0438\u043C.",
+      "\u0420\u0435\u0437\u0435\u0440\u0432\u043D\u044B\u0435 \u043A\u043E\u043F\u0438\u0438: " + this.plugin.dataFolder + "/Backups/",
       "ap-muted"
     );
+    el(root, "p", "\u0417\u0430\u043C\u0435\u0442\u043A\u0438: " + this.plugin.dataFolder + "/Tasks/", "ap-muted");
     const actions = el(root, "div", "", "ap-actions");
     button(actions, "\u0421\u043E\u0437\u0434\u0430\u0442\u044C \u0440\u0435\u0437\u0435\u0440\u0432\u043D\u0443\u044E \u043A\u043E\u043F\u0438\u044E", () => this.plugin.backup());
     button(
@@ -5653,22 +5843,16 @@ var TrainerView = class extends import_obsidian.ItemView {
     button(actions, "\u041F\u0435\u0440\u0435\u0437\u0430\u0433\u0440\u0443\u0437\u0438\u0442\u044C \u0431\u0430\u0437\u0443", async () => {
       await this.plugin.store.reload();
       this.plugin.refresh();
-      new import_obsidian.Notice("\u0411\u0430\u0437\u0430 \u043F\u0435\u0440\u0435\u0447\u0438\u0442\u0430\u043D\u0430 \u0441 \u0434\u0438\u0441\u043A\u0430.");
+      new import_obsidian2.Notice("\u0411\u0430\u0437\u0430 \u043F\u0435\u0440\u0435\u0447\u0438\u0442\u0430\u043D\u0430 \u0441 \u0434\u0438\u0441\u043A\u0430.");
     });
     button(
       actions,
       "\u0418\u043C\u043F\u043E\u0440\u0442 \u0438\u0441\u0445\u043E\u0434\u043D\u043E\u0433\u043E \u043A\u0430\u0442\u0430\u043B\u043E\u0433\u0430",
       () => new ImportModal(this.plugin, JSON.stringify(starter_catalog_default)).open()
     );
-    el(
-      root,
-      "p",
-      "LeetCode \u043D\u0435 \u0441\u0438\u043D\u0445\u0440\u043E\u043D\u0438\u0437\u0438\u0440\u0443\u0435\u0442\u0441\u044F \u0430\u0432\u0442\u043E\u043C\u0430\u0442\u0438\u0447\u0435\u0441\u043A\u0438. \u0417\u0430\u043F\u0438\u0441\u044B\u0432\u0430\u0439\u0442\u0435 \u0440\u0435\u0437\u0443\u043B\u044C\u0442\u0430\u0442 \u0432\u0441\u0435\u0439 \u043F\u043E\u043F\u044B\u0442\u043A\u0438; \u0438\u0441\u043F\u043E\u043B\u044C\u0437\u043E\u0432\u0430\u043D\u0438\u0435 \u043F\u043E\u043C\u043E\u0449\u0438 \u043E\u0442\u043C\u0435\u0447\u0430\u0435\u0442\u0441\u044F \u0432\u0440\u0443\u0447\u043D\u0443\u044E. \u041F\u043E\u0441\u043B\u0435 \u0437\u0430\u043A\u0440\u044B\u0442\u0438\u044F Obsidian \u0437\u0430\u043F\u0443\u0449\u0435\u043D\u043D\u044B\u0439 \u0442\u0430\u0439\u043C\u0435\u0440 \u043F\u0440\u043E\u0434\u043E\u043B\u0436\u0430\u0435\u0442 \u0443\u0447\u0438\u0442\u044B\u0432\u0430\u0442\u044C \u0432\u0440\u0435\u043C\u044F \u2014 \u043F\u0440\u0438 \u0437\u0430\u0432\u0435\u0440\u0448\u0435\u043D\u0438\u0438 \u0435\u0433\u043E \u043C\u043E\u0436\u043D\u043E \u0438\u0441\u043F\u0440\u0430\u0432\u0438\u0442\u044C.",
-      "ap-footnote"
-    );
   }
 };
-var ConfirmModal = class extends import_obsidian.Modal {
+var ConfirmModal = class extends import_obsidian2.Modal {
   constructor(plugin, title, description, action) {
     super(plugin.app);
     this.plugin = plugin;
@@ -5693,7 +5877,7 @@ var ConfirmModal = class extends import_obsidian.Modal {
     );
   }
 };
-var FinishModal = class extends import_obsidian.Modal {
+var FinishModal = class extends import_obsidian2.Modal {
   constructor(plugin, manual = false) {
     super(plugin.app);
     this.plugin = plugin;
@@ -5776,7 +5960,7 @@ var FinishModal = class extends import_obsidian.Modal {
             });
           });
           this.close();
-          new import_obsidian.Notice("\u041F\u043E\u043F\u044B\u0442\u043A\u0430 \u0441\u043E\u0445\u0440\u0430\u043D\u0435\u043D\u0430. \u0420\u0430\u0441\u043F\u0438\u0441\u0430\u043D\u0438\u0435 \u043E\u0431\u043D\u043E\u0432\u043B\u0435\u043D\u043E.");
+          new import_obsidian2.Notice("\u041F\u043E\u043F\u044B\u0442\u043A\u0430 \u0441\u043E\u0445\u0440\u0430\u043D\u0435\u043D\u0430. \u0420\u0430\u0441\u043F\u0438\u0441\u0430\u043D\u0438\u0435 \u043E\u0431\u043D\u043E\u0432\u043B\u0435\u043D\u043E.");
         } catch (error) {
           feedback.textContent = error.message;
         }
@@ -5785,7 +5969,7 @@ var FinishModal = class extends import_obsidian.Modal {
     );
   }
 };
-var ImportModal = class extends import_obsidian.Modal {
+var ImportModal = class extends import_obsidian2.Modal {
   constructor(plugin, initial = "") {
     super(plugin.app);
     this.plugin = plugin;
@@ -5814,7 +5998,7 @@ var ImportModal = class extends import_obsidian.Modal {
         void selected.text().then((text) => {
           source.value = text;
           preview.replaceChildren();
-        }).catch((e) => new import_obsidian.Notice(String(e)));
+        }).catch((e) => new import_obsidian2.Notice(String(e)));
     });
     const preview = el(root, "div");
     const parse = () => {
@@ -5854,7 +6038,7 @@ var ImportModal = class extends import_obsidian.Modal {
               summary = mergeCatalog(db, result.catalog);
             });
             this.close();
-            new import_obsidian.Notice(
+            new import_obsidian2.Notice(
               `\u0414\u043E\u0431\u0430\u0432\u043B\u0435\u043D\u043E: ${summary.added}. \u041E\u0431\u043D\u043E\u0432\u043B\u0435\u043D\u043E: ${summary.updated}.`
             );
           },
@@ -5869,7 +6053,7 @@ var ImportModal = class extends import_obsidian.Modal {
     if (this.initial) parse();
   }
 };
-var RestoreModal = class extends import_obsidian.Modal {
+var RestoreModal = class extends import_obsidian2.Modal {
   constructor(plugin) {
     super(plugin.app);
     this.plugin = plugin;
@@ -5908,7 +6092,7 @@ var RestoreModal = class extends import_obsidian.Modal {
                 Object.assign(db, restored);
               });
               this.close();
-              new import_obsidian.Notice("\u0411\u0430\u0437\u0430 \u0432\u043E\u0441\u0441\u0442\u0430\u043D\u043E\u0432\u043B\u0435\u043D\u0430.");
+              new import_obsidian2.Notice("\u0411\u0430\u0437\u0430 \u0432\u043E\u0441\u0441\u0442\u0430\u043D\u043E\u0432\u043B\u0435\u043D\u0430.");
             },
             true
           );
@@ -5916,7 +6100,7 @@ var RestoreModal = class extends import_obsidian.Modal {
     });
   }
 };
-var ProblemModal = class extends import_obsidian.Modal {
+var ProblemModal = class extends import_obsidian2.Modal {
   constructor(plugin, problemId) {
     super(plugin.app);
     this.plugin = plugin;

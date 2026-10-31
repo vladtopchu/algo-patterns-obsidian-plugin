@@ -3,7 +3,10 @@ import {
   Modal,
   Notice,
   Plugin,
+  PluginSettingTab,
+  Setting,
   TFile,
+  TFolder,
   WorkspaceLeaf,
   normalizePath,
 } from "obsidian";
@@ -27,11 +30,14 @@ import {
 } from "./core";
 import { ImportResult, parseImport } from "./importer";
 import { Store } from "./store";
+import {
+  dataFolderPath,
+  DEFAULT_DATA_FOLDER,
+  LEGACY_DATA_FOLDER,
+} from "./settings";
 import starterCatalog from "../data/starter-catalog.json";
 
 const VIEW = "algo-patterns-trainer";
-const ROOT = "Algo Patterns";
-const DATA = ROOT + "/tracker.json";
 const date = (at: string) =>
   new Date(at).toLocaleString("ru-RU", {
     dateStyle: "short",
@@ -145,21 +151,30 @@ export default class AlgoPatternsPlugin extends Plugin {
   store!: Store;
   ready!: Promise<void>;
   startupError = "";
+  dataFolder = DEFAULT_DATA_FOLDER;
+  get dataPath() {
+    return this.dataFolder + "/tracker.json";
+  }
   get db() {
     return this.store.db;
   }
   async onload() {
+    const saved = await this.loadData();
+    if (saved?.dataFolder !== undefined)
+      this.dataFolder = dataFolderPath(saved.dataFolder);
     this.store = new Store({
       read: async () => {
-        const f = this.app.vault.getAbstractFileByPath(DATA);
+        const f = this.app.vault.getAbstractFileByPath(this.dataPath);
+        if (f && !(f instanceof TFile))
+          throw new Error("Путь базы занят папкой: " + this.dataPath);
         return f instanceof TFile ? this.app.vault.read(f) : null;
       },
       create: async (text) => {
-        await this.folder(ROOT);
-        await this.app.vault.create(DATA, text);
+        await this.folder(this.dataFolder);
+        await this.app.vault.create(this.dataPath, text);
       },
       replace: async (expected, next) => {
-        const file = this.app.vault.getAbstractFileByPath(DATA);
+        const file = this.app.vault.getAbstractFileByPath(this.dataPath);
         if (!(file instanceof TFile))
           throw new Error(
             "Файл базы не найден. Перезагрузите базу через экран «Данные».",
@@ -175,8 +190,7 @@ export default class AlgoPatternsPlugin extends Plugin {
     });
     this.ready = new Promise<void>((resolve, reject) =>
       this.app.workspace.onLayoutReady(() => {
-        this.store
-          .load()
+        this.initializeStorage(saved?.dataFolder === undefined)
           .then(resolve)
           .catch((error) => {
             this.startupError = String(error);
@@ -186,6 +200,7 @@ export default class AlgoPatternsPlugin extends Plugin {
       }),
     );
     void this.ready.catch(() => {});
+    this.addSettingTab(new AlgoPatternsSettings(this));
     this.registerView(VIEW, (leaf) => new TrainerView(leaf, this));
     this.addRibbonIcon("brain-circuit", "Algo Patterns", () => {
       void this.open();
@@ -216,12 +231,80 @@ export default class AlgoPatternsPlugin extends Plugin {
       },
     });
   }
+  async initializeStorage(firstRun: boolean) {
+    if (firstRun) {
+      const legacy = this.app.vault.getAbstractFileByPath(LEGACY_DATA_FOLDER);
+      const oldData = this.app.vault.getAbstractFileByPath(
+        LEGACY_DATA_FOLDER + "/tracker.json",
+      );
+      if (legacy instanceof TFolder && oldData instanceof TFile) {
+        const destinationExists = this.app.vault.getAbstractFileByPath(
+          this.dataFolder,
+        );
+        // Persist the old location first so a failed move remains recoverable.
+        this.dataFolder = LEGACY_DATA_FOLDER;
+        await this.saveData({ dataFolder: this.dataFolder });
+        if (!destinationExists) await this.moveDataFolder(DEFAULT_DATA_FOLDER);
+        else
+          new Notice(
+            "Папка _algo_patterns уже занята. Сохранена текущая база в Algo Patterns; новый путь можно выбрать в настройках.",
+            10000,
+          );
+      }
+    }
+    await this.store.load();
+    await this.saveData({ dataFolder: this.dataFolder });
+  }
+  async changeDataFolder(value: string) {
+    const next = dataFolderPath(value);
+    await this.ready;
+    await this.store.exclusive(() => this.moveDataFolder(next));
+    this.refresh();
+  }
+  private async moveDataFolder(next: string) {
+    const previous = this.dataFolder;
+    if (next === previous) return;
+    if (next.startsWith(previous + "/") || previous.startsWith(next + "/"))
+      throw new Error(
+        "Новая папка не должна содержать текущую или находиться внутри неё.",
+      );
+    if (this.app.vault.getAbstractFileByPath(next))
+      throw new Error(
+        "Папка назначения уже существует. Выберите свободный путь; данные не объединяются.",
+      );
+    const source = this.app.vault.getAbstractFileByPath(previous);
+    if (!(source instanceof TFolder))
+      throw new Error("Папка данных не найдена: " + previous);
+    const parent = next.split("/").slice(0, -1).join("/");
+    if (parent) await this.folder(parent);
+    await this.app.fileManager.renameFile(source, next);
+    try {
+      await this.saveData({ dataFolder: next });
+    } catch (error) {
+      try {
+        await this.app.fileManager.renameFile(source, previous);
+      } catch {
+        // Keep this session on the actual path if rollback also fails.
+        this.dataFolder = next;
+        throw new Error(
+          "Данные перенесены в " +
+            next +
+            ", но сохранить настройку и вернуть папку не удалось. Проверьте путь перед перезапуском.",
+        );
+      }
+      throw error;
+    }
+    this.dataFolder = next;
+    new Notice("Данные перенесены в " + next);
+  }
   async folder(path: string) {
     let current = "";
     for (const part of normalizePath(path).split("/")) {
       current = current ? current + "/" + part : part;
-      if (!this.app.vault.getAbstractFileByPath(current))
-        await this.app.vault.createFolder(current);
+      const existing = this.app.vault.getAbstractFileByPath(current);
+      if (existing && !(existing instanceof TFolder))
+        throw new Error("Путь занят файлом: " + current);
+      if (!existing) await this.app.vault.createFolder(current);
     }
   }
   async open() {
@@ -242,17 +325,19 @@ export default class AlgoPatternsPlugin extends Plugin {
   }
   async backup() {
     await this.ready;
-    await this.folder(ROOT + "/Backups");
-    const path =
-      ROOT +
-      "/Backups/tracker-" +
-      new Date().toISOString().replace(/[:.]/g, "-") +
-      "-" +
-      uid().slice(0, 6) +
-      ".json";
-    await this.app.vault.create(path, JSON.stringify(this.db, null, 2));
-    new Notice("Резервная копия: " + path);
-    return path;
+    return this.store.exclusive(async () => {
+      await this.folder(this.dataFolder + "/Backups");
+      const path =
+        this.dataFolder +
+        "/Backups/tracker-" +
+        new Date().toISOString().replace(/[:.]/g, "-") +
+        "-" +
+        uid().slice(0, 6) +
+        ".json";
+      await this.app.vault.create(path, JSON.stringify(this.db, null, 2));
+      new Notice("Резервная копия: " + path);
+      return path;
+    });
   }
   async start(item: QueueItem, manual = false) {
     await this.change((db) => {
@@ -273,22 +358,138 @@ export default class AlgoPatternsPlugin extends Plugin {
     if (manual) new FinishModal(this, true).open();
   }
   async note(problemId: string) {
-    const p = this.db.problems.find((p) => p.id === problemId)!;
-    await this.folder(ROOT + "/Tasks");
-    const safe = p.id.replace(/[^\p{L}\p{N}_-]/gu, "_");
-    const path = ROOT + "/Tasks/" + safe + ".md";
-    let file = this.app.vault.getAbstractFileByPath(path);
-    if (!(file instanceof TFile)) {
-      const patterns = p.patternIds.map(
-        (id) => this.db.patterns.find((t) => t.id === id)?.name ?? id,
+    await this.ready;
+    return this.store.exclusive(async () => {
+      const p = this.db.problems.find((p) => p.id === problemId)!;
+      await this.folder(this.dataFolder + "/Tasks");
+      const safe = p.id.replace(/[^\p{L}\p{N}_-]/gu, "_");
+      const path = this.dataFolder + "/Tasks/" + safe + ".md";
+      let file = this.app.vault.getAbstractFileByPath(path);
+      if (!(file instanceof TFile)) {
+        const patterns = p.patternIds.map(
+          (id) => this.db.patterns.find((t) => t.id === id)?.name ?? id,
+        );
+        file = await this.app.vault.create(
+          path,
+          `---\nalgo_id: ${JSON.stringify(p.id)}\ndifficulty: ${JSON.stringify(p.difficulty)}\npatterns: ${JSON.stringify(patterns)}\n---\n\n# ${p.title.replace(/[\r\n]/g, " ")}\n\n${p.url}\n\n## Идея и инвариант\n\n## Решение\n\n## Ошибки и крайние случаи\n`,
+        );
+      }
+      if (file instanceof TFile)
+        await this.app.workspace.getLeaf("tab").openFile(file);
+    });
+  }
+}
+
+class AlgoPatternsSettings extends PluginSettingTab {
+  constructor(private plugin: AlgoPatternsPlugin) {
+    super(plugin.app, plugin);
+  }
+  display() {
+    this.containerEl.replaceChildren();
+    void this.plugin.ready
+      .then(() => this.render())
+      .catch((error) => {
+        el(this.containerEl, "p", String(error), "ap-error");
+      });
+  }
+  private render() {
+    this.containerEl.replaceChildren();
+    let value = this.plugin.dataFolder;
+    new Setting(this.containerEl)
+      .setName("Папка данных")
+      .setDesc(
+        "Каталог, история, таймер, резервные копии и заметки. При сохранении текущая папка переносится целиком. По умолчанию: _algo_patterns.",
+      )
+      .addText((text) =>
+        text
+          .setPlaceholder(DEFAULT_DATA_FOLDER)
+          .setValue(value)
+          .onChange((next) => {
+            value = next;
+          }),
+      )
+      .addButton((save) =>
+        save.setButtonText("Сохранить и перенести").onClick(async () => {
+          save.setDisabled(true);
+          try {
+            await this.plugin.changeDataFolder(value);
+            this.display();
+          } catch (error) {
+            new Notice(String(error), 8000);
+          } finally {
+            save.setDisabled(false);
+          }
+        }),
       );
-      file = await this.app.vault.create(
-        path,
-        `---\nalgo_id: ${JSON.stringify(p.id)}\ndifficulty: ${JSON.stringify(p.difficulty)}\npatterns: ${JSON.stringify(patterns)}\n---\n\n# ${p.title.replace(/[\r\n]/g, " ")}\n\n${p.url}\n\n## Идея и инвариант\n\n## Решение\n\n## Ошибки и крайние случаи\n`,
+    el(this.containerEl, "p", "Прогресс: " + this.plugin.dataPath);
+    el(
+      this.containerEl,
+      "p",
+      "Сохранение автоматическое после каждого изменения.",
+    );
+    new Setting(this.containerEl)
+      .setName("Время на план, мин")
+      .addText((text) =>
+        text
+          .setValue(String(this.plugin.db.settings.budget))
+          .onChange(async (value) => {
+            const budget = Number(value);
+            if (!Number.isFinite(budget) || budget < 5 || budget > 480) return;
+            try {
+              await this.plugin.change((db) => {
+                db.settings.budget = budget;
+              });
+            } catch (error) {
+              new Notice(String(error));
+            }
+          }),
       );
-    }
-    if (file instanceof TFile)
-      await this.app.workspace.getLeaf("tab").openFile(file);
+    new Setting(this.containerEl)
+      .setName("Доля времени на новые задачи")
+      .addDropdown((select) =>
+        select
+          .addOptions({ "40": "40%", "60": "60%", "80": "80%" })
+          .setValue(String(this.plugin.db.settings.newPercent))
+          .onChange(async (value) => {
+            try {
+              await this.plugin.change((db) => {
+                db.settings.newPercent = Number(value);
+              });
+            } catch (error) {
+              new Notice(String(error));
+            }
+          }),
+      );
+    new Setting(this.containerEl)
+      .setName("Скрывать паттерн при смешанной практике")
+      .addToggle((toggle) =>
+        toggle
+          .setValue(this.plugin.db.settings.hidePattern)
+          .onChange(async (value) => {
+            try {
+              await this.plugin.change((db) => {
+                db.settings.hidePattern = value;
+              });
+            } catch (error) {
+              new Notice(String(error));
+            }
+          }),
+      );
+    new Setting(this.containerEl)
+      .setName("Добавлять короткие проверки подхода")
+      .addToggle((toggle) =>
+        toggle
+          .setValue(this.plugin.db.settings.includeRecall)
+          .onChange(async (value) => {
+            try {
+              await this.plugin.change((db) => {
+                db.settings.includeRecall = value;
+              });
+            } catch (error) {
+              new Notice(String(error));
+            }
+          }),
+      );
   }
 }
 
@@ -341,20 +542,15 @@ export class TrainerView extends ItemView {
         root,
         "Не удалось открыть базу",
         this.plugin.startupError +
-          " Файл не перезаписан. Проверьте Algo Patterns/tracker.json и резервные копии.",
+          " Файл не перезаписан. Проверьте " +
+          this.plugin.dataPath +
+          " и резервные копии.",
       );
       return;
     }
     const header = el(root, "header", "", "ap-header");
     const title = el(header, "div");
-    el(title, "div", "ALGO PATTERNS", "ap-eyebrow");
-    el(title, "h2", "Практика, которая остаётся");
-    el(
-      title,
-      "p",
-      "Новые задачи · отложенные повторения · самостоятельные решения",
-      "ap-muted",
-    );
+    el(title, "h2", "Algo Patterns");
     button(header, "Импорт каталога", () =>
       new ImportModal(this.plugin).open(),
     );
@@ -381,6 +577,13 @@ export class TrainerView extends ItemView {
     if (this.tab === "progress") this.progress(body);
     if (this.tab === "history") this.history(body);
     if (this.tab === "data") this.data(body);
+    if (this.tab !== "data")
+      el(
+        root,
+        "p",
+        "Автосохранение: " + this.plugin.dataPath,
+        "ap-muted ap-storage",
+      );
     this.tick();
   }
   active(root: HTMLElement) {
@@ -465,12 +668,12 @@ export class TrainerView extends ItemView {
     if (!db.problems.length) {
       const box = empty(
         root,
-        "Начните со своего каталога",
-        "Загрузите CSV из Numbers или готовый каталог. Существующая история при повторном импорте сохраняется.",
+        "Каталог пуст",
+        "Импортируйте CSV/JSON или загрузите встроенный каталог.",
       );
       button(
         box,
-        "Загрузить каталог из вашего Numbers",
+        "Загрузить встроенный каталог",
         () =>
           new ImportModal(this.plugin, JSON.stringify(starterCatalog)).open(),
         true,
@@ -565,7 +768,7 @@ export class TrainerView extends ItemView {
     if (!queue.length)
       empty(
         root,
-        "План свободен",
+        "Нет задач в очереди",
         "Нет подходящих задач в выбранном бюджете. Выберите другую тему, увеличьте время или начните задачу вручную из каталога.",
       );
     queue.forEach((item) => this.queueRow(root, item));
@@ -574,12 +777,6 @@ export class TrainerView extends ItemView {
         this.skipped.clear();
         this.render();
       });
-    el(
-      root,
-      "p",
-      "После каждой попытки план пересчитывается для указанного бюджета. Он не является лимитом всей сессии. Пропуск не ухудшает результат; невыполненные повторения сохраняют срок.",
-      "ap-footnote",
-    );
   }
   queueRow(root: HTMLElement, item: QueueItem) {
     const db = this.plugin.db,
@@ -865,11 +1062,7 @@ export class TrainerView extends ItemView {
       full.some((a) => a.problemId === p.id),
     );
     if (!practiced.length) {
-      empty(
-        root,
-        "Пока нет результатов",
-        "Завершите первую попытку — здесь появятся показатели.",
-      );
+      empty(root, "Нет результатов", "Нет сохранённых попыток.");
       return;
     }
     const chart = el(root, "div");
@@ -905,11 +1098,7 @@ export class TrainerView extends ItemView {
     const db = this.plugin.db;
     el(root, "h3", "Журнал попыток");
     if (!db.attempts.length) {
-      empty(
-        root,
-        "История пока пуста",
-        "Здесь сохраняются все результаты, в том числе неудачные попытки.",
-      );
+      empty(root, "История пуста", "Нет сохранённых попыток.");
       return;
     }
     for (const a of [...db.attempts].reverse().slice(0, 100)) {
@@ -943,6 +1132,16 @@ export class TrainerView extends ItemView {
   }
   data(root: HTMLElement) {
     el(root, "h3", "Повторения и данные");
+    const folder = input(root, "Папка данных", this.plugin.dataFolder);
+    button(root, "Сохранить папку и перенести данные", () =>
+      this.plugin.changeDataFolder(folder.value),
+    );
+    el(
+      root,
+      "p",
+      "По умолчанию: _algo_patterns. При смене пути текущая папка переносится целиком; выберите свободный путь внутри vault.",
+      "ap-muted",
+    );
     const settings = el(root, "div", "", "ap-stack");
     const hide = checkbox(
       settings,
@@ -971,18 +1170,22 @@ export class TrainerView extends ItemView {
     el(
       root,
       "p",
-      "Интервалы после самостоятельных решений: 1 → 3 → 7 → 14 → 30 → 60 → 90 дней. После подсказки, разбора или неудачи — 1 день. Расписания полных решений и коротких проверок независимы. Это простой алгоритм интервалов, не FSRS.",
+      "Интервалы повторений: 1 → 3 → 7 → 14 → 30 → 60 → 90 дней. После подсказки, разбора или неудачи — 1 день.",
+    );
+    el(root, "p", "Прогресс: " + this.plugin.dataPath, "ap-muted");
+    el(
+      root,
+      "p",
+      "Сохранение автоматическое после каждого изменения.",
+      "ap-muted",
     );
     el(
       root,
       "p",
-      "Каталог, попытки и активный таймер: " +
-        DATA +
-        ". Заметки: " +
-        ROOT +
-        "/Tasks/. Файл базы хранится в vault и может синхронизироваться вместе с ним.",
+      "Резервные копии: " + this.plugin.dataFolder + "/Backups/",
       "ap-muted",
     );
+    el(root, "p", "Заметки: " + this.plugin.dataFolder + "/Tasks/", "ap-muted");
     const actions = el(root, "div", "", "ap-actions");
     button(actions, "Создать резервную копию", () => this.plugin.backup());
     button(actions, "Восстановить резервную копию", () =>
@@ -995,12 +1198,6 @@ export class TrainerView extends ItemView {
     });
     button(actions, "Импорт исходного каталога", () =>
       new ImportModal(this.plugin, JSON.stringify(starterCatalog)).open(),
-    );
-    el(
-      root,
-      "p",
-      "LeetCode не синхронизируется автоматически. Записывайте результат всей попытки; использование помощи отмечается вручную. После закрытия Obsidian запущенный таймер продолжает учитывать время — при завершении его можно исправить.",
-      "ap-footnote",
     );
   }
 }

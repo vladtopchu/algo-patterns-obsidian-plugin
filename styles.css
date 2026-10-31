@@ -47,6 +47,10 @@
   color: var(--text-muted);
   font-size: 13px;
 }
+.ap-storage {
+  margin-top: 24px !important;
+  overflow-wrap: anywhere;
+}
 .ap-footnote {
   margin: 20px 0 !important;
   line-height: 1.6;

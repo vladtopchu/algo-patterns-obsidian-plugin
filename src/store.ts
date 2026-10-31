@@ -24,7 +24,7 @@ export class Store {
     }
   }
   change(mutator: (draft: Database) => void): Promise<void> {
-    const operation = this.queue.then(async () => {
+    return this.exclusive(async () => {
       const draft = structuredClone(this.db);
       mutator(draft);
       draft.revision = this.db.revision + 1;
@@ -34,11 +34,14 @@ export class Store {
       this.raw = next;
       this.db = draft;
     });
+  }
+  // Folder moves and other disk operations share the same queue as writes.
+  exclusive<T>(action: () => Promise<T>): Promise<T> {
+    const operation = this.queue.then(action);
     this.queue = operation.catch(() => {});
     return operation;
   }
   async reload() {
-    await this.queue;
-    await this.load();
+    await this.exclusive(() => this.load());
   }
 }

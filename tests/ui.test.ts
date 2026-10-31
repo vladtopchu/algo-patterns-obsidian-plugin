@@ -44,6 +44,8 @@ test("UI journey: import preview → plan → timed solve → finish → progres
       return store.db;
     },
     ready: Promise.resolve(),
+    dataFolder: "_algo_patterns",
+    dataPath: "_algo_patterns/tracker.json",
     app: {},
     change: async (fn: any) => {
       await store.change(fn);
@@ -71,7 +73,7 @@ test("UI journey: import preview → plan → timed solve → finish → progres
   const view = new TrainerView({}, plugin);
   document.body.append(view.contentEl);
   view.render();
-  assert.match(view.contentEl.textContent, /Начните со своего каталога/);
+  assert.match(view.contentEl.textContent, /Каталог пуст/);
   const modal = new ImportModal(
     plugin,
     "topic,pattern,title,id,difficulty\nArrays,Pointers,Two Sum,1,Easy",
@@ -166,6 +168,6 @@ test("Restored views do not block workspace readiness", async () => {
   assert.match(view.contentEl.textContent, /Загрузка каталога/);
   ready();
   await Promise.resolve();
-  assert.match(view.contentEl.textContent, /Начните со своего каталога/);
+  assert.match(view.contentEl.textContent, /Каталог пуст/);
   dom.window.close();
 });
