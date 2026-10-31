@@ -1,6 +1,6 @@
 {
   "name": "algo-patterns-trainer",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "private": true,
   "description": "Algorithm practice and spaced repetition for Obsidian",
   "scripts": {

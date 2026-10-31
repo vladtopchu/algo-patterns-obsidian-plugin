@@ -12,13 +12,13 @@ try {
     [
       "-q",
       "-r",
-      "algo-patterns-trainer-1.0.0.zip",
+      "algo-patterns-trainer-1.0.1.zip",
       "algo-patterns-trainer",
       "INSTALL.md",
     ],
     { cwd: "dist" },
   );
-  console.log("Ready: dist/algo-patterns-trainer-1.0.0.zip");
+  console.log("Ready: dist/algo-patterns-trainer-1.0.1.zip");
 } catch {
   console.log(
     "zip unavailable; copy dist/algo-patterns-trainer as described in INSTALL.md.",

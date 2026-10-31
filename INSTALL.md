@@ -131,7 +131,7 @@ npm ci
 npm run package
 ```
 
-`npm run package` проверяет TypeScript, собирает `main.js`, запускает тесты и создаёт готовую папку в `dist/`. На macOS/Linux при наличии `zip` также создаётся архив `dist/algo-patterns-trainer-1.0.0.zip`.
+`npm run package` проверяет TypeScript, собирает `main.js`, запускает тесты и создаёт готовую папку в `dist/`. На macOS/Linux при наличии `zip` также создаётся архив `dist/algo-patterns-trainer-1.0.1.zip`.
 
 Команды разработчика:
 
